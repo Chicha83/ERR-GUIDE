@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Empire Rome Rising (ERR)</title>
+<style>
+:root{
+  --bg:#0b0d12; --bg2:#12151c; --card:#171b24; --card2:#1d2230; --border:#2a3042;
+  --gold:#f5c542; --gold-d:#c99a1c; --text:#e8e9ee; --muted:#9aa0b4;
+  --note-bg:rgba(154,160,180,.10); --strat-bg:rgba(80,170,255,.10); --strat:#7cc0ff;
+  --limit-bg:rgba(245,197,66,.12); --rem-bg:rgba(80,200,140,.12); --rem:#6fe0a8;
+  --warn-bg:rgba(255,80,80,.13); --warn:#ff7b7b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1200px 600px at 50% -10%,#1a1f2e 0,var(--bg) 60%);color:var(--text);
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans","Noto Sans Arabic",sans-serif;line-height:1.55;min-height:100vh}
+header{position:sticky;top:0;z-index:10;background:rgba(11,13,18,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--gold-d);padding:12px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.brand{font-weight:800;color:var(--gold);letter-spacing:.5px;font-size:1.1rem}
+.langbox{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.langbox .lbl{color:var(--muted);font-size:.85rem}
+.langbtn{background:var(--card);color:var(--text);border:1px solid var(--border);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.88rem;font-family:inherit;transition:.15s}
+.langbtn:hover{border-color:var(--gold)}
+.langbtn.active{background:var(--gold);color:#16130a;border-color:var(--gold);font-weight:700}
+main{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+h1{color:var(--gold);font-size:clamp(1.7rem,4vw,2.5rem);text-align:center;text-shadow:0 0 24px rgba(245,197,66,.25)}
+.sub{text-align:center;color:var(--muted);margin:6px 0 28px;font-size:1.05rem}
+h2.phase{color:var(--gold);font-size:1.4rem;margin:38px 0 18px;padding-bottom:8px;border-bottom:2px solid var(--gold-d)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.day{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.dayhead{background:linear-gradient(135deg,var(--card2),#242a3b);padding:12px 16px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--gold-d)}
+.dayhead .dn{color:var(--gold);font-weight:800;font-size:1.15rem}
+.dayhead .wd{color:var(--muted);font-size:.9rem}
+.events{padding:12px;display:flex;flex-direction:column;gap:10px}
+.ev{background:var(--bg2);border:1px solid var(--border);border-inline-start:3px solid var(--gold);border-radius:10px;padding:10px 12px}
+.evtop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px}
+.evname{font-weight:700;color:#fff}
+.badge{background:var(--gold);color:#16130a;font-weight:800;font-size:.72rem;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.badge.short{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.desc{color:#cfd2de;font-size:.93rem}
+.tag{display:block;margin-top:7px;padding:6px 9px;border-radius:7px;font-size:.86rem}
+.tag b{margin-inline-end:4px}
+.note{background:var(--note-bg);color:var(--muted)}
+.strat{background:var(--strat-bg);color:var(--strat)}
+.limit{background:var(--limit-bg);color:var(--gold);font-weight:600}
+.rem{background:var(--rem-bg);color:var(--rem)}
+.warn{background:var(--warn-bg);color:var(--warn)}
+footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">⚔ ERR</div>
+  <div class="langbox">
+    <span class="lbl" id="langLabel"></span>
+    <div id="langs"></div>
+  </div>
+</header>
+<main>
+  <h1 id="title"></h1>
+  <p class="sub" id="sub"></p>
+  <div id="content"></div>
+</main>
+<footer>by Chicha83</footer>
+
+<script>
+const LANGS=[["es","Español"],["en","English"],["ru","Русский"],["ar","العربية"],["fil","Filipino"]];
+
+const UI={
+ es:{title:"Empire Rome Rising (ERR)",sub:"Guía Estratégica & Calendario de Eventos de 14 Días",lang:"Idioma:",day:"Día",note:"Nota:",strat:"Estrategia:",
+  p1:"FASE 1: Semana 1 (Días 1 al 7)",p2:"FASE 2: Semana 2 (Días 8 al 14)",h:"H",remT:"🔔 RECORDATORIO IMPORTANTE:",warnT:"⚠️ AVISO CRÍTICO:",
+  wd:["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"]},
+ en:{title:"Empire Rome Rising (ERR)",sub:"Strategic Guide & 14-Day Event Calendar",lang:"Language:",day:"Day",note:"Note:",strat:"Strategy:",
+  p1:"PHASE 1: Week 1 (Days 1 to 7)",p2:"PHASE 2: Week 2 (Days 8 to 14)",h:"H",remT:"🔔 IMPORTANT REMINDER:",warnT:"⚠️ CRITICAL NOTICE:",
+  wd:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]},
+ ru:{title:"Empire Rome Rising (ERR)",sub:"Стратегическое руководство и календарь событий на 14 дней",lang:"Язык:",day:"День",note:"Примечание:",strat:"Стратегия:",
+  p1:"ФАЗА 1: Неделя 1 (Дни с 1 по 7)",p2:"ФАЗА 2: Неделя 2 (Дни с 8 по 14)",h:"Ч",remT:"🔔 ВАЖНОЕ НАПОМИНАНИЕ:",warnT:"⚠️ КРИТИЧЕСКОЕ ПРЕДУПРЕЖДЕНИЕ:",
+  wd:["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"]},
+ ar:{title:"Empire Rome Rising (ERR)",sub:"دليل استراتيجي وتقويم الأحداث لمدة 14 يومًا",lang:"اللغة:",day:"اليوم",note:"ملاحظة:",strat:"الاستراتيجية:",
+  p1:"المرحلة 1: الأسبوع 1 (الأيام من 1 إلى 7)",p2:"المرحلة 2: الأسبوع 2 (الأيام من 8 إلى 14)",h:"س",remT:"🔔 تذكير مهم:",warnT:"⚠️ تنبيه حرج:",
+  wd:["الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت","الأحد"]},
+ fil:{title:"Empire Rome Rising (ERR)",sub:"Gabay sa Estratehiya at Kalendaryo ng mga Event sa Loob ng 14 na Araw",lang:"Wika:",day:"Araw",note:"Tandaan:",strat:"Estratehiya:",
+  p1:"YUGTO 1: Linggo 1 (Araw 1 hanggang 7)",p2:"YUGTO 2: Linggo 2 (Araw 8 hanggang 14)",h:"H",remT:"🔔 MAHALAGANG PAALALA:",warnT:"⚠️ KRITIKAL NA BABALA:",
+  wd:["Lunes","Martes","Miyerkules","Huwebes","Biyernes","Sabado","Linggo"]}
+};
+
+const T={
+ ks:{es:"Atacar ciudades muertas (rojas) en el mapa.",en:"Attack dead (red) cities on the map.",ru:"Атакуйте мёртвые (красные) города на карте.",ar:"هاجم المدن الميتة (الحمراء) على الخريطة.",fil:"Atakihin ang mga patay (pulang) lungsod sa mapa."},
+ ks2:{es:"Atacar ciudades muertas (rojas).",en:"Attack dead (red) cities.",ru:"Атакуйте мёртвые (красные) города.",ar:"هاجم المدن الميتة (الحمراء).",fil:"Atakihin ang mga patay (pulang) lungsod."},
+ same:{es:"Es el mismo pero de 4h.",en:"It's the same, but 4h.",ru:"То же самое, но на 4 часа.",ar:"هو نفسه ولكن لمدة 4 ساعات.",fil:"Pareho lang ito pero 4h."},
+ same_n:{es:"Es lo mismo pero de 4h.",en:"It's the same, but 4h.",ru:"То же самое, но на 4 часа.",ar:"هو نفسه ولكن لمدة 4 ساعات.",fil:"Pareho lang ito pero 4h."},
+ wr:{es:"Atacar ladrones de gemas para obtener cristales.",en:"Attack gem thieves to obtain crystals.",ru:"Атакуйте воров самоцветов, чтобы получить кристаллы.",ar:"هاجم لصوص الجواهر للحصول على البلورات.",fil:"Atakihin ang mga magnanakaw ng gem para makakuha ng kristal."},
+ wr2:{es:"Atacar ladrones de gemas.",en:"Attack gem thieves.",ru:"Атакуйте воров самоцветов.",ar:"هاجم لصوص الجواهر.",fil:"Atakihin ang mga magnanakaw ng gem."},
+ sr:{es:"Gastar oro en la ruleta VIP.",en:"Spend gold on the VIP roulette.",ru:"Тратьте золото на VIP-рулетку.",ar:"أنفق الذهب في عجلة الحظ VIP.",fil:"Gumastos ng ginto sa VIP roulette."},
+ n1:{es:"Inútil invertir desde hace tiempo",en:"Pointless to invest for a long time now",ru:"Уже давно нет смысла вкладываться",ar:"لم يعد الاستثمار مجديًا منذ فترة طويلة",fil:"Matagal nang walang saysay mag-invest"},
+ n2:{es:"Inútil invertir",en:"Pointless to invest",ru:"Нет смысла вкладываться",ar:"الاستثمار غير مجدٍ",fil:"Walang saysay mag-invest"},
+ ue:{es:"Usar cristales de War raiders para subir equipamiento.",en:"Use War raiders crystals to upgrade equipment.",ru:"Используйте кристаллы War raiders для улучшения снаряжения.",ar:"استخدم بلورات War raiders لترقية المعدات.",fil:"Gamitin ang mga kristal ng War raiders para i-upgrade ang kagamitan."},
+ sp:{es:"Usar aceleradores de tiempo.",en:"Use time speedups.",ru:"Используйте ускорители времени.",ar:"استخدم معززات الوقت.",fil:"Gamitin ang mga speedup ng oras."},
+ tfh:{es:"Atacar al Diablo en el fuerte.",en:"Attack the Devil in the fortress.",ru:"Атакуйте Дьявола в крепости.",ar:"هاجم الشيطان في الحصن.",fil:"Atakihin ang Diablo sa kuta."},
+ cg:{es:"Usar monedas en la lotería.",en:"Use coins in the lottery.",ru:"Используйте монеты в лотерее.",ar:"استخدم العملات في اليانصيب.",fil:"Gamitin ang mga barya sa lotto."},
+ limit:{es:"Límite: Solo obtener los 3 niveles de recompensa.",en:"Limit: Only obtain the 3 reward tiers.",ru:"Ограничение: получайте только 3 уровня наград.",ar:"الحد: احصل فقط على مستويات المكافآت الثلاثة.",fil:"Limitasyon: Kunin lang ang 3 antas ng gantimpala."},
+ isw:{es:"Guerra entre servidores.",en:"Inter-server war.",ru:"Война между серверами.",ar:"حرب بين الخوادم.",fil:"Digmaan sa pagitan ng mga server."},
+ nr:{es:"Recolectar recursos del mapa.",en:"Gather resources from the map.",ru:"Собирайте ресурсы на карте.",ar:"اجمع الموارد من الخريطة.",fil:"Mangolekta ng mga resource mula sa mapa."},
+ nr_s:{es:"Recolectar calaveras da más puntos.",en:"Gathering skulls gives more points.",ru:"Сбор черепов приносит больше очков.",ar:"جمع الجماجم يمنح نقاطًا أكثر.",fil:"Mas maraming puntos ang pagkolekta ng mga bungo."},
+ td:{es:"Entrenar la mayor cantidad de tropas.",en:"Train as many troops as possible.",ru:"Тренируйте как можно больше войск.",ar:"درّب أكبر عدد ممكن من القوات.",fil:"Magsanay ng pinakamaraming tropa."},
+ td_s:{es:"Usar las calaveras del día anterior.",en:"Use the skulls from the previous day.",ru:"Используйте черепа предыдущего дня.",ar:"استخدم الجماجم من اليوم السابق.",fil:"Gamitin ang mga bungo mula sa nakaraang araw."},
+ bc:{es:"Donar recursos en la base.",en:"Donate resources at the base.",ru:"Жертвуйте ресурсы на базу.",ar:"تبرّع بالموارد في القاعدة.",fil:"Mag-donate ng mga resource sa base."},
+ abp:{es:"Atacar bases para stratagems.",en:"Attack bases for stratagems.",ru:"Атакуйте базы ради стратагем.",ar:"هاجم القواعد للحصول على الخطط (stratagems).",fil:"Atakihin ang mga base para sa stratagems."},
+ uh:{es:"Upgradear héroes (solo misiones 4★ o superior).",en:"Upgrade heroes (only 4★ or higher quests).",ru:"Улучшайте героев (только задания 4★ и выше).",ar:"قم بترقية الأبطال (مهام 4★ أو أعلى فقط).",fil:"I-upgrade ang mga bayani (mga quest na 4★ pataas lang)."},
+ rem:{es:"Ponerse de acuerdo hoy en el chat de la alianza para definir el horario de inicio del Asedio de Monstruos del sábado.",en:"Agree today in the alliance chat on the start time of Saturday's Monster Siege.",ru:"Договоритесь сегодня в чате альянса о времени начала Осады монстров в субботу.",ar:"اتفقوا اليوم في دردشة التحالف على موعد بدء حصار الوحوش يوم السبت.",fil:"Magkasundo ngayon sa chat ng alyansa sa oras ng simula ng Monster Siege sa Sabado."},
+ gm:{es:"Mezclar gemas para puntuar.",en:"Merge gems to score.",ru:"Объединяйте самоцветы ради очков.",ar:"ادمج الجواهر لكسب النقاط.",fil:"Pagsamahin ang mga gem para makaiskor."},
+ warn:{es:"Informar a todos los miembros que NO pueden abandonar la alianza hasta después de finalizar el Asedio del sábado.",en:"Inform all members that they CANNOT leave the alliance until after Saturday's Siege ends.",ru:"Сообщите всем участникам, что они НЕ МОГУТ покидать альянс до окончания субботней Осады.",ar:"أبلغ جميع الأعضاء بأنه لا يمكنهم مغادرة التحالف إلا بعد انتهاء حصار السبت.",fil:"Ipaalam sa lahat ng miyembro na HINDI sila puwedeng umalis sa alyansa hanggang matapos ang Siege sa Sabado."},
+ qm:{es:"Ruletas en misiones (solo 4★ o superior).",en:"Roulettes in quests (only 4★ or higher).",ru:"Рулетки в заданиях (только 4★ и выше).",ar:"عجلات الحظ في المهام (4★ أو أعلى فقط).",fil:"Mga roulette sa mga quest (4★ pataas lang)."},
+ sc:{es:"Construcción y tecnologías.",en:"Construction and technologies.",ru:"Строительство и технологии.",ar:"البناء والتقنيات.",fil:"Konstruksyon at mga teknolohiya."},
+ ms:{es:"Recibir 200 olas de monstruos.",en:"Receive 200 monster waves.",ru:"Отразите 200 волн монстров.",ar:"استقبل 200 موجة من الوحوش.",fil:"Harapin ang 200 alon ng halimaw."},
+ qm2:{es:"Misiones de héroe/alianza (4★ o superior).",en:"Hero/alliance quests (4★ or higher).",ru:"Задания героя/альянса (4★ и выше).",ar:"مهام البطل/التحالف (4★ أو أعلى).",fil:"Mga quest ng bayani/alyansa (4★ pataas)."}
+};
+
+// Line types: t=text, n=note, s=strategy, l=limit, r=reminder, w=warning
+const E=(name,h,lines)=>({name,h,lines});
+const SR=()=>E("Super roulette",24,[["t","sr"],["n","n2"]]);
+const DAYS=[
+ [E("Killing spree",24,[["t","ks"]]),E("Killing spree (4h)",4,[["t","same"]]),E("War raiders",24,[["t","wr"]]),E("Super roulette",24,[["t","sr"],["n","n1"]])],
+ [E("Upgrade equipment",24,[["t","ue"]]),E("Upgrade equipment (4h)",4,[["t","same"]]),E("War raiders",24,[["t","wr2"]]),SR()],
+ [E("Sprint",24,[["t","sp"]]),E("Sprint (4h)",4,[["t","same"]]),E("Treasure from heaven",24,[["t","tfh"]]),SR()],
+ [E("Chip game",24,[["t","cg"],["l"]]),E("Chip game (4h)",4,[["t","same"]]),E("Treasure from heaven",24,[["t","tfh"]]),SR()],
+ [E("ISW",24,[["t","isw"],["l"]]),SR()],
+ [E("ISW",24,[["t","isw"],["l"]]),SR()],
+ [E("ISW",24,[["t","isw"],["l"]]),SR()],
+ [E("Natural resources",24,[["t","nr"],["s","nr_s"]]),E("Natural resources (4h)",4,[["t","same_n"]])],
+ [E("Training day",24,[["t","td"],["s","td_s"]]),E("Training day (4h)",4,[["t","same"]]),E("Base construction",24,[["t","bc"]]),E("Alliance base plunder",24,[["t","abp"]])],
+ [E("Upgrade Hero",24,[["t","uh"],["l"]]),E("Upgrade hero (4h)",4,[["t","same"]]),E("Base construction",24,[["t","bc"]]),E("Alliance base plunder",24,[["t","abp"],["r","rem"]])],
+ [E("Gems merge",24,[["t","gm"],["l"]]),E("Gems merge (4h)",4,[["t","same"]]),E("Base construction",24,[["t","bc"]]),E("Alliance base plunder",24,[["t","abp"],["w","warn"]])],
+ [E("Quest master",24,[["t","qm"]]),E("Strength the city",24,[["t","sc"]]),E("Strength the city (4h)",4,[["t","same"]]),E("Alliance base plunder",24,[["t","abp"]])],
+ [E("Monster siege",24,[["t","ms"]]),E("Quest master",24,[["t","qm2"]]),E("Killing spree",24,[["t","ks2"]]),E("Alliance base plunder",24,[["t","abp"]])],
+ [E("War raiders",24,[["t","wr2"]]),E("Killing spree",24,[["t","ks2"]]),E("Alliance base plunder",24,[["t","abp"]]),SR()]
+];
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// Nombres originales del juego en francés (se usan como nombre de evento en árabe)
+const FR={
+ "killing spree":"Massacre","war raiders":"Combattants de la guerre","super roulette":"Roulette superbe",
+ "upgrade equipment":"Mettre à niveau l'équipement","sprint":"Sprint","treasure from heaven":"Trésor du ciel",
+ "chip game":"Chip jeu","isw":"l'embuscade (ISW)","natural resources":"Ressources naturelles",
+ "training day":"Formation de jour","base construction":"Construction de base",
+ "alliance base plunder":"Le pillage de la base de l'Alliance","upgrade hero":"Mettre à niveau l'héro",
+ "gems merge":"Les points bijoux","strength the city":"Renforcer la Ville","quest master":"Maître de quête",
+ "monster siege":"Le Siège des Monstres"
+};
+function evName(name,lang){
+  if(lang!=="ar")return name==="ISW"?"l'embuscade (ISW)":esc(name);
+  const m=name.match(/^(.*?)(\s*\(4h\))?$/i);
+  const fr=FR[m[1].toLowerCase()];
+  if(!fr)return esc(name);
+  return `<bdi dir="ltr">${esc(fr)}${m[2]?" (4h)":""}</bdi>`;
+}
+
+function renderDay(i,lang){
+  const u=UI[lang];
+  const evs=DAYS[i].map(ev=>{
+    const lines=ev.lines.map(([k,key])=>{
+      switch(k){
+        case "t": return `<div class="desc">${esc(T[key][lang])}</div>`;
+        case "n": return `<span class="tag note"><b>${u.note}</b>${esc(T[key][lang])}</span>`;
+        case "s": return `<span class="tag strat"><b>${u.strat}</b>${esc(T[key][lang])}</span>`;
+        case "l": return `<span class="tag limit">${esc(T.limit[lang])}</span>`;
+        case "r": return `<span class="tag rem"><b>${u.remT}</b><br>${esc(T[key][lang])}</span>`;
+        case "w": return `<span class="tag warn"><b>${u.warnT}</b><br>${esc(T[key][lang])}</span>`;
+      }
+    }).join("");
+    const bd=`<span class="badge ${ev.h===4?"short":""}">${ev.h}${u.h}</span>`;
+    return `<div class="ev"><div class="evtop"><span class="evname">${evName(ev.name,lang)}</span>${bd}</div>${lines}</div>`;
+  }).join("");
+  return `<article class="day"><div class="dayhead"><span class="dn">${u.day} ${i+1}</span><span class="wd">${u.wd[i%7]}</span></div><div class="events">${evs}</div></article>`;
+}
+
+function render(lang){
+  const u=UI[lang];
+  document.documentElement.lang=lang==="fil"?"fil":lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.title=u.title;
+  document.getElementById("title").textContent=u.title;
+  document.getElementById("sub").textContent=u.sub;
+  document.getElementById("langLabel").textContent=u.lang;
+  document.querySelectorAll(".langbtn").forEach(b=>b.classList.toggle("active",b.dataset.l===lang));
+  let html=`<h2 class="phase">${u.p1}</h2><div class="grid">`;
+  for(let i=0;i<7;i++)html+=renderDay(i,lang);
+  html+=`</div><h2 class="phase">${u.p2}</h2><div class="grid">`;
+  for(let i=7;i<14;i++)html+=renderDay(i,lang);
+  html+=`</div>`;
+  document.getElementById("content").innerHTML=html;
+  try{localStorage.setItem("err_lang",lang)}catch(e){}
+}
+
+const box=document.getElementById("langs");
+LANGS.forEach(([c,n])=>{
+  const b=document.createElement("button");
+  b.className="langbtn";b.dataset.l=c;b.textContent=n;
+  b.addEventListener("click",()=>render(c));
+  box.appendChild(b);
+});
+let start="es";
+try{const s=localStorage.getItem("err_lang");if(s&&UI[s])start=s}catch(e){}
+render(start);
+</script>
+</body>
+</html>
