@@ -80,6 +80,7 @@ h2.phase{color:var(--gold);font-size:1.4rem;margin:38px 0 18px;padding-bottom:8p
 .lrow.done .lstat{color:var(--muted);font-weight:500}
 .lstat bdi{font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace}
 .lsec{grid-column:1/-1;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.6px;margin-top:4px}
+.tag.span{background:rgba(245,197,66,.10);color:var(--gold);font-weight:600}
 .lrow.prep{border-inline-start-color:var(--strat)}
 .lrow.prep .lstat{color:var(--strat)}
 .lsec.prepsec{color:var(--strat);font-weight:700;margin-top:10px}
@@ -253,8 +254,10 @@ function renderDay(i,lang){
         case "w": return `<span class="tag warn"><b>${u.warnT}</b><br>${fmt(T[key][lang])}</span>`;
       }
     }).join("");
-    const bd=`<span class="badge ${ev.h===4?"short":""}">${ev.h}${u.h}</span>`;
-    return `<div class="ev"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${lines}</div>`;
+    const si=ev.h===24?spanInfo(i,ev.name):null;
+    const long=si&&si.len>1;
+    const bd=`<span class="badge ${ev.h===4?"short":""}">${long?si.len*24:ev.h}${u.h}</span>`;
+    return `<div class="ev"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${lines}${spanTag(si,lang,false)}</div>`;
   }).join("");
   const cn=canaryNow().day, isToday=(i===cn), isTmr=(i===(cn+1)%14);
   return `<article class="day${isToday?" today":""}"><div class="dayhead"><span class="dn">${u.day} ${i+1}${isToday?`<span class="todaytag">${L[lang].today}</span>`:""}${isTmr?`<span class="todaytag tmr">${L[lang].tmr}</span>`:""}</span><span class="wd">${u.wd[i%7]}</span></div><div class="events">${evs}</div></article>`;
@@ -269,11 +272,11 @@ const TZ="Atlantic/Canary";
 const H4=[2,8,14], DUR4=4;
 
 const L={
- es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora de Canarias",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy",prep:"Prepárate para mañana",at:"Empiezan a las",tmr:"MAÑANA"},
- en:{btn:"Live",title:"Live now",clock:"Canary Islands time",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events",prep:"Get ready for tomorrow",at:"Starts at",tmr:"TOMORROW"},
- ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Время Канарских островов",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня",prep:"Готовьтесь к завтрашнему дню",at:"Начало в",tmr:"ЗАВТРА"},
- ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت جزر الكناري",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم",prep:"استعد لغد",at:"يبدأ في الساعة",tmr:"غدًا"},
- fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng Canary Islands",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon",prep:"Maghanda para bukas",at:"Magsisimula nang",tmr:"BUKAS"}
+ es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora de Canarias",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy",prep:"Prepárate para mañana",at:"Empiezan a las",tmr:"MAÑANA",lasts:"Dura",days:"Días",dsuf:"d",cont:"Continúa mañana"},
+ en:{btn:"Live",title:"Live now",clock:"Canary Islands time",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events",prep:"Get ready for tomorrow",at:"Starts at",tmr:"TOMORROW",lasts:"Lasts",days:"Days",dsuf:"d",cont:"Continues tomorrow"},
+ ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Время Канарских островов",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня",prep:"Готовьтесь к завтрашнему дню",at:"Начало в",tmr:"ЗАВТРА",lasts:"Длится",days:"Дни",dsuf:"д",cont:"Продолжается завтра"},
+ ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت جزر الكناري",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم",prep:"استعد لغد",at:"يبدأ في الساعة",tmr:"غدًا",lasts:"تستمر",days:"الأيام",dsuf:"ي",cont:"يستمر غدًا"},
+ fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng Canary Islands",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon",prep:"Maghanda para bukas",at:"Magsisimula nang",tmr:"BUKAS",lasts:"Tumatagal ng",days:"Araw",dsuf:"d",cont:"Magpapatuloy bukas"}
 };
 let curLang="es", liveOn=true;
 
@@ -294,7 +297,28 @@ function canaryNow(){
 const pad=n=>String(n).padStart(2,"0");
 const hms=t=>`${pad(Math.floor(t/3600))}:${pad(Math.floor(t%3600/60))}:${pad(t%60)}`;
 
-function liveRow(ev,lang,state,secs,custom){
+/* Eventos que duran más de 24H: días consecutivos (en ciclo) con el mismo evento de 24H */
+function spanInfo(d,name){
+  const key=name.toLowerCase();
+  const has=x=>DAYS[((x%14)+14)%14].some(e=>e.h===24&&e.name.toLowerCase()===key);
+  if(!has(d))return null;
+  let s=d,e=d,c=0;
+  while(has(s-1)&&c<14){s--;c++}
+  c=0;
+  while(has(e+1)&&c<14){e++;c++}
+  const len=Math.min(e-s+1,14), m=x=>((x%14)+14)%14+1;
+  return {len,pos:d-s,a:m(s),b:m(e)};
+}
+function spanTag(si,lang,withPos){
+  if(!si||si.len<2)return "";
+  const l=L[lang];
+  return `<span class="tag span">⏳ ${l.lasts} <bdi dir="ltr">${si.len*24}H</bdi> · ${l.days} <bdi dir="ltr">${si.a}–${si.b}</bdi>${withPos?` · <bdi dir="ltr">${si.pos+1}/${si.len}</bdi>`:""}</span>`;
+}
+function hmsd(t,lang){
+  return t>=86400?`${Math.floor(t/86400)}${L[lang].dsuf} ${hms(t%86400)}`:hms(t);
+}
+
+function liveRow(ev,lang,state,secs,custom,dayIdx){
   const l=L[lang], u=UI[lang];
   const desc=ev.lines.filter(([k])=>!(state==="prep"&&(k==="r"||k==="w"))).map(([k,key])=>{
     switch(k){
@@ -306,13 +330,18 @@ function liveRow(ev,lang,state,secs,custom){
       case "w": return `<span class="tag warn"><b>${u.warnT}</b><br>${fmt(T[key][lang])}</span>`;
     }
   }).join("");
-  const bd=`<span class="badge ${ev.h===4?"short":""}">${ev.h}${u.h}</span>`;
+  const si=(ev.h===24&&dayIdx!=null)?spanInfo(dayIdx,ev.name):null;
+  const long=si&&si.len>1;
+  const bd=`<span class="badge ${ev.h===4?"short":""}">${long?si.len*24:ev.h}${u.h}</span>`;
   let stat;
-  if(state==="live")stat=`${l.ends} <bdi dir="ltr">${hms(secs)}</bdi>`;
+  if(state==="live"){
+    if(long)secs=(si.len-si.pos)*86400-(86400-secs);   // hasta el final del último día del evento
+    stat=`${l.ends} <bdi dir="ltr">${hmsd(secs,lang)}</bdi>`;
+  }
   else if(state==="soon")stat=`${l.starts} <bdi dir="ltr">${hms(secs)}</bdi>`;
-  else if(state==="prep")stat=custom||`${l.starts} <bdi dir="ltr">${hms(secs)}</bdi>`;
+  else if(state==="prep")stat=(long&&si.pos>0)?l.cont:(custom||`${l.starts} <bdi dir="ltr">${hms(secs)}</bdi>`);
   else stat=l.done;
-  return `<div class="lrow ${state==="live"?"":state}"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${desc}<div class="lstat">${stat}</div></div>`;
+  return `<div class="lrow ${state==="live"?"":state}"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${desc}${spanTag(si,lang,state==="live")}<div class="lstat">${stat}</div></div>`;
 }
 
 function renderLive(){
@@ -323,7 +352,7 @@ function renderLive(){
   const n=canaryNow();
   if(n.day!==shownDay){renderAll(lang);return}   // cambio de día
   const evs=DAYS[n.day];
-  const rows24=evs.filter(e=>e.h===24).map(e=>liveRow(e,lang,"live",86400-n.secs)).join("");
+  const rows24=evs.filter(e=>e.h===24).map(e=>liveRow(e,lang,"live",86400-n.secs,undefined,n.day)).join("");
   let rows4="";
   for(const e of evs.filter(e=>e.h===4)){
     let state="done",t=0;
@@ -337,7 +366,7 @@ function renderLive(){
   const nd=(n.day+1)%14, evsT=DAYS[nd];
   const h4txt=H4.map(x=>pad(x)+":00").join(" · ");
   const prep=evsT.map(e=>e.h===24
-    ?liveRow(e,lang,"prep",86400-n.secs)
+    ?liveRow(e,lang,"prep",86400-n.secs,undefined,nd)
     :liveRow(e,lang,"prep",0,`${l.at} <bdi dir="ltr">${h4txt}</bdi>`)).join("");
   box.innerHTML=`<div class="livehead"><span class="dot"></span><b>${l.title}</b><span class="clock">${l.clock}: <bdi dir="ltr">${pad(n.h)}:${pad(n.mi)}:${pad(n.s)}</bdi></span><span class="dayinfo">${u.day} ${n.day+1}</span></div>
   <div class="livelist">${rows24?`<div class="lsec">${l.s24}</div>${rows24}`:""}${rows4?`<div class="lsec">${l.s4}</div>${rows4}`:""}<div class="lsec prepsec">${l.prep} · ${u.day} ${nd+1}</div>${prep}</div>`;
