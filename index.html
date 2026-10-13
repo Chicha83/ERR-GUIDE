@@ -57,20 +57,49 @@ h2.phase{color:var(--gold);font-size:1.4rem;margin:38px 0 18px;padding-bottom:8p
 .limit{background:var(--limit-bg);color:var(--gold);font-weight:600}
 .rem{background:var(--rem-bg);color:var(--rem)}
 .warn{background:var(--warn-bg);color:var(--warn)}
+.livebtn{background:var(--card);color:var(--text);border:1px solid var(--border);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.88rem;font-family:inherit;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.livebtn:hover{border-color:#ff5a5a}
+.livebtn.on{border-color:#ff5a5a;color:#ff8a8a;font-weight:700}
+.livebtn .dot,.livehead .dot{width:9px;height:9px;border-radius:50%;background:#ff4040;box-shadow:0 0 0 0 rgba(255,64,64,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,64,64,.6)}70%{box-shadow:0 0 0 8px rgba(255,64,64,0)}100%{box-shadow:0 0 0 0 rgba(255,64,64,0)}}
+.hdr-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.livebox{background:linear-gradient(135deg,#1d1519,#171b24);border:1px solid #ff5a5a;border-radius:14px;padding:14px 16px;margin:0 0 26px;box-shadow:0 0 28px rgba(255,64,64,.12)}
+.livebox[hidden]{display:none}
+.livehead{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:12px}
+.livehead b{color:#ff8a8a;font-size:1.1rem;letter-spacing:.3px}
+.livehead .clock{color:var(--muted);font-size:.88rem}
+.livehead .dayinfo{margin-inline-start:auto;color:var(--gold);font-weight:800}
+.livelist{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px}
+.lrow{background:var(--bg2);border:1px solid var(--border);border-inline-start:3px solid #ff4040;border-radius:10px;padding:9px 11px}
+.lrow.soon{border-inline-start-color:var(--gold);opacity:.95}
+.lrow.done{border-inline-start-color:var(--border);opacity:.55}
+.lrow .evicon{width:40px;height:40px}
+.lrow .evtop{margin-bottom:2px}
+.lstat{margin-top:6px;font-size:.9rem;font-weight:700;color:#ff8a8a}
+.lrow.soon .lstat{color:var(--gold)}
+.lrow.done .lstat{color:var(--muted);font-weight:500}
+.lstat bdi{font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace}
+.lsec{grid-column:1/-1;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.6px;margin-top:4px}
+.day.today{border-color:#ff5a5a;box-shadow:0 0 0 1px #ff5a5a,0 0 24px rgba(255,64,64,.2)}
+.todaytag{background:#ff4040;color:#fff;font-weight:800;font-size:.7rem;padding:2px 8px;border-radius:999px;margin-inline-start:8px}
 footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
 </style>
 </head>
 <body>
 <header>
   <div class="brand">⚔ ERR</div>
-  <div class="langbox">
-    <span class="lbl" id="langLabel"></span>
-    <div id="langs"></div>
+  <div class="hdr-right">
+    <button class="livebtn on" id="liveBtn" type="button" aria-pressed="true"><span class="dot"></span><span id="liveBtnTxt"></span></button>
+    <div class="langbox">
+      <span class="lbl" id="langLabel"></span>
+      <div id="langs"></div>
+    </div>
   </div>
 </header>
 <main>
   <h1 id="title"></h1>
   <p class="sub" id="sub"></p>
+  <section class="livebox" id="live" aria-live="off"></section>
   <div id="content"></div>
 </main>
 <footer>by Chicha83</footer>
@@ -193,7 +222,88 @@ function renderDay(i,lang){
     const bd=`<span class="badge ${ev.h===4?"short":""}">${ev.h}${u.h}</span>`;
     return `<div class="ev"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${lines}</div>`;
   }).join("");
-  return `<article class="day"><div class="dayhead"><span class="dn">${u.day} ${i+1}</span><span class="wd">${u.wd[i%7]}</span></div><div class="events">${evs}</div></article>`;
+  const isToday=(i===canaryNow().day);
+  return `<article class="day${isToday?" today":""}"><div class="dayhead"><span class="dn">${u.day} ${i+1}${isToday?`<span class="todaytag">${L[lang].today}</span>`:""}</span><span class="wd">${u.wd[i%7]}</span></div><div class="events">${evs}</div></article>`;
+}
+
+/* ===== EN VIVO =====
+   - Los eventos terminan a las 00:00 (hora de Canarias).
+   - Los eventos de 4h empiezan a las 02:00, 08:00 y 14:00 (hora de Canarias) y duran 4h.
+   - CYCLE_START = fecha (en Canarias) en que empieza el Día 1 del ciclo de 14 días. */
+const CYCLE_START="2026-10-04";
+const TZ="Atlantic/Canary";
+const H4=[2,8,14], DUR4=4;
+
+const L={
+ es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora de Canarias",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy"},
+ en:{btn:"Live",title:"Live now",clock:"Canary Islands time",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events"},
+ ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Время Канарских островов",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня"},
+ ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت جزر الكناري",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم"},
+ fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng Canary Islands",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon"}
+};
+let curLang="es", liveOn=true;
+
+function canaryNow(){
+  let y,mo,d,h,mi,s;
+  try{
+    const parts=new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hourCycle:"h23",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"}).formatToParts(new Date());
+    const g=t=>+parts.find(p=>p.type===t).value;
+    y=g("year");mo=g("month");d=g("day");h=g("hour");mi=g("minute");s=g("second");
+  }catch(e){
+    const n=new Date(Date.now()+3600e3); // respaldo: UTC+1
+    y=n.getUTCFullYear();mo=n.getUTCMonth()+1;d=n.getUTCDate();h=n.getUTCHours();mi=n.getUTCMinutes();s=n.getUTCSeconds();
+  }
+  const [cy,cm,cd]=CYCLE_START.split("-").map(Number);
+  const days=Math.round((Date.UTC(y,mo-1,d)-Date.UTC(cy,cm-1,cd))/864e5);
+  return {day:((days%14)+14)%14, secs:h*3600+mi*60+s, h,mi,s};
+}
+const pad=n=>String(n).padStart(2,"0");
+const hms=t=>`${pad(Math.floor(t/3600))}:${pad(Math.floor(t%3600/60))}:${pad(t%60)}`;
+
+function liveRow(ev,lang,state,secs){
+  const l=L[lang], u=UI[lang];
+  const descKey=(ev.lines.find(x=>x[0]==="t")||[])[1];
+  const desc=descKey?`<div class="desc">${fmt(T[descKey][lang])}</div>`:"";
+  const bd=`<span class="badge ${ev.h===4?"short":""}">${ev.h}${u.h}</span>`;
+  let stat;
+  if(state==="live")stat=`${l.ends} <bdi dir="ltr">${hms(secs)}</bdi>`;
+  else if(state==="soon")stat=`${l.starts} <bdi dir="ltr">${hms(secs)}</bdi>`;
+  else stat=l.done;
+  return `<div class="lrow ${state==="live"?"":state}"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${desc}<div class="lstat">${stat}</div></div>`;
+}
+
+function renderLive(){
+  const box=document.getElementById("live");
+  if(!liveOn){box.hidden=true;return}
+  box.hidden=false;
+  const lang=curLang, l=L[lang], u=UI[lang];
+  const n=canaryNow();
+  if(n.day!==shownDay){renderAll(lang);return}   // cambio de día
+  const evs=DAYS[n.day];
+  const rows24=evs.filter(e=>e.h===24).map(e=>liveRow(e,lang,"live",86400-n.secs)).join("");
+  let rows4="";
+  for(const e of evs.filter(e=>e.h===4)){
+    let state="done",t=0;
+    for(const st of H4){
+      const a=st*3600,b=a+DUR4*3600;
+      if(n.secs>=a&&n.secs<b){state="live";t=b-n.secs;break}
+      if(n.secs<a){state="soon";t=a-n.secs;break}
+    }
+    rows4+=liveRow(e,lang,state,t);
+  }
+  box.innerHTML=`<div class="livehead"><span class="dot"></span><b>${l.title}</b><span class="clock">${l.clock}: <bdi dir="ltr">${pad(n.h)}:${pad(n.mi)}:${pad(n.s)}</bdi></span><span class="dayinfo">${u.day} ${n.day+1}</span></div>
+  <div class="livelist">${rows24?`<div class="lsec">${l.s24}</div>${rows24}`:""}${rows4?`<div class="lsec">${l.s4}</div>${rows4}`:""}</div>`;
+}
+
+let shownDay=-1, liveTimer=null;
+function renderAll(lang){
+  curLang=lang;
+  shownDay=canaryNow().day;
+  render(lang);
+  const b=document.getElementById("liveBtn");
+  document.getElementById("liveBtnTxt").textContent=L[lang].btn;
+  b.classList.toggle("on",liveOn);b.setAttribute("aria-pressed",liveOn);
+  renderLive();
 }
 
 function render(lang){
@@ -218,12 +328,19 @@ const box=document.getElementById("langs");
 LANGS.forEach(([c,n])=>{
   const b=document.createElement("button");
   b.className="langbtn";b.dataset.l=c;b.textContent=n;
-  b.addEventListener("click",()=>render(c));
+  b.addEventListener("click",()=>renderAll(c));
   box.appendChild(b);
 });
 let start="es";
 try{const s=localStorage.getItem("err_lang");if(s&&UI[s])start=s}catch(e){}
-render(start);
+try{liveOn=localStorage.getItem("err_live")!=="0"}catch(e){}
+document.getElementById("liveBtn").addEventListener("click",()=>{
+  liveOn=!liveOn;
+  try{localStorage.setItem("err_live",liveOn?"1":"0")}catch(e){}
+  renderAll(curLang);
+});
+renderAll(start);
+liveTimer=setInterval(renderLive,1000);
 </script>
 </body>
 </html>
