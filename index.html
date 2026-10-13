@@ -262,8 +262,16 @@ const hms=t=>`${pad(Math.floor(t/3600))}:${pad(Math.floor(t%3600/60))}:${pad(t%6
 
 function liveRow(ev,lang,state,secs){
   const l=L[lang], u=UI[lang];
-  const descKey=(ev.lines.find(x=>x[0]==="t")||[])[1];
-  const desc=descKey?`<div class="desc">${fmt(T[descKey][lang])}</div>`:"";
+  const desc=ev.lines.map(([k,key])=>{
+    switch(k){
+      case "t": return `<div class="desc">${fmt(T[key][lang])}</div>`;
+      case "n": return `<span class="tag note"><b>${u.note}</b>${fmt(T[key][lang])}</span>`;
+      case "s": return `<span class="tag strat"><b>${u.strat}</b>${fmt(T[key][lang])}</span>`;
+      case "l": return `<span class="tag limit">${fmt(T.limit[lang])}</span>`;
+      case "r": return `<span class="tag rem"><b>${u.remT}</b><br>${fmt(T[key][lang])}</span>`;
+      case "w": return `<span class="tag warn"><b>${u.warnT}</b><br>${fmt(T[key][lang])}</span>`;
+    }
+  }).join("");
   const bd=`<span class="badge ${ev.h===4?"short":""}">${ev.h}${u.h}</span>`;
   let stat;
   if(state==="live")stat=`${l.ends} <bdi dir="ltr">${hms(secs)}</bdi>`;
