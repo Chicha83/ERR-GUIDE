@@ -80,6 +80,10 @@ h2.phase{color:var(--gold);font-size:1.4rem;margin:38px 0 18px;padding-bottom:8p
 .lrow.done .lstat{color:var(--muted);font-weight:500}
 .lstat bdi{font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace}
 .lsec{grid-column:1/-1;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.6px;margin-top:4px}
+.lrow.prep{border-inline-start-color:var(--strat)}
+.lrow.prep .lstat{color:var(--strat)}
+.lsec.prepsec{color:var(--strat);font-weight:700;margin-top:10px}
+.todaytag.tmr{background:var(--strat);color:#06223a}
 .day.today{border-color:#ff5a5a;box-shadow:0 0 0 1px #ff5a5a,0 0 24px rgba(255,64,64,.2)}
 .todaytag{background:#ff4040;color:#fff;font-weight:800;font-size:.7rem;padding:2px 8px;border-radius:999px;margin-inline-start:8px}
 footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
@@ -222,8 +226,8 @@ function renderDay(i,lang){
     const bd=`<span class="badge ${ev.h===4?"short":""}">${ev.h}${u.h}</span>`;
     return `<div class="ev"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${lines}</div>`;
   }).join("");
-  const isToday=(i===canaryNow().day);
-  return `<article class="day${isToday?" today":""}"><div class="dayhead"><span class="dn">${u.day} ${i+1}${isToday?`<span class="todaytag">${L[lang].today}</span>`:""}</span><span class="wd">${u.wd[i%7]}</span></div><div class="events">${evs}</div></article>`;
+  const cn=canaryNow().day, isToday=(i===cn), isTmr=(i===(cn+1)%14);
+  return `<article class="day${isToday?" today":""}"><div class="dayhead"><span class="dn">${u.day} ${i+1}${isToday?`<span class="todaytag">${L[lang].today}</span>`:""}${isTmr?`<span class="todaytag tmr">${L[lang].tmr}</span>`:""}</span><span class="wd">${u.wd[i%7]}</span></div><div class="events">${evs}</div></article>`;
 }
 
 /* ===== EN VIVO =====
@@ -235,11 +239,11 @@ const TZ="Atlantic/Canary";
 const H4=[2,8,14], DUR4=4;
 
 const L={
- es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora de Canarias",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy"},
- en:{btn:"Live",title:"Live now",clock:"Canary Islands time",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events"},
- ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Время Канарских островов",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня"},
- ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت جزر الكناري",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم"},
- fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng Canary Islands",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon"}
+ es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora de Canarias",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy",prep:"Prepárate para mañana",at:"Empiezan a las",tmr:"MAÑANA"},
+ en:{btn:"Live",title:"Live now",clock:"Canary Islands time",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events",prep:"Get ready for tomorrow",at:"Starts at",tmr:"TOMORROW"},
+ ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Время Канарских островов",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня",prep:"Готовьтесь к завтрашнему дню",at:"Начало в",tmr:"ЗАВТРА"},
+ ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت جزر الكناري",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم",prep:"استعد لغد",at:"يبدأ في الساعة",tmr:"غدًا"},
+ fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng Canary Islands",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon",prep:"Maghanda para bukas",at:"Magsisimula nang",tmr:"BUKAS"}
 };
 let curLang="es", liveOn=true;
 
@@ -260,9 +264,9 @@ function canaryNow(){
 const pad=n=>String(n).padStart(2,"0");
 const hms=t=>`${pad(Math.floor(t/3600))}:${pad(Math.floor(t%3600/60))}:${pad(t%60)}`;
 
-function liveRow(ev,lang,state,secs){
+function liveRow(ev,lang,state,secs,custom){
   const l=L[lang], u=UI[lang];
-  const desc=ev.lines.map(([k,key])=>{
+  const desc=ev.lines.filter(([k])=>!(state==="prep"&&(k==="r"||k==="w"))).map(([k,key])=>{
     switch(k){
       case "t": return `<div class="desc">${fmt(T[key][lang])}</div>`;
       case "n": return `<span class="tag note"><b>${u.note}</b>${fmt(T[key][lang])}</span>`;
@@ -276,6 +280,7 @@ function liveRow(ev,lang,state,secs){
   let stat;
   if(state==="live")stat=`${l.ends} <bdi dir="ltr">${hms(secs)}</bdi>`;
   else if(state==="soon")stat=`${l.starts} <bdi dir="ltr">${hms(secs)}</bdi>`;
+  else if(state==="prep")stat=custom||`${l.starts} <bdi dir="ltr">${hms(secs)}</bdi>`;
   else stat=l.done;
   return `<div class="lrow ${state==="live"?"":state}"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${desc}<div class="lstat">${stat}</div></div>`;
 }
@@ -299,8 +304,13 @@ function renderLive(){
     }
     rows4+=liveRow(e,lang,state,t);
   }
+  const nd=(n.day+1)%14, evsT=DAYS[nd];
+  const h4txt=H4.map(x=>pad(x)+":00").join(" · ");
+  const prep=evsT.map(e=>e.h===24
+    ?liveRow(e,lang,"prep",86400-n.secs)
+    :liveRow(e,lang,"prep",0,`${l.at} <bdi dir="ltr">${h4txt}</bdi>`)).join("");
   box.innerHTML=`<div class="livehead"><span class="dot"></span><b>${l.title}</b><span class="clock">${l.clock}: <bdi dir="ltr">${pad(n.h)}:${pad(n.mi)}:${pad(n.s)}</bdi></span><span class="dayinfo">${u.day} ${n.day+1}</span></div>
-  <div class="livelist">${rows24?`<div class="lsec">${l.s24}</div>${rows24}`:""}${rows4?`<div class="lsec">${l.s4}</div>${rows4}`:""}</div>`;
+  <div class="livelist">${rows24?`<div class="lsec">${l.s24}</div>${rows24}`:""}${rows4?`<div class="lsec">${l.s4}</div>${rows4}`:""}<div class="lsec prepsec">${l.prep} · ${u.day} ${nd+1}</div>${prep}</div>`;
 }
 
 let shownDay=-1, liveTimer=null;
