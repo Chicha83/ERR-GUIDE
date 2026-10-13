@@ -226,7 +226,7 @@ const FR={
  "monster siege":"Le Siège des Monstres"
 };
 function evName(name,lang){
-  if(lang!=="ar")return name==="ISW"?"l'embuscade (ISW)":esc(name);
+  if(lang!=="ar")return esc(name);
   const m=name.match(/^(.*?)(\s*\(4h\))?$/i);
   const fr=FR[m[1].toLowerCase()];
   if(!fr)return esc(name);
