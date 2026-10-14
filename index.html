@@ -152,6 +152,10 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
 .rsl i{position:absolute;top:-4px;left:6px;background:#f5c542;color:#111;font-style:normal;font-weight:700;font-size:.6rem;border-radius:50%;width:15px;height:15px;line-height:15px}
 .rsl small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pset{margin-top:8px;font-size:.82rem}.pset b{color:#fff;display:block}
+.gzmodal{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:16px}
+.gzbox{background:var(--bg2,#151926);border:1px solid #ff5a5a;border-radius:14px;max-width:420px;width:100%;padding:22px 20px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.gzico{font-size:2rem;margin-bottom:6px}.gzbox h3{color:#fff;margin-bottom:8px}.gzbox p{color:var(--muted,#aab);font-size:.92rem;line-height:1.45;margin-bottom:16px}
+.gzbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.gzdanger{background:#c62828!important;border-color:#c62828!important;color:#fff!important}
 .hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
 .hcard{background:var(--bg2);border:1px solid var(--border);border-inline-start:3px solid #ff8a1f;border-radius:10px;padding:12px 14px}
 .hcard h4{color:#fff;margin-bottom:6px;font-size:1.02rem}
@@ -646,6 +650,7 @@ es:{btn:"Gemas y runas",title:"Calculadora de gemas y runas",sub:"Pon lo que tie
  baseT:"Lo que ya tienes de otras fuentes",baseCas:"Casualties (%)",baseAcas:"Anti-casualties (%)",baseIdef:"Bonus de defensa de infantería (%)",baseNote:"Algunos sets tienen efectos condicionales («por cada 5% de anti-casualties…», «por cada 1% de casualties…», «por cada 2000% de defensa de infantería…»). Se calculan con lo que equipes más lo que pongas aquí (investigación, edificios, héroe, etc.).",condT:"Efectos condicionales de los sets",condCas:"Casualties",condAcas:"Anti-casualties",condIdef:"Defensa de infantería",condMax:"máx.",
  layNote:"8 piezas × 4 huecos de runa. Halo dorado = set activo (el número marca el orden en que se ponen las runas); borde discontinuo = runa extra del hueco libre.",
  enemy:"Contra qué tropas luchas",enemyAny:"Sin definir",enemyNote:"Elige el rival (p. ej. arqueros contra arqueros): la calculadora buscará SIEMPRE la combinación de gemas y runas con más «% contra» esa tropa, y solo después optimiza el resto. Sin definir, todos los «contra …» valen la mitad.",
+ zeroT:"¡Atención!",zeroWG:"Se borrarán TODAS las gemas que tienes marcadas. Esta acción no se puede deshacer.",zeroWR:"Se borrarán TODAS las runas que tienes marcadas. Esta acción no se puede deshacer.",zeroOk:"Sí, borrar todo",zeroNo:"Cancelar",
  maxc:"Máx. copias iguales de una gema",resp:"Respetar la pieza de cada set de runas",
  search:"Buscar…",fAll:"Todas",fOwn:"Las que tengo",zero:"Poner todo a 0",one:"1 de cada",owned:"Total:",
  resG:"Gemas a equipar",resR:"Runas a equipar",resT:"Suma de efectos",slots:"huecos usados",
@@ -662,6 +667,7 @@ en:{btn:"Gems & runes",title:"Gem & rune calculator",sub:"Enter what you own and
  baseT:"What you already have from other sources",baseCas:"Casualties (%)",baseAcas:"Anti-casualties (%)",baseIdef:"Infantry defense bonus (%)",baseNote:"Some sets have conditional effects («for every 5% anti-casualties…», «for every 1% casualties…», «for every 2000% infantry defense…»). They are computed from what you equip plus what you enter here (research, buildings, hero, etc.).",condT:"Conditional set effects",condCas:"Casualties",condAcas:"Anti-casualties",condIdef:"Infantry defense",condMax:"max",
  layNote:"8 pieces × 4 rune slots. Gold halo = active set (the number is the order to place runes); dashed border = extra rune in the free slot.",
  enemy:"Fighting against",enemyAny:"Any",enemyNote:"Pick the enemy (e.g. archers vs archers): the calculator ALWAYS looks for the gem and rune combination with the highest «% against» that troop first, and only then optimizes everything else. With Any, all «against …» bonuses count at half value.",
+ zeroT:"Warning!",zeroWG:"ALL the gems you have entered will be deleted. This cannot be undone.",zeroWR:"ALL the runes you have entered will be deleted. This cannot be undone.",zeroOk:"Yes, delete everything",zeroNo:"Cancel",
  maxc:"Max copies of the same gem",resp:"Respect each rune set's piece",
  search:"Search…",fAll:"All",fOwn:"Owned",zero:"Set all to 0",one:"1 of each",owned:"Total:",
  resG:"Gems to equip",resR:"Runes to equip",resT:"Total effects",slots:"slots used",
@@ -678,6 +684,7 @@ ru:{btn:"Самоцветы и руны",title:"Калькулятор само�
  baseT:"Что у вас уже есть из других источников",baseCas:"Casualties (%)",baseAcas:"Anti-casualties (%)",baseIdef:"Бонус защиты пехоты (%)",baseNote:"У некоторых наборов есть условные эффекты («за каждые 5% anti-casualties…», «за каждый 1% casualties…», «за каждые 2000% защиты пехоты…»). Они считаются по экипировке плюс то, что вы укажете здесь (исследования, здания, герой и т. д.).",condT:"Условные эффекты наборов",condCas:"Casualties",condAcas:"Anti-casualties",condIdef:"Защита пехоты",condMax:"макс.",
  layNote:"8 предметов × 4 слота рун. Золотое свечение = активный набор (цифра — порядок установки рун); пунктир = дополнительная руна в свободном слоте.",
  enemy:"Против каких войск",enemyAny:"Не задано",enemyNote:"Выберите противника (например, лучники против лучников): калькулятор ВСЕГДА ищет комбинацию самоцветов и рун с максимальным «% против» этого типа, и только затем оптимизирует остальное. Без выбора все «против …» учитываются вполовину.",
+ zeroT:"Внимание!",zeroWG:"ВСЕ введённые вами самоцветы будут удалены. Это действие нельзя отменить.",zeroWR:"ВСЕ введённые вами руны будут удалены. Это действие нельзя отменить.",zeroOk:"Да, удалить всё",zeroNo:"Отмена",
  maxc:"Макс. одинаковых самоцветов",resp:"Учитывать слот каждого набора рун",
  search:"Поиск…",fAll:"Все",fOwn:"Есть у меня",zero:"Обнулить всё",one:"По одному",owned:"Всего:",
  resG:"Самоцветы для установки",resR:"Руны для установки",resT:"Сумма эффектов",slots:"слотов занято",
@@ -694,6 +701,7 @@ ar:{btn:"الجواهر والرونات",title:"حاسبة الجواهر وا�
  baseT:"ما لديك بالفعل من مصادر أخرى",baseCas:"Casualties (%)",baseAcas:"Anti-casualties (%)",baseIdef:"مكافأة دفاع المشاة (%)",baseNote:"بعض الأطقم لها تأثيرات مشروطة («لكل 5% من anti-casualties…»، «لكل 1% من casualties…»، «لكل 2000% من دفاع المشاة…»). تُحسب بحسب ما تركّبه مع ما تدخله هنا (الأبحاث، المباني، البطل، إلخ).",condT:"التأثيرات المشروطة للأطقم",condCas:"Casualties",condAcas:"Anti-casualties",condIdef:"دفاع المشاة",condMax:"الحد الأقصى",
  layNote:"٨ قطع × ٤ خانات رون. التوهج الذهبي = مجموعة مفعّلة (الرقم هو ترتيب وضع الرونات)؛ الإطار المتقطع = رون إضافي في الخانة الحرة.",
  enemy:"ضد أي وحدات",enemyAny:"غير محدد",enemyNote:"اختر العدو (مثل رماة ضد رماة): تبحث الحاسبة دائمًا أولًا عن تركيبة الجواهر والرونات ذات أعلى «٪ ضد» ذلك النوع، ثم تحسّن الباقي. بدون تحديد تُحتسب كل مكافآت «ضد …» بنصف القيمة.",
+ zeroT:"تنبيه!",zeroWG:"سيتم حذف جميع الجواهر التي أدخلتها. لا يمكن التراجع عن هذا الإجراء.",zeroWR:"سيتم حذف جميع الرونات التي أدخلتها. لا يمكن التراجع عن هذا الإجراء.",zeroOk:"نعم، احذف الكل",zeroNo:"إلغاء",
  maxc:"الحد الأقصى لنسخ الجوهرة نفسها",resp:"احترام قطعة كل طقم رونات",
  search:"بحث…",fAll:"الكل",fOwn:"ما أملكه",zero:"تصفير الكل",one:"واحدة من كل نوع",owned:"المجموع:",
  resG:"الجواهر المطلوب تركيبها",resR:"الرونات المطلوب تركيبها",resT:"مجموع التأثيرات",slots:"خانات مستخدمة",
@@ -710,6 +718,7 @@ fil:{btn:"Gems at runes",title:"Calculator ng gems at runes",sub:"Ilagay ang mer
  baseT:"Ang mayroon ka na mula sa ibang source",baseCas:"Casualties (%)",baseAcas:"Anti-casualties (%)",baseIdef:"Infantry defense bonus (%)",baseNote:"May conditional effects ang ilang set («bawat 5% ng anti-casualties…», «bawat 1% ng casualties…», «bawat 2000% ng infantry defense…»). Kinakalkula ito mula sa naka-equip plus ang ilalagay mo rito (research, buildings, hero, atbp.).",condT:"Mga conditional effect ng set",condCas:"Casualties",condAcas:"Anti-casualties",condIdef:"Infantry defense",condMax:"max",
  layNote:"8 piraso × 4 rune slot. Gintong halo = aktibong set (ang numero ang pagkakasunod ng runes); putol-putol na border = extra rune sa libreng slot.",
  enemy:"Laban sa anong troop",enemyAny:"Hindi tinukoy",enemyNote:"Piliin ang kalaban (hal. archers vs archers): ALWAYS hahanapin muna ng calculator ang gem at rune combination na may pinakamataas na «% laban» sa troop na iyon, saka lang i-o-optimize ang iba. Kung Hindi tinukoy, half value ang lahat ng «laban sa …».",
+ zeroT:"Babala!",zeroWG:"LAHAT ng gems na inilagay mo ay made-delete. Hindi na ito maibabalik.",zeroWR:"LAHAT ng runes na inilagay mo ay made-delete. Hindi na ito maibabalik.",zeroOk:"Oo, burahin lahat",zeroNo:"Kanselahin",
  maxc:"Max na kopya ng parehong gem",resp:"Sundin ang piece ng bawat rune set",
  search:"Maghanap…",fAll:"Lahat",fOwn:"Meron ako",zero:"I-zero lahat",one:"1 bawat isa",owned:"Kabuuan:",
  resG:"Gems na ilalagay",resR:"Runes na ilalagay",resT:"Kabuuan ng effects",slots:"slots na gamit",
@@ -1170,6 +1179,16 @@ function gFilterRows(){
     el.style.display=hit&&own?"":"none";
   });
 }
+function gZeroAsk(){
+  const t=GT[curLang],isG=gTab==="g",old=document.getElementById("gzModal");if(old)old.remove();
+  const d=document.createElement("div");d.id="gzModal";d.className="gzmodal";d.setAttribute("role","alertdialog");d.setAttribute("aria-modal","true");
+  d.innerHTML=`<div class="gzbox"${curLang==="ar"?' dir="rtl"':""}><div class="gzico">⚠️</div><h3>${t.zeroT}</h3><p>${isG?t.zeroWG:t.zeroWR}</p><div class="gzbtns"><button type="button" class="gchip" id="gzNo">${t.zeroNo}</button><button type="button" class="gchip gzdanger" id="gzYes">${t.zeroOk}</button></div></div>`;
+  document.body.appendChild(d);
+  const close=()=>{d.remove();document.removeEventListener("keydown",esc)};
+  const esc=e=>{if(e.key==="Escape")close()};document.addEventListener("keydown",esc);
+  d.addEventListener("click",e=>{if(e.target===d||e.target.id==="gzNo")close();else if(e.target.id==="gzYes"){const inv=isG?ginv.g:ginv.r;Object.keys(inv).forEach(k=>delete inv[k]);gSave();close();gRender()}});
+  document.getElementById("gzNo").focus();
+}
 function gTotals(){
   const t=GT[curLang],el=document.getElementById("gemOwned");if(!el)return;
   const inv=gTab==="g"?ginv.g:ginv.r;let s=0;for(const k in inv)s+=+inv[k]||0;el.textContent=t.owned+" "+s;
@@ -1197,7 +1216,7 @@ function gHtml(lang){
   else{
     const list=gTab==="g"?GD.gems:GD.runes,inv=gTab==="g"?ginv.g:ginv.r;
     h+=gTab==="g"?gTutHtml(t):"";
-    h+=`<div class="gtools"><input type="search" id="gemQ" placeholder="${t.search}" value="${gesc(gQuery)}"><button type="button" class="gchip${gFilter==="all"?" on":""}" data-flt="all">${t.fAll}</button><button type="button" class="gchip${gFilter==="own"?" on":""}" data-flt="own">${t.fOwn}</button><button type="button" class="gchip" id="gemOne">${t.one}</button><button type="button" class="gchip" id="gemZero">${t.zero}</button><span class="gown" id="gemOwned"></span></div>
+    h+=`<div class="gtools"><input type="search" id="gemQ" placeholder="${t.search}" value="${gesc(gQuery)}"><button type="button" class="gchip${gFilter==="all"?" on":""}" data-flt="all">${t.fAll}</button><button type="button" class="gchip${gFilter==="own"?" on":""}" data-flt="own">${t.fOwn}</button><button type="button" class="gchip" id="gemZero">${t.zero}</button><span class="gown" id="gemOwned"></span></div>
     <div id="gemList">${gRows(list,inv,lang)}</div>`;
   }
   return h;
@@ -1230,8 +1249,7 @@ function gInit(){
     if(b.dataset.grp){gcfg[b.dataset.grp]=b.dataset.val;gSave();gRender();return}
     if(b.dataset.tab){gTab=b.dataset.tab;gFilter="all";gQuery="";gRender();m.scrollTop=0;return}
     if(b.dataset.flt){gFilter=b.dataset.flt;gRender();return}
-    if(b.id==="gemZero"){const inv=gTab==="g"?ginv.g:ginv.r;Object.keys(inv).forEach(k=>delete inv[k]);gSave();gRender();return}
-    if(b.id==="gemOne"){const inv=gTab==="g"?ginv.g:ginv.r,list=gTab==="g"?GD.gems:GD.runes;list.forEach(x=>{inv[x.n]=1});gSave();gRender();return}
+    if(b.id==="gemZero"){gZeroAsk();return}
     if(b.dataset.d){
       const row=b.closest(".grow"),inp=row.querySelector("input"),inv=gTab==="g"?ginv.g:ginv.r;
       const v=Math.max(0,Math.min(99,(+inp.value||0)+(+b.dataset.d)));inp.value=v;
