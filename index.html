@@ -762,6 +762,7 @@ function gFmtVal(k,x){return k==="mf"?gNum(x)+" ("+(Math.round(x/1000*10)/10)+"k
 function gCv(v){return [v.cas||0,v.acas||0,(v["i.D"]||0)+(v["x.D"]||0)]}
 function gCondVal(r,X){const n=Math.floor(X/r.s+1e-9);if(n<=0)return 0;let v=n*r.v;if(r.m!=null)v=r.v>0?Math.min(v,r.m):Math.max(v,r.m);return v}
 function gCondX(r,C,A,D){return r.t==="cas"?C:r.t==="acas"?A:D}
+let gBase={c:0,a:0,d:0};
 function gOptRunes(w,respect){
   const inv={};GD.runes.forEach(r=>{inv[r.n]=+ginv.r[r.n]||0});
   const rs={};GD.runes.forEach(r=>rs[r.n]=gScore(gvec(r),w));
@@ -774,7 +775,7 @@ function gOptRunes(w,respect){
   let T32=0;{let left=32;for(const n of names){if(rs[n]<=0)break;const k=Math.min(inv[n],left);T32+=k*rs[n];left-=k;if(left<=0)break}}
   let best={score:-1,pick:[],loose:[]},nodes=0;
   function evalPick(pick){
-    const cur=Object.assign({},inv);let sc=0,used=0,C=+gcfg.bcas||0,A=+gcfg.bacas||0,D=+gcfg.bidef||0;
+    const cur=Object.assign({},inv);let sc=0,used=0,C=(+gcfg.bcas||0)+gBase.c,A=(+gcfg.bacas||0)+gBase.a,D=(+gcfg.bidef||0)+gBase.d;
     pick.forEach(o=>{sc+=o.sc;C+=o.cv[0];A+=o.cv[1];D+=o.cv[2];o.s.c.forEach(n=>{cur[n]--;sc+=rs[n];used++;const q=cvR[n];C+=q[0];A+=q[1];D+=q[2]})});
     let free=32-used;const loose=[];
     // runas fuera de set: rellenan los huecos libres (32 en total); primero las de mayor valor, luego las neutras; nunca las que restan
@@ -854,6 +855,16 @@ function gLayout(rn){
 }
 function gAdd2(res,x,n){const hv=x.h||{};const o=Object.assign({},x.v);for(const k in hv)o[k]=(o[k]||0)-hv[k];gAdd(res.tot,gcfg.hero==="y"?o:gvec(x),n);if(gcfg.hero==="y")gAdd(res.toth,hv,n)}
 function gCompute(){
+  gBase={c:0,a:0,d:0};let res=gCompute1();
+  // las casualties / anti-casualties / defensa de infantería salen de las gemas recomendadas: se itera hasta que los sets y las gemas coinciden
+  for(let it=0;it<3;it++){
+    const nb={c:0,a:0,d:0};res.gems.forEach(o=>{const v=gvec(o.g);nb.c+=(v.cas||0)*o.n;nb.a+=(v.acas||0)*o.n;nb.d+=((v["i.D"]||0)+(v["x.D"]||0))*o.n});
+    if(nb.c===gBase.c&&nb.a===gBase.a&&nb.d===gBase.d)break;
+    gBase=nb;res=gCompute1();
+  }
+  gBase={c:0,a:0,d:0};return res;
+}
+function gCompute1(){
   const w=gWeights(),res={gems:[],tot:{},toth:{},runes:null};
   res.runes=gOptRunes(w,gcfg.resp);
   res.runes.pick.forEach(o=>{gAdd2(res,o.s,1);o.s.c.forEach(n=>{const r=GD.runes.find(x=>x.n===n);gAdd2(res,r,1)})});
