@@ -381,7 +381,10 @@ function renderLive(){
   const h4txt=H4.map(x=>pad(x)+":00").join(" · ");
   const prep=evsT.map(e=>e.h===24
     ?liveRow(e,lang,"prep",86400-n.secs,undefined,nd)
-    :liveRow(e,lang,"prep",0,`${l.at} <bdi dir="ltr">${h4txt}</bdi>`)).join("");
+    :liveRow(e,lang,"prep",0,undefined,nd,H4.map((st,i)=>{
+        const t=86400-n.secs+st*3600, ft=x=>pad(x%24)+":00";
+        return `<div class="slot ${i===0?"next":"later"}"><bdi dir="ltr" class="srange">${ft(st)}–${ft(st+DUR4)}</bdi><span>${l.starts} <bdi dir="ltr">${hmsd(t,lang)}</bdi></span></div>`;
+      }).join(""))).join("");
   box.innerHTML=`<div class="livehead"><span class="dot"></span><b>${l.title}</b><span class="clock">${l.clock}: <bdi dir="ltr">${pad(n.h)}:${pad(n.mi)}:${pad(n.s)}</bdi></span><span class="dayinfo">${u.day} ${n.day+1}</span></div>
   <div class="livelist">${rows24?`<div class="lsec">${l.s24}</div>${rows24}`:""}${rows4?`<div class="lsec">${l.s4}</div>${rows4}`:""}<div class="lsec prepsec">${l.prep} · ${u.day} ${nd+1}</div>${prep}</div>`;
 }
