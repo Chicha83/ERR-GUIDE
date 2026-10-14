@@ -82,6 +82,14 @@ h2.phase{color:var(--gold);font-size:1.4rem;margin:38px 0 18px;padding-bottom:8p
 .lstat bdi{font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace}
 .lsec{grid-column:1/-1;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.6px;margin-top:4px}
 .tag.span{background:rgba(245,197,66,.10);color:var(--gold);font-weight:600}
+.slots{margin-top:8px;display:grid;gap:5px}
+.slot{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.86rem;padding:5px 9px;border-radius:7px;background:var(--note-bg);color:var(--muted)}
+.slot .srange{white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-weight:700;color:var(--text)}
+.slot.live{background:rgba(255,64,64,.14);color:#ff8a8a;font-weight:700}
+.slot.next{background:var(--limit-bg);color:var(--gold);font-weight:700}
+.slot.later{color:var(--strat)}
+.slot.done{opacity:.5}
+.slot bdi{font-variant-numeric:tabular-nums}
 .lrow.prep{border-inline-start-color:var(--strat)}
 .lrow.prep .lstat{color:var(--strat)}
 .lsec.prepsec{color:var(--strat);font-weight:700;margin-top:10px}
@@ -273,11 +281,11 @@ const TZ="Atlantic/Canary";
 const H4=[2,10,16], DUR4=4;
 
 const L={
- es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora de Canarias",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy",prep:"Prepárate para mañana",at:"Empiezan a las",tmr:"MAÑANA",lasts:"Dura",days:"Días",dsuf:"d",cont:"Continúa mañana"},
- en:{btn:"Live",title:"Live now",clock:"Canary Islands time",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events",prep:"Get ready for tomorrow",at:"Starts at",tmr:"TOMORROW",lasts:"Lasts",days:"Days",dsuf:"d",cont:"Continues tomorrow"},
- ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Время Канарских островов",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня",prep:"Готовьтесь к завтрашнему дню",at:"Начало в",tmr:"ЗАВТРА",lasts:"Длится",days:"Дни",dsuf:"д",cont:"Продолжается завтра"},
- ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت جزر الكناري",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم",prep:"استعد لغد",at:"يبدأ في الساعة",tmr:"غدًا",lasts:"تستمر",days:"الأيام",dsuf:"ي",cont:"يستمر غدًا"},
- fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng Canary Islands",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon",prep:"Maghanda para bukas",at:"Magsisimula nang",tmr:"BUKAS",lasts:"Tumatagal ng",days:"Araw",dsuf:"d",cont:"Magpapatuloy bukas"}
+ es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora de Canarias",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy",prep:"Prepárate para mañana",at:"Empiezan a las",tmr:"MAÑANA",lasts:"Dura",days:"Días",dsuf:"d",cont:"Continúa mañana",fin:"Finalizado",sat:"Empieza a las"},
+ en:{btn:"Live",title:"Live now",clock:"Canary Islands time",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events",prep:"Get ready for tomorrow",at:"Starts at",tmr:"TOMORROW",lasts:"Lasts",days:"Days",dsuf:"d",cont:"Continues tomorrow",fin:"Finished",sat:"Starts at"},
+ ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Время Канарских островов",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня",prep:"Готовьтесь к завтрашнему дню",at:"Начало в",tmr:"ЗАВТРА",lasts:"Длится",days:"Дни",dsuf:"д",cont:"Продолжается завтра",fin:"Завершено",sat:"Начало в"},
+ ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت جزر الكناري",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم",prep:"استعد لغد",at:"يبدأ في الساعة",tmr:"غدًا",lasts:"تستمر",days:"الأيام",dsuf:"ي",cont:"يستمر غدًا",fin:"انتهى",sat:"يبدأ في الساعة"},
+ fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng Canary Islands",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon",prep:"Maghanda para bukas",at:"Magsisimula nang",tmr:"BUKAS",lasts:"Tumatagal ng",days:"Araw",dsuf:"d",cont:"Magpapatuloy bukas",fin:"Tapos na",sat:"Magsisimula nang"}
 };
 let curLang="es", liveOn=true;
 
@@ -319,7 +327,7 @@ function hmsd(t,lang){
   return t>=86400?`${Math.floor(t/86400)}${L[lang].dsuf} ${hms(t%86400)}`:hms(t);
 }
 
-function liveRow(ev,lang,state,secs,custom,dayIdx){
+function liveRow(ev,lang,state,secs,custom,dayIdx,slots){
   const l=L[lang], u=UI[lang];
   const desc=ev.lines.filter(([k])=>!(state==="prep"&&(k==="r"||k==="w"))).map(([k,key])=>{
     switch(k){
@@ -342,7 +350,7 @@ function liveRow(ev,lang,state,secs,custom,dayIdx){
   else if(state==="soon")stat=`${l.starts} <bdi dir="ltr">${hms(secs)}</bdi>`;
   else if(state==="prep")stat=(long&&si.pos>0)?l.cont:(custom||`${l.starts} <bdi dir="ltr">${hms(secs)}</bdi>`);
   else stat=l.done;
-  return `<div class="lrow ${state==="live"?"":state}"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${desc}${spanTag(si,lang,state==="live")}<div class="lstat">${stat}</div></div>`;
+  return `<div class="lrow ${state==="live"?"":state}"><div class="evtop"><span class="evleft">${evIcon(ev.name)}<span class="evname">${evName(ev.name,lang)}</span></span>${bd}</div>${desc}${spanTag(si,lang,state==="live")}${slots!==undefined?`<div class="slots">${slots}</div>`:`<div class="lstat">${stat}</div>`}</div>`;
 }
 
 function renderLive(){
@@ -356,13 +364,18 @@ function renderLive(){
   const rows24=evs.filter(e=>e.h===24).map(e=>liveRow(e,lang,"live",86400-n.secs,undefined,n.day)).join("");
   let rows4="";
   for(const e of evs.filter(e=>e.h===4)){
-    let state="done",t=0;
+    let rowState="done",slots="",nextFound=false;
+    const ft=x=>pad(x%24)+":00";
     for(const st of H4){
-      const a=st*3600,b=a+DUR4*3600;
-      if(n.secs>=a&&n.secs<b){state="live";t=b-n.secs;break}
-      if(n.secs<a){state="soon";t=a-n.secs;break}
+      const a=st*3600,b=a+DUR4*3600, rng=`${ft(st)}–${ft(st+DUR4)}`;
+      let cls,txt;
+      if(n.secs>=b){cls="done";txt=l.fin}
+      else if(n.secs>=a){cls="live";txt=`${l.btn} · ${l.ends} <bdi dir="ltr">${hms(b-n.secs)}</bdi>`;rowState="live"}
+      else if(!nextFound){cls="next";nextFound=true;txt=`${l.starts} <bdi dir="ltr">${hms(a-n.secs)}</bdi>`;if(rowState!=="live")rowState="soon"}
+      else{cls="later";txt=`${l.sat} <bdi dir="ltr">${ft(st)}</bdi>`;if(rowState!=="live")rowState="soon"}
+      slots+=`<div class="slot ${cls}"><bdi dir="ltr" class="srange">${rng}</bdi><span>${txt}</span></div>`;
     }
-    rows4+=liveRow(e,lang,state,t);
+    rows4+=liveRow(e,lang,rowState,0,undefined,n.day,slots);
   }
   const nd=(n.day+1)%14, evsT=DAYS[nd];
   const h4txt=H4.map(x=>pad(x)+":00").join(" · ");
