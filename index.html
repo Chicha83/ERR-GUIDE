@@ -140,7 +140,6 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
 .hdate{color:#f2e6d6;margin-top:6px;font-size:.95rem}
 .hcount{display:inline-block;margin-top:10px;background:rgba(0,0,0,.55);border:1px solid #ff8a1f;color:#ffcf8f;padding:6px 12px;border-radius:999px;font-weight:700}
 .hsec{color:#ffb45a;margin:26px 0 12px;padding-bottom:6px;border-bottom:2px solid #8a4a10;font-size:1.2rem}
-.pcard.locked{opacity:.45;filter:grayscale(.8)}.pcard.locked .pset{margin-top:12px;color:var(--muted,#aab)}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-bottom:8px}
 .pcard{display:flex;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:10px}
 .pcard.on{border-color:#f5c542;box-shadow:0 0 0 1px #f5c542,0 0 14px 2px rgba(245,197,66,.55),inset 0 0 12px rgba(245,197,66,.14)}
@@ -652,7 +651,6 @@ es:{btn:"Gemas y runas",title:"Calculadora de gemas y runas",sub:"Pon lo que tie
  layNote:"8 piezas × 4 huecos de runa. Halo dorado = set activo (el número marca el orden en que se ponen las runas); borde discontinuo = runa extra del hueco libre.",
  enemy:"Contra qué tropas luchas",enemyAny:"Sin definir",enemyNote:"Elige el rival (p. ej. arqueros contra arqueros): la calculadora buscará SIEMPRE la combinación de gemas y runas con más «% contra» esa tropa, y solo después optimiza el resto. Sin definir, todos los «contra …» valen la mitad.",
  zeroT:"¡Atención!",zeroWG:"Se borrarán TODAS las gemas que tienes marcadas. Esta acción no se puede deshacer.",zeroWR:"Se borrarán TODAS las runas que tienes marcadas. Esta acción no se puede deshacer.",zeroOk:"Sí, borrar todo",zeroNo:"Cancelar",
- slotsQ:"¿Cuántas piezas de runas tienes desbloqueadas?",slotsNote:"Se desbloquean al subir la tecnología, en este orden: Weapon, Blessing of Gods, Turquoise Ring, Berserker Shoulder Padding, Royal Cloak, Shoulder Padding, Breastplate y Helmet (de arriba a la derecha hacia abajo, y luego hacia la izquierda hasta arriba a la izquierda). Cada pieza tiene 4 huecos de runa.",lockedT:"Bloqueada",
  maxc:"Máx. copias iguales de una gema",resp:"Respetar la pieza de cada set de runas",
  search:"Buscar…",fAll:"Todas",fOwn:"Las que tengo",zero:"Poner todo a 0",one:"1 de cada",owned:"Total:",
  resG:"Gemas a equipar",resR:"Runas a equipar",resT:"Suma de efectos",slots:"huecos usados",
@@ -670,7 +668,6 @@ en:{btn:"Gems & runes",title:"Gem & rune calculator",sub:"Enter what you own and
  layNote:"8 pieces × 4 rune slots. Gold halo = active set (the number is the order to place runes); dashed border = extra rune in the free slot.",
  enemy:"Fighting against",enemyAny:"Any",enemyNote:"Pick the enemy (e.g. archers vs archers): the calculator ALWAYS looks for the gem and rune combination with the highest «% against» that troop first, and only then optimizes everything else. With Any, all «against …» bonuses count at half value.",
  zeroT:"Warning!",zeroWG:"ALL the gems you have entered will be deleted. This cannot be undone.",zeroWR:"ALL the runes you have entered will be deleted. This cannot be undone.",zeroOk:"Yes, delete everything",zeroNo:"Cancel",
- slotsQ:"How many rune pieces do you have unlocked?",slotsNote:"They unlock as you raise your technology, in this order: Weapon, Blessing of Gods, Turquoise Ring, Berserker Shoulder Padding, Royal Cloak, Shoulder Padding, Breastplate and Helmet (from top right going down, then to the left up to the top left). Each piece has 4 rune slots.",lockedT:"Locked",
  maxc:"Max copies of the same gem",resp:"Respect each rune set's piece",
  search:"Search…",fAll:"All",fOwn:"Owned",zero:"Set all to 0",one:"1 of each",owned:"Total:",
  resG:"Gems to equip",resR:"Runes to equip",resT:"Total effects",slots:"slots used",
@@ -688,7 +685,6 @@ ru:{btn:"Самоцветы и руны",title:"Калькулятор само�
  layNote:"8 предметов × 4 слота рун. Золотое свечение = активный набор (цифра — порядок установки рун); пунктир = дополнительная руна в свободном слоте.",
  enemy:"Против каких войск",enemyAny:"Не задано",enemyNote:"Выберите противника (например, лучники против лучников): калькулятор ВСЕГДА ищет комбинацию самоцветов и рун с максимальным «% против» этого типа, и только затем оптимизирует остальное. Без выбора все «против …» учитываются вполовину.",
  zeroT:"Внимание!",zeroWG:"ВСЕ введённые вами самоцветы будут удалены. Это действие нельзя отменить.",zeroWR:"ВСЕ введённые вами руны будут удалены. Это действие нельзя отменить.",zeroOk:"Да, удалить всё",zeroNo:"Отмена",
- slotsQ:"Сколько предметов для рун у вас открыто?",slotsNote:"Открываются с ростом технологий в таком порядке: Weapon, Blessing of Gods, Turquoise Ring, Berserker Shoulder Padding, Royal Cloak, Shoulder Padding, Breastplate и Helmet (сверху справа вниз, затем влево до верхнего левого). В каждом предмете 4 слота рун.",lockedT:"Закрыто",
  maxc:"Макс. одинаковых самоцветов",resp:"Учитывать слот каждого набора рун",
  search:"Поиск…",fAll:"Все",fOwn:"Есть у меня",zero:"Обнулить всё",one:"По одному",owned:"Всего:",
  resG:"Самоцветы для установки",resR:"Руны для установки",resT:"Сумма эффектов",slots:"слотов занято",
@@ -706,7 +702,6 @@ ar:{btn:"الجواهر والرونات",title:"حاسبة الجواهر وا�
  layNote:"٨ قطع × ٤ خانات رون. التوهج الذهبي = مجموعة مفعّلة (الرقم هو ترتيب وضع الرونات)؛ الإطار المتقطع = رون إضافي في الخانة الحرة.",
  enemy:"ضد أي وحدات",enemyAny:"غير محدد",enemyNote:"اختر العدو (مثل رماة ضد رماة): تبحث الحاسبة دائمًا أولًا عن تركيبة الجواهر والرونات ذات أعلى «٪ ضد» ذلك النوع، ثم تحسّن الباقي. بدون تحديد تُحتسب كل مكافآت «ضد …» بنصف القيمة.",
  zeroT:"تنبيه!",zeroWG:"سيتم حذف جميع الجواهر التي أدخلتها. لا يمكن التراجع عن هذا الإجراء.",zeroWR:"سيتم حذف جميع الرونات التي أدخلتها. لا يمكن التراجع عن هذا الإجراء.",zeroOk:"نعم، احذف الكل",zeroNo:"إلغاء",
- slotsQ:"كم قطعة رونات مفتوحة لديك؟",slotsNote:"تُفتح مع تطوير التقنية بهذا الترتيب: Weapon وBlessing of Gods وTurquoise Ring وBerserker Shoulder Padding وRoyal Cloak وShoulder Padding وBreastplate وHelmet (من أعلى اليمين نزولًا ثم نحو اليسار حتى أعلى اليسار). لكل قطعة ٤ خانات رونات.",lockedT:"مقفلة",
  maxc:"الحد الأقصى لنسخ الجوهرة نفسها",resp:"احترام قطعة كل طقم رونات",
  search:"بحث…",fAll:"الكل",fOwn:"ما أملكه",zero:"تصفير الكل",one:"واحدة من كل نوع",owned:"المجموع:",
  resG:"الجواهر المطلوب تركيبها",resR:"الرونات المطلوب تركيبها",resT:"مجموع التأثيرات",slots:"خانات مستخدمة",
@@ -724,7 +719,6 @@ fil:{btn:"Gems at runes",title:"Calculator ng gems at runes",sub:"Ilagay ang mer
  layNote:"8 piraso × 4 rune slot. Gintong halo = aktibong set (ang numero ang pagkakasunod ng runes); putol-putol na border = extra rune sa libreng slot.",
  enemy:"Laban sa anong troop",enemyAny:"Hindi tinukoy",enemyNote:"Piliin ang kalaban (hal. archers vs archers): ALWAYS hahanapin muna ng calculator ang gem at rune combination na may pinakamataas na «% laban» sa troop na iyon, saka lang i-o-optimize ang iba. Kung Hindi tinukoy, half value ang lahat ng «laban sa …».",
  zeroT:"Babala!",zeroWG:"LAHAT ng gems na inilagay mo ay made-delete. Hindi na ito maibabalik.",zeroWR:"LAHAT ng runes na inilagay mo ay made-delete. Hindi na ito maibabalik.",zeroOk:"Oo, burahin lahat",zeroNo:"Kanselahin",
- slotsQ:"Ilang rune piece ang naka-unlock sa iyo?",slotsNote:"Nag-a-unlock ito habang tumataas ang technology, sa ganitong pagkakasunod: Weapon, Blessing of Gods, Turquoise Ring, Berserker Shoulder Padding, Royal Cloak, Shoulder Padding, Breastplate at Helmet (mula kanang-itaas pababa, saka pakaliwa hanggang kaliwang-itaas). May 4 rune slot ang bawat piece.",lockedT:"Naka-lock",
  maxc:"Max na kopya ng parehong gem",resp:"Sundin ang piece ng bawat rune set",
  search:"Maghanap…",fAll:"Lahat",fOwn:"Meron ako",zero:"I-zero lahat",one:"1 bawat isa",owned:"Kabuuan:",
  resG:"Gems na ilalagay",resR:"Runes na ilalagay",resT:"Kabuuan ng effects",slots:"slots na gamit",
@@ -749,7 +743,7 @@ ru:{cas:"Casualties",acas:"Anti-casualties",hall:"Вместимость Зал�
 ar:{cas:"Casualties",acas:"Anti-casualties",hall:"سعة قاعة الحرب",tp:"حماية الكنز",cap:"معدل الأسر",tre:"سعة الخزينة",mp:"حد المسيرة (%)",mf:"حد المسيرة (ثابت)",ms:"سرعة المسيرة",hosp:"سعة المستشفى",silver:"إنتاج الفضة",mon:"الهجوم ضد الوحوش"},
 fil:{cas:"Casualties",acas:"Anti-casualties",hall:"Hall of War capacity",tp:"Treasure protection",cap:"Capture rate",tre:"Treasury capacity",mp:"March limit (%)",mf:"March limit (flat)",ms:"March speed",hosp:"Kapasidad ng hospital",silver:"Silver production",mon:"Attack laban sa monsters"}};
 const GKEY="err_calc",GURL="https://script.google.com/macros/s/AKfycbxVR-eidL_O8wBWJ6HkVf-FjgqCjY4sFGRMHHNJ_xJr_0e8zkR-ajCchdtshA5eURYriA/exec",GKK="err_key";
-let gcfg={troop:"i",focus:"attack",enemy:"any",slots:8,fin:1000,vs:0.5,city:0.5,cas:1000,acas:1000,march:0,ms:0,maxc:16,resp:true,ecas:0,eacas:0,bcas:0,bacas:0,bidef:0};
+let gcfg={troop:"i",focus:"attack",enemy:"any",fin:1000,vs:0.5,city:0.5,cas:1000,acas:1000,march:0,ms:0,maxc:16,resp:true,ecas:0,eacas:0,bcas:0,bacas:0,bidef:0};
 let ginv={g:{},r:{},name:""}, gOpen=false, gTab="g", gFilter="all", gQuery="";
 try{const s=JSON.parse(localStorage.getItem(GKEY)||"null");if(s){Object.assign(gcfg,s.c||{});ginv.g=s.g||{};ginv.r=s.r||{};ginv.name=s.n||""}}catch(e){}
 let gView=null,gStash=null;
@@ -799,10 +793,7 @@ function gCv(v){return [v.cas||0,v.acas||0,(v["i.D"]||0)+(v["x.D"]||0)]}
 function gCondVal(r,X){const n=Math.floor(X/r.s+1e-9);if(n<=0)return 0;let v=n*r.v;if(r.m!=null)v=r.v>0?Math.min(v,r.m):Math.max(v,r.m);return v}
 function gCondX(r,C,A,D){return r.t==="cas"?C:r.t==="acas"?A:D}
 let gBase={c:0,a:0,d:0};
-const GUNL=["Weapon","Blessing of Gods","Turquoise Ring","Berserker Shoulder Padding","Royal Cloak","Shoulder Padding","Breastplate","Helmet"];
-function gNP(){const n=Math.round(+gcfg.slots||8);return Math.max(1,Math.min(8,n))}
 function gOptRunes(w,respect){
-  const NP=gNP(),TOT=NP*4,allowed=GUNL.slice(0,NP);
   const inv={};GD.runes.forEach(r=>{inv[r.n]=+ginv.r[r.n]||0});
   const rs={};GD.runes.forEach(r=>rs[r.n]=gScore(gvec(r),w));
   const cvR={};GD.runes.forEach(r=>{cvR[r.n]=gCv(gvec(r))});
@@ -811,21 +802,20 @@ function gOptRunes(w,respect){
   sets.sort((a,b)=>b.ub-a.ub);
   const names=Object.keys(inv).sort((a,b)=>rs[b]-rs[a]);
   // cota superior de lo que aportan las runas sueltas (las 32 mejores)
-  let T32=0;{let left=TOT;for(const n of names){if(rs[n]<=0)break;const k=Math.min(inv[n],left);T32+=k*rs[n];left-=k;if(left<=0)break}}
+  let T32=0;{let left=32;for(const n of names){if(rs[n]<=0)break;const k=Math.min(inv[n],left);T32+=k*rs[n];left-=k;if(left<=0)break}}
   let best={score:-1,pick:[],loose:[]},nodes=0;
   function evalPick(pick){
     const cur=Object.assign({},inv);let sc=0,used=0,C=(+gcfg.bcas||0)+gBase.c,A=(+gcfg.bacas||0)+gBase.a,D=(+gcfg.bidef||0)+gBase.d;
     pick.forEach(o=>{sc+=o.sc;C+=o.cv[0];A+=o.cv[1];D+=o.cv[2];o.s.c.forEach(n=>{cur[n]--;sc+=rs[n];used++;const q=cvR[n];C+=q[0];A+=q[1];D+=q[2]})});
-    let free=TOT-used;const loose=[];
+    let free=32-used;const loose=[];
     // runas fuera de set: rellenan los huecos libres (32 en total); primero las de mayor valor, luego las neutras; nunca las que restan
     for(const n of names){if(rs[n]<0)continue;let c=cur[n];while(c>0&&free>0){loose.push(n);free--;c--;sc+=rs[n];const q=cvR[n];C+=q[0];A+=q[1];D+=q[2]}}
     pick.forEach(o=>{(o.s.cd||[]).forEach(r=>{sc+=w(r.k)*gCondVal(r,gCondX(r,C,A,D))})});
-    if(sc>best.score)best={score:sc,pick:pick.slice(),loose:loose,used:TOT-free};
+    if(sc>best.score)best={score:sc,pick:pick.slice(),loose:loose,used:32-free};
   }
   const LIM=3000000;
   if(respect){
-    const PL=GD.pieces.filter(p=>allowed.includes(p));
-    const groups=PL.map(p=>sets.filter(o=>o.s.p===p||(o.s.ps&&o.s.ps.includes(p))));
+    const groups=GD.pieces.map(p=>sets.filter(o=>o.s.p===p||(o.s.ps&&o.s.ps.includes(p))));
     const gmax=groups.map(gr=>gr.length?Math.max(0,gr[0].ub):0);
     const suf=[];let acc=0;for(let i=groups.length-1;i>=0;i--){acc+=gmax[i];suf[i]=acc}suf[groups.length]=0;
     const cur=Object.assign({},inv),occ={};
@@ -833,11 +823,11 @@ function gOptRunes(w,respect){
       if(++nodes>LIM)return;
       if(gi===groups.length){evalPick(pick);return}
       if(sum+suf[gi]+T32<=best.score)return;
-      const p=PL[gi];
+      const p=GD.pieces[gi];
       if(!occ[p]){
         for(const o of groups[gi]){
           const ps=o.s.ps||[o.s.p];
-          if(ps.some(x=>occ[x]||!allowed.includes(x)))continue;
+          if(ps.some(x=>occ[x]))continue;
           const need={};o.s.c.forEach(n=>need[n]=(need[n]||0)+1);
           if(!Object.keys(need).every(n=>cur[n]>=need[n]))continue;
           for(const n in need)cur[n]-=need[n];
@@ -853,8 +843,8 @@ function gOptRunes(w,respect){
     const cur=Object.assign({},inv);
     (function dfs(i,pick,sum){
       if(++nodes>LIM)return;
-      if(i===sets.length||pick.length===NP){evalPick(pick);return}
-      let b=sum,k=0;for(let j=i;j<sets.length&&k<NP-pick.length;j++,k++){if(sets[j].ub<=0)break;b+=sets[j].ub}
+      if(i===sets.length||pick.length===8){evalPick(pick);return}
+      let b=sum,k=0;for(let j=i;j<sets.length&&k<8-pick.length;j++,k++){if(sets[j].ub<=0)break;b+=sets[j].ub}
       if(b+T32<=best.score)return;
       const o=sets[i],need={};o.s.c.forEach(n=>need[n]=(need[n]||0)+1);
       if(Object.keys(need).every(n=>cur[n]>=need[n])){
@@ -870,11 +860,11 @@ function gOptRunes(w,respect){
 // reparto de los sets y runas sueltas en las 8 piezas (4 huecos cada una)
 const GORD=['Helmet','Weapon','Breastplate','Blessing of Gods','Shoulder Padding','Turquoise Ring','Royal Cloak','Berserker Shoulder Padding'];
 function gLayout(rn){
-  const NP=gNP(),allowed=GUNL.slice(0,NP);const cards={};GORD.forEach(p=>cards[p]={p:p,o:null,sub:false,slots:[],locked:!allowed.includes(p)});
-  const free=()=>GORD.filter(p=>!cards[p].o&&!cards[p].sub&&!cards[p].locked);
+  const cards={};GORD.forEach(p=>cards[p]={p:p,o:null,sub:false,slots:[]});
+  const free=()=>GORD.filter(p=>!cards[p].o&&!cards[p].sub);
   const place=[];
   rn.pick.forEach(o=>{
-    if(o.s.ps){const ps=o.s.ps;if(ps.every(p=>!cards[p].o&&!cards[p].sub&&!cards[p].locked))place.push({o:o,ps:ps});else place.push({o:o,ps:null})}
+    if(o.s.ps){const ps=o.s.ps;if(ps.every(p=>!cards[p].o&&!cards[p].sub))place.push({o:o,ps:ps});else place.push({o:o,ps:null})}
     else place.push({o:o,ps:null});
   });
   // primero los que ya traen pieza (respeto) o la pieza nativa
@@ -884,13 +874,13 @@ function gLayout(rn){
   place.forEach(x=>{
     if(x.done)return;
     let p=x.o.pc||x.o.s.p;
-    if(!p||cards[p].o||cards[p].sub||cards[p].locked)p=free()[0];
+    if(!p||cards[p].o||cards[p].sub)p=free()[0];
     if(!p)return;
     const c=cards[p];c.o=x.o;c.slots=x.o.s.c.map((n,k)=>({n:n,k:"set",i:k+1}));
   });
   const pool=rn.loose.slice();
   const order=GORD.filter(p=>cards[p].slots.length>0&&cards[p].slots.length<4).concat(GORD.filter(p=>cards[p].slots.length===0),GORD.filter(p=>cards[p].slots.length>0&&cards[p].slots.length<4));
-  GORD.forEach(p=>{const c=cards[p];if(c.locked)return;while(c.slots.length<4){const n=pool.shift();c.slots.push(n?{n:n,k:c.o?"extra":"free"}:{n:null,k:"empty"})}});
+  GORD.forEach(p=>{const c=cards[p];while(c.slots.length<4){const n=pool.shift();c.slots.push(n?{n:n,k:c.o?"extra":"free"}:{n:null,k:"empty"})}});
   return GORD.map(p=>cards[p]);
 }
 function gAdd2(res,x,n){const hv=x.h||{};const o=Object.assign({},x.v);for(const k in hv)o[k]=(o[k]||0)-hv[k];gAdd(res.tot,gcfg.hero==="y"?o:gvec(x),n);if(gcfg.hero==="y")gAdd(res.toth,hv,n)}
@@ -1059,13 +1049,12 @@ function gResultHtml(lang){
   let h=`<h3 class="hsec">${t.resG} <small>(${r.gemSlots}/16 ${t.slots})</small></h3>`;
   if(!anyG||!r.gems.length)h+=`<p class="desc">${t.noG}</p>`;
   else h+=`<ol class="gres">${r.gems.map(o=>`<li>${gico(o.g.n)}<div class="gname"><b><bdi dir="ltr">${gesc(o.g.n)}</bdi>${o.n>1?` ×${o.n}`:""}</b><span class="geff"><bdi dir="${lang==="ar"?"rtl":"ltr"}">${gesc(gtr(o.g.e,lang))}</bdi></span></div></li>`).join("")}</ol>`;
-  h+=`<h3 class="hsec">${t.resR} <small>(${r.runes.used||0}/${gNP()*4} ${t.slots})</small></h3>`;
+  h+=`<h3 class="hsec">${t.resR} <small>(${r.runes.used||0}/32 ${t.slots})</small></h3>`;
   if(!anyR)h+=`<p class="desc">${t.noR}</p>`;
   else{
     const lay=gLayout(r.runes);
     h+=`<div class="hlab">${t.layNote}</div><div class="pgrid">`+lay.map(c=>{
       const on=!!c.o,pn=gesc(c.p);
-      if(c.locked)return `<div class="pcard locked"><div class="phead"><img class="pimg" src="${GP[c.p]||""}" alt="${pn}" title="${pn}" width="44" height="44"></div><div class="pbody"><div class="pset">🔒 ${t.lockedT}</div></div></div>`;
       const ims=c.slots.map(sl=>sl.n?`<div class="rsl ${sl.k}" title="${gesc(sl.n)}">${GI[sl.n]?`<img src="${GI[sl.n]}" alt="${gesc(sl.n)}" width="44" height="44" loading="lazy">`:`<span class="nf">?</span>`}${sl.k==="set"?`<i>${sl.i}</i>`:""}<small><bdi dir="ltr">${gesc(sl.n)}</bdi></small></div>`:`<div class="rsl empty"></div>`).join("");
       const info=on?(c.sub?`<div class="pset"><b><bdi dir="ltr">${gesc(c.o.s.n)}</bdi></b> <span class="tag note">↑ ${gesc(c.o.s.ps[0])}</span></div>`:`<div class="pset"><b><bdi dir="ltr">${gesc(c.o.s.n)}</bdi></b><span class="geff"><bdi dir="${lang==="ar"?"rtl":"ltr"}">${gesc(gtr(c.o.s.e,lang))}</bdi></span>${c.o.s.sp?`<span class="tag warn">${t.special}</span>`:""}</div>`):"";
       return `<div class="pcard${on?" on":""}"><div class="phead"><img class="pimg" src="${GP[c.p]||""}" alt="${pn}" title="${pn}" width="44" height="44"></div><div class="pbody"><div class="rsls" dir="ltr">${ims}</div>${info}</div></div>`}).join("")+`</div>`;
@@ -1108,7 +1097,7 @@ function gPack(){
   const g={},r={};
   GD.gems.forEach((x,i)=>{const q=+ginv.g[x.n]||0;if(q)g[i]=q});
   GD.runes.forEach((x,i)=>{const q=+ginv.r[x.n]||0;if(q)r[i]=q});
-  const o={v:1,n:ginv.name||"",g:g,r:r,t:gcfg.troop,f:gcfg.focus,h:gcfg.hero,e:gcfg.enemy,s:gcfg.slots};
+  const o={v:1,n:ginv.name||"",g:g,r:r,t:gcfg.troop,f:gcfg.focus,h:gcfg.hero,e:gcfg.enemy};
   const j=unescape(encodeURIComponent(JSON.stringify(o)));
   return "ERR1:"+btoa(j).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 }
@@ -1121,7 +1110,7 @@ function gUnpack(code){
     const inv={g:{},r:{},name:String(o.n||"").slice(0,40)};
     for(const i in o.g){const x=GD.gems[+i];if(x)inv.g[x.n]=Math.min(99,+o.g[i]||0)}
     for(const i in o.r){const x=GD.runes[+i];if(x)inv.r[x.n]=Math.min(99,+o.r[i]||0)}
-    return {inv:inv,t:o.t,f:o.f,h:o.h,e:o.e,s:o.s};
+    return {inv:inv,t:o.t,f:o.f,h:o.h,e:o.e};
   }catch(e){return null}
 }
 
@@ -1154,12 +1143,12 @@ function gCopy(txt,btn){
 }
 function gApplyImport(r,persist){
   if(persist){gView=null;gStash=null}
-  ginv=r.inv;if(r.t)gcfg.troop=r.t;if(r.f)gcfg.focus=r.f;if(r.h)gcfg.hero=r.h;if(r.e)gcfg.enemy=r.e;if(r.s)gcfg.slots=Math.max(1,Math.min(8,+r.s||8));
+  ginv=r.inv;if(r.t)gcfg.troop=r.t;if(r.f)gcfg.focus=r.f;if(r.h)gcfg.hero=r.h;if(r.e)gcfg.enemy=r.e;
   if(persist)gSave();
 }
 function gEnterView(r){
   if(!gView){gStash={inv:ginv,c:Object.assign({},gcfg)}}
-  gView={name:r.inv.name||"?"};ginv=r.inv;if(r.t)gcfg.troop=r.t;if(r.f)gcfg.focus=r.f;if(r.h)gcfg.hero=r.h;if(r.e)gcfg.enemy=r.e;if(r.s)gcfg.slots=Math.max(1,Math.min(8,+r.s||8));gTab="x";
+  gView={name:r.inv.name||"?"};ginv=r.inv;if(r.t)gcfg.troop=r.t;if(r.f)gcfg.focus=r.f;if(r.h)gcfg.hero=r.h;if(r.e)gcfg.enemy=r.e;gTab="x";
 }
 function gExitView(){if(gStash){ginv=gStash.inv;Object.assign(gcfg,gStash.c)}gView=null;gStash=null;gTab="g"}
 function gShareHtml(lang){
@@ -1218,8 +1207,6 @@ function gHtml(lang){
   <div class="hlab">${t.focus}</div><div class="gchips">${chip("focus","attack",t.fAtk,c.focus)}${chip("focus","def",t.fDef,c.focus)}${chip("focus","bal",t.fBal,c.focus)}</div>
   <div class="hlab">${t.enemy}</div><div class="gchips">${chip("enemy","any",t.enemyAny,c.enemy||"any")}${chip("enemy","i",t.inf,c.enemy)}${chip("enemy","c",t.cav,c.enemy)}${chip("enemy","a",t.arc,c.enemy)}</div>
   <p class="desc gsmall">${t.enemyNote}</p>
-  <div class="hlab">${t.slotsQ}</div><div class="gchips">${[1,2,3,4,5,6,7,8].map(n=>chip("slots",String(n),n,String(c.slots||8))).join("")}</div>
-  <p class="desc gsmall">${t.slotsNote}</p>
   <div class="hlab">${t.hero}</div><div class="gchips">${chip("hero","n",t.heroN,c.hero)}${chip("hero","y",t.heroY,c.hero)}</div>
   <p class="desc gsmall">${t.heroNote}</p>
   </div>
