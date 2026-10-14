@@ -149,12 +149,51 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
 .hstats li{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dashed #2a3040;font-size:.9rem;color:#cfd2de}
 .hstats li:last-child{border-bottom:0}
 .hstats .sv{color:#ffb45a;font-weight:800;white-space:nowrap}
+.gembtn{background:linear-gradient(135deg,#0f2a3a,#14161f);color:#7fd4ff;border:1px solid #3aa7e0;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.88rem;font-family:inherit;font-weight:700;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.gembtn:hover{box-shadow:0 0 14px rgba(58,167,224,.45);transform:translateY(-1px)}
+.ghero{background:linear-gradient(135deg,#0f2a3a,#1a1530);min-height:0}
+.ghero h2{color:#7fd4ff}
+.gctl{margin:14px 0 4px}
+.gchips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+.gchip{background:var(--card);color:var(--text);border:1px solid var(--border);padding:6px 12px;border-radius:999px;cursor:pointer;font-size:.88rem;font-family:inherit}
+.gchip.on{background:#3aa7e0;color:#06131c;border-color:#3aa7e0;font-weight:700}
+.gadv{margin:6px 0 4px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:8px 12px}
+.gadv summary{cursor:pointer;color:var(--gold);font-weight:700}
+.gsmall{font-size:.82rem;color:var(--muted)}
+.gnums{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:8px}
+.gnum{display:flex;flex-direction:column;gap:4px;font-size:.82rem;color:var(--muted)}
+.gnum input[type=number]{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-family:inherit;width:100%}
+.gnum.gchk{flex-direction:row;align-items:center;gap:8px}
+.gtabs{display:flex;gap:6px;margin:14px 0 10px;border-bottom:2px solid #1d4a63;flex-wrap:wrap}
+.gtab{background:transparent;color:var(--muted);border:0;padding:9px 14px;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:700;border-bottom:3px solid transparent;margin-bottom:-2px}
+.gtab.on{color:#7fd4ff;border-bottom-color:#3aa7e0}
+.gtools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px;position:sticky;top:0;z-index:2;background:var(--bg);padding:6px 0}
+.gtools input[type=search]{flex:1 1 160px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-family:inherit}
+.gown{margin-inline-start:auto;color:var(--muted);font-size:.85rem}
+.grow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid #232a3a}
+.gname{display:flex;flex-direction:column;min-width:0}
+.gname b{color:#fff}
+.geff{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.gstep{display:flex;align-items:center;gap:4px;flex:none}
+.gstep button{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:1.1rem;cursor:pointer}
+.gstep input{width:52px;text-align:center;background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px 2px;font-family:inherit}
+.gres{margin:0;padding-inline-start:22px}
+.gres li{padding:6px 0;border-bottom:1px dashed #2a3040}
+.gres li b{color:#fff}
+.hsec small{color:var(--muted);font-weight:400;font-size:.8rem}
+.gview{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#0f2a3a;border:1px solid #3aa7e0;border-radius:10px;padding:10px 12px;margin:10px 0;color:#cfe9f7;font-size:.9rem}
+.gview>span{flex:1 1 220px}
+.gta{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px;font-family:monospace;font-size:.8rem;resize:vertical}
+.gnum input[type=text]{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-family:inherit;width:100%;max-width:320px}
+.gfile{cursor:pointer;display:inline-block}
+.gshare .gchips{margin:10px 0}
 </style>
 </head>
 <body>
 <header>
   <div class="brand">⚔ ERR</div>
   <div class="hdr-right">
+    <button class="gembtn" id="gemBtn" type="button">💎 <span id="gemBtnTxt"></span></button>
     <button class="halbtn" id="halBtn" type="button">🎃 <span id="halBtnTxt"></span></button>
     <button class="livebtn on" id="liveBtn" type="button" aria-pressed="true"><span class="dot"></span><span id="liveBtnTxt"></span></button>
     <div class="langbox">
@@ -170,6 +209,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
   <div id="content"></div>
 </main>
 <div class="halmodal" id="halModal" hidden role="dialog" aria-modal="true"><div class="halpanel"><button class="halclose" id="halClose" type="button">✕</button><div id="halBody"></div></div></div>
+<div class="halmodal" id="gemModal" hidden role="dialog" aria-modal="true"><div class="halpanel"><button class="halclose" id="gemClose" type="button">✕</button><div id="gemBody"></div></div></div>
 <footer>by Chicha83</footer>
 
 <script>
@@ -570,6 +610,374 @@ function halShow(on){
 }
 function halLabel(){document.getElementById("halBtnTxt").textContent=HT[curLang].btn}
 
+/* ===== CALCULADORA DE GEMAS Y RUNAS ===== */
+const GD={"gems":[{"n":"Dawn Gem","e":"Archer's Attack +15%","v":{"a.A":15.0}},{"n":"Wish Gem","e":"Hero-led Infantry attack +300%, Casualties +1%, Infantry final attack +10%","v":{"i.A":300.0,"cas":1.0,"i.FA":10.0}},{"n":"Leyding","e":"Cavalry's attack -200%, cavalry's defense +800%","v":{"c.A":-200.0,"c.D":800.0}},{"n":"Dromi","e":"Anti-Casualties -10%, Casualties +10%","v":{"acas":-10.0,"cas":10.0}},{"n":"Gleipnir","e":"Cavalry's attack -150%, cavalry's defense +900%, Anti-Casualties -8%, Casualties +12%","v":{"c.A":-150.0,"c.D":900.0,"acas":-8.0,"cas":12.0}},{"n":"Laevatain","e":"Cavalry's attack +300%, cavalry's final attack +10%, cavalry's attack against archer +80%","v":{"c.A":300.0,"c.FA":10.0,"c.VA":80.0}},{"n":"Jormungand’s fang","e":"Infantry's final attack +10%, archer's final attack +10%, Anti-Casualties +5%","v":{"i.FA":10.0,"a.FA":10.0,"acas":5.0}},{"n":"2021 Temple Invasion Gem","e":"Infantry defense +350%, Infantry final attack +15%, Infantry attack +300%","v":{"i.D":350.0,"i.FA":15.0,"i.A":300.0}},{"n":"Retribution Angel (Infantry)","e":"Infantry attack +300%, Infantry final attack +10%, max march +5%","v":{"i.A":300.0,"i.FA":10.0,"mp":5.0}},{"n":"Retribution Angel (Cavalry)","e":"Cavalry attack +400%,cavalry final attack +5%, Casualties +5%","v":{"c.A":400.0,"c.FA":5.0,"cas":5.0}},{"n":"Retribution Angel (Archer)","e":"Archer attack +200%, Archer final attack +18%, max march +12k","v":{"a.A":200.0,"a.FA":18.0,"mf":12000.0}},{"n":"New World (Human)","e":"March limit +50%","v":{"mp":50.0}},{"n":"New World (Army)","e":"All troops' attack +800%, silver production +100%","v":{"x.A":800.0,"silver":100.0}},{"n":"New World (Peace)","e":"Hospital capacity +100%, silver production +100%","v":{"hosp":100.0,"silver":100.0}},{"n":"Reverse: Precise Gem","e":"Archer attack against cavalry +50%; 50% chance Anti-casualties +20%","v":{"a.VA":50.0,"acas":10.0}},{"n":"Reverse: Strike Gem","e":"Cavalry attack against infantry +50%; 50% chance cavalry attack +600%","v":{"c.VA":50.0,"c.A":300.0}},{"n":"Reverse: Counter Attack Gem","e":"Infantry attack against archer +50%; 50% chance casualties +10%, infantry HP +1000%","v":{"i.VA":50.0,"cas":5.0,"i.H":1000.0}},{"n":"Ice Breaker","e":"Archer attack against cavalry +30%, Archer attack +350%, March limit +20k","v":{"a.VA":30.0,"a.A":350.0,"mf":20000.0}},{"n":"2019 Father’s Day Gem","e":"March +5%, march +5000","v":{"mp":5.0,"mf":5000.0}},{"n":"Tsunami (Infantry)","e":"Infantry attack +800%, max march +5%, march speed +50%","v":{"i.A":800.0,"mp":5.0,"ms":50.0}},{"n":"Tsunami (Cavalry)","e":"Cavalry final attack +20%, max march +20k, march speed +150%","v":{"c.FA":20.0,"mf":20000.0,"ms":150.0}},{"n":"Infinite Knight Sword","e":"Cavalry attack +900%, cavalry final attack +12%, max march +8%","v":{"c.A":900.0,"c.FA":12.0,"mp":8.0}},{"n":"The icy sword of Skadi","e":"Archer defense in city +1500%, cavalry defense in city +1000%, infantry defense in city +1000%","v":{"a.CD":1500.0,"c.CD":1000.0,"i.CD":1000.0}},{"n":"Trend","e":"March limit +10%, Infantry attack against cavalry +30%, Infantry attack +300%","v":{"mp":10.0,"i.VA":30.0,"i.A":300.0}},{"n":"Fallen Soul of King","e":"March +30k, Archer attack +850%, Infantry defense +1000%","v":{"mf":30000.0,"a.A":850.0,"i.D":1000.0}},{"n":"Fallen Soul of King+","e":"March +60k, Archer attack +2000%, Infantry defense +2000%","v":{"mf":60000.0,"a.A":2000.0,"i.D":2000.0}},{"n":"Yggdrasil Soul Stone","e":"March limit +8%, archers attack on infantry +50%, infantry's final defense +8%","v":{"mp":8.0,"a.VA":50.0,"i.FD":8.0}},{"n":"Yggdrasil Soul Stone+","e":"March limit +16%, archers attack on infantry +100%, infantry's final defense +16%","v":{"mp":16.0,"a.VA":100.0,"i.FD":16.0}},{"n":"Nidhogg Poison","e":"Hero-led cavalry attack + 20%, HP +10%","v":{"c.A":20.0,"c.H":10.0}},{"n":"Nidhogg Plague","e":"Hero-led cavalry attack + 200%, HP +100% / Casualties +0.5%","v":{"c.A":200.0,"c.H":100.0,"cas":0.5}},{"n":"Hallow","e":"Anti-casualties +2.5%, cavalry HP +1000%, archer attack +800%, infantry defense +1000%","v":{"acas":2.5,"c.H":1000.0,"a.A":800.0,"i.D":1000.0}},{"n":"Hallow+","e":"Anti-casualties +8%, cavalry HP +2000%, archer attack +2000%, infantry defense +2000%","v":{"acas":8.0,"c.H":2000.0,"a.A":2000.0,"i.D":2000.0}},{"n":"Civil War I","e":"Infantry attack against Infantry +50%, Archer attack against Archer +50%","v":{"i.VA":50.0,"a.VA":50.0}},{"n":"Civil War II","e":"Cavalry attack against Cavalry +50%, Casualties +3%","v":{"c.VA":50.0,"cas":3.0}},{"n":"Civil War +","e":"Infantry attack against Infantry +75%, Archer attack against Archer +75%, Cavalry attack against Cavalry +75%, Casualties +5%","v":{"i.VA":75.0,"a.VA":75.0,"c.VA":75.0,"cas":5.0}},{"n":"Snow Diamond","e":"Infantry defense against Infantry +10%, Cavalry defense against Cavalry +10%, Archer defense against Archer +10%","v":{"i.VD":10.0,"c.VD":10.0,"a.VD":10.0}},{"n":"Perfect Snow Diamond","e":"Infantry defense against Infantry +30%, Cavalry defense against Cavalry +30%, Archer defense against Archer +30%","v":{"i.VD":30.0,"c.VD":30.0,"a.VD":30.0}},{"n":"Wish Gem - Pure","e":"Infantry final attack +20%, cavalry final attack +15%, archer final attack +10%, march limit +5%","v":{"i.FA":20.0,"c.FA":15.0,"a.FA":10.0,"mp":5.0}},{"n":"Leyding+","e":"Cavalry's attack -500%, cavalry's defense +2000%","v":{"c.A":-500.0,"c.D":2000.0}},{"n":"Dromi+","e":"Anti-Casualties -15%, Casualties +15%","v":{"acas":-15.0,"cas":15.0}},{"n":"Gleipnir+","e":"Cavalry's attack -250%, cavalry's defense +3000%,Anti-Casualties -12%, Casualties +20%","v":{"c.A":-250.0,"c.D":3000.0,"acas":-12.0,"cas":20.0}},{"n":"Temple Invasion Gem+","e":"Infantry defense +3000%, Infantry final attack +20%, Infantry attack +1500%","v":{"i.D":3000.0,"i.FA":20.0,"i.A":1500.0}},{"n":"Retribution Angel+","e":"Infantry attack +1500%, Cavalry attack +1800%, Archer attack +2000%, max march +25k","v":{"i.A":1500.0,"c.A":1800.0,"a.A":2000.0,"mf":25000.0}},{"n":"New World+","e":"All units' attack +2500%, all units' defense +2500%, march limit +80%","v":{"x.A":2500.0,"x.D":2500.0,"mp":80.0}},{"n":"New World++","e":"All units' attack +3500%, all units' defense +3000%, march limit +100%, Hospital Capacity +200%","v":{"x.A":3500.0,"x.D":3000.0,"mp":100.0,"hosp":200.0}},{"n":"Reverse: Infinite Gem","e":"All units' attack +1500%; 50% chance casualties +8%, Anti-casualties +5%","v":{"x.A":1500.0,"cas":4.0,"acas":5.0}},{"n":"Reverse: Infinite Gem+","e":"All units' attack +4500%; 50% chance casualties +30%, Anti-casualties +30%","v":{"x.A":4500.0,"cas":15.0,"acas":30.0}},{"n":"Resistance to repression II","e":"Cavalry attack +1200%, Cavalry final attack +15%, cavalry defense +2000%","v":{"c.A":1200.0,"c.FA":15.0,"c.D":2000.0}},{"n":"Resistance to repression+","e":"Cavalry attack against infantry +50%, Cavalry attack +2000%, Cavalry final attack +30%, cavalry defense +3000%","v":{"c.VA":50.0,"c.A":2000.0,"c.FA":30.0,"c.D":3000.0}},{"n":"Arrow Rain+","e":"Archer attack +2400%,Archer final attack +15%, Casualties +5%,march +100k","v":{"a.A":2400.0,"a.FA":15.0,"cas":5.0,"mf":100000.0}},{"n":"Tsunami+","e":"All units attack +2000%, max march +10%, max march +100k, march speed +250%","v":{"x.A":2000.0,"mp":10.0,"mf":100000.0,"ms":250.0}},{"n":"Tsunami (Infantry)II","e":"Infantry attack +1200%, max march +8%, march speed +50%","v":{"i.A":1200.0,"mp":8.0,"ms":50.0}},{"n":"Tsunami (Cavalry)II","e":"Cavalry attack +1200%, max march +80k, march speed +150%","v":{"c.A":1200.0,"mf":80000.0,"ms":150.0}},{"n":"Infinite Knight Sword II","e":"Cavalry attack +1500%, cavalry final attack +10%, max march +50k, casualties +5%","v":{"c.A":1500.0,"c.FA":10.0,"mf":50000.0,"cas":5.0}},{"n":"The Great Trend","e":"March +80k, Infantry attack +2000%, Infantry attack against cavalry +30%, all units attack in city +3000%","v":{"mf":80000.0,"i.A":2000.0,"i.VA":30.0,"x.CA":3000.0}},{"n":"The icy sword of Skadi II","e":"All units defense in city +3000%, all units attack in city +3000%","v":{"x.CD":3000.0,"x.CA":3000.0}},{"n":"Dinner","e":"Archer attack +600%, cavalry attack +400%, infantry attack +300%, march limit +20000","v":{"a.A":600.0,"c.A":400.0,"i.A":300.0,"mf":20000.0}},{"n":"Dinner+","e":"Archer attack +2500%, cavalry attack +2000%, infantry attack +1500%, march limit +40%","v":{"a.A":2500.0,"c.A":2000.0,"i.A":1500.0,"mp":40.0}},{"n":"Wish Gem - Pure+","e":"Infantry final attack +50%, cavalry final attack +40%, archer final attack +30%, march limit +25%","v":{"i.FA":50.0,"c.FA":40.0,"a.FA":30.0,"mp":25.0}},{"n":"Day and night+","e":"March limit +40%, Archer's final attack +40%, Casualties +5%, anti-casualties +25%","v":{"mp":40.0,"a.FA":40.0,"cas":5.0,"acas":25.0}},{"n":"God of War Gem","e":"Infantry defense +6000%, Infantry final defense +10%, anti-casualties +5%, infantry HP +2000%","v":{"i.D":6000.0,"i.FD":10.0,"acas":5.0,"i.H":2000.0}},{"n":"God of War Gem+","e":"Infantry defense +15000%, Infantry final defense +25%, anti-casualties +12%, infantry HP +5000%","v":{"i.D":15000.0,"i.FD":25.0,"acas":12.0,"i.H":5000.0}},{"n":"Retribution Angel (Infantry) II","e":"Infantry defense +3000%, Infantry final defense +10%, max march +5%","v":{"i.D":3000.0,"i.FD":10.0,"mp":5.0}},{"n":"Retribution Angel (Cavalry) II","e":"Cavalry attack +4000%,cavalry final attack +5%, Casualties +5%","v":{"c.A":4000.0,"c.FA":5.0,"cas":5.0}},{"n":"Retribution Angel (Archer) II","e":"Archer attack +2000%, Archer final attack +18%, max march +12k","v":{"a.A":2000.0,"a.FA":18.0,"mf":12000.0}},{"n":"Retribution Angel (Infantry) II+","e":"Infantry defense +10000%, Infantry final defense +30%, max march +15%","v":{"i.D":10000.0,"i.FD":30.0,"mp":15.0}},{"n":"Retribution Angel (Cavalry) II+","e":"Cavalry attack +12000%,cavalry final attack +15%, Casualties +20%","v":{"c.A":12000.0,"c.FA":15.0,"cas":20.0}},{"n":"Retribution Angel (Archer) II+","e":"Archer attack +6000%, Archer final attack +65%, max march +36k","v":{"a.A":6000.0,"a.FA":65.0,"mf":36000.0}},{"n":"Retribution Angel II+","e":"Infantry defense +4500%, Cavalry attack +5000%, Archer attack +3500%, max march +25k","v":{"i.D":4500.0,"c.A":5000.0,"a.A":3500.0,"mf":25000.0}},{"n":"New World II","e":"All units' attack +5000%, march limit +110%, Hospital Capacity +250%, anti-casualties +25%","v":{"x.A":5000.0,"mp":110.0,"hosp":250.0,"acas":25.0}},{"n":"Reverse: Myth Gem","e":"All units' attack +2000%; march limit +10k, casualties +8%, Anti-casualties +5%","v":{"x.A":2000.0,"mf":10000.0,"cas":8.0,"acas":5.0}},{"n":"Reverse: Myth Gem (Infantry)+","e":"Infantry defense +15000%, march limit +20k, Anti-casualties +20%","v":{"i.D":15000.0,"mf":20000.0,"acas":20.0}},{"n":"Reverse: Myth Gem (Cavalry)+","e":"Hero-led cavalry attack +8000%, hero-led cavalry defense +5000%, casualties +20%,","v":{"c.A":8000.0,"c.D":5000.0,"cas":20.0}},{"n":"Reverse: Myth Gem (Archer)+","e":"Archer attack +8000%, archer final attack +90%, Anti-casualties +15%, march limit +25k","v":{"a.A":8000.0,"a.FA":90.0,"acas":15.0,"mf":25000.0}},{"n":"Resistance to repression III","e":"Hero-led Cavalry attack +8000%, Hero-led Cavalry defense +8000%, Cavalry final attack +30%, casualties +20%","v":{"c.A":8000.0,"c.D":8000.0,"c.FA":30.0,"cas":20.0}},{"n":"Arrow Rain++","e":"Archer attack +5000%,Archer final attack +50%, anti-Casualties +5%,march +100k","v":{"a.A":5000.0,"a.FA":50.0,"acas":5.0,"mf":100000.0}},{"n":"Tsunami (Infantry)III","e":"Infantry defense +12000%, max march +8%, march speed +50%","v":{"i.D":12000.0,"mp":8.0,"ms":50.0}},{"n":"Tsunami (Cavalry)III","e":"Hero-led Cavalry attack +6000%, casualties +5%, march speed +50%","v":{"c.A":6000.0,"cas":5.0,"ms":50.0}},{"n":"Tsunami (Infantry)III+","e":"Infantry defense +30000%, max march +20%, march speed +100%","v":{"i.D":30000.0,"mp":20.0,"ms":100.0}},{"n":"Tsunami (Cavalry)III+","e":"Hero-led Cavalry attack +15000%, casualties +12%, march speed +100%","v":{"c.A":15000.0,"cas":12.0,"ms":100.0}},{"n":"Infinite Knight Sword+","e":"Hero-led Cavalry attack +8000%, cavalry final defense +10%, max march + 20%, casualties +10%","v":{"c.A":8000.0,"c.FD":10.0,"mp":20.0,"cas":10.0}},{"n":"Hallow II","e":"Anti-casualties +4%, cavalry HP +8000%, archer final attack +120%, infantry defense +8000%","v":{"acas":4.0,"c.H":8000.0,"a.FA":120.0,"i.D":8000.0}},{"n":"Hallow II+","e":"Anti-casualties +12%, cavalry HP +16000%, archer final attack +240%, infantry defense +16000%","v":{"acas":12.0,"c.H":16000.0,"a.FA":240.0,"i.D":16000.0}},{"n":"Dinner II","e":"Archer attack +6000%, cavalry attack +5000%, infantry attack +5000%, march limit +20000","v":{"a.A":6000.0,"c.A":5000.0,"i.A":5000.0,"mf":20000.0}},{"n":"Dinner II+","e":"Archer attack +20000%, cavalry attack +15000%, infantry attack +15000%, march limit +40%","v":{"a.A":20000.0,"c.A":15000.0,"i.A":15000.0,"mp":40.0}},{"n":"Titan","e":"March speed +300%, Casualties +5%， all units attack +800%","v":{"ms":300.0,"cas":5.0,"x.A":800.0}},{"n":"God of Light","e":"March speed +500%, Casualties +20%， all units attack +2500%","v":{"ms":500.0,"cas":20.0,"x.A":2500.0}},{"n":"Wish Gem - Azure","e":"Casualties +8%, anti-casualties +12%, max march +50k, max march +25%","v":{"cas":8.0,"acas":12.0,"mf":50000.0,"mp":25.0}},{"n":"Wish Gem - Azure+","e":"Casualties +20%, anti-casualties +35%, max march +100k, max march +50%","v":{"cas":20.0,"acas":35.0,"mf":100000.0,"mp":50.0}},{"n":"Leyding II","e":"Anti-Casualties -30%, cavalry final attack +30%，hero-led cavalry attack +20000%, cavalry attack +8000%","v":{"acas":-30.0,"c.FA":30.0,"c.A":28000.0}},{"n":"Dromi II","e":"Anti-Casualties -30%, Casualties +30%, archer attack against cavalry +30%, infantry attack against cavalry +30%","v":{"acas":-30.0,"cas":30.0,"a.VA":30.0,"i.VA":30.0}},{"n":"Never Abandon","e":"Anti-casualties +5%, all units attack +5000%, all units defense +10000%","v":{"acas":5.0,"x.A":5000.0,"x.D":10000.0}},{"n":"Eternal Contract","e":"Anti-casualties +30%, all units attack +15000%, all units defense +30000%, hospital capacity +500%, with marching animation","v":{"acas":30.0,"x.A":15000.0,"x.D":30000.0,"hosp":500.0}},{"n":"Gleipnir++","e":"Cavalry's attack +5000%, cavalry's defense +6000%, Casualties +20%","v":{"c.A":5000.0,"c.D":6000.0,"cas":20.0}},{"n":"Temple Prayer","e":"March limit +50%, Infantry attack +5000%, Infantry defense +15000%, Infantry final defense +30%","v":{"mp":50.0,"i.A":5000.0,"i.D":15000.0,"i.FD":30.0}},{"n":"Temple Prayer+","e":"March limit +120%, Infantry attack +10000%, Infantry defense +45000%, Infantry final defense +70%","v":{"mp":120.0,"i.A":10000.0,"i.D":45000.0,"i.FD":70.0}},{"n":"Glory of Angel","e":"All units attack +2000%, all units defense +4000%, all units HP +4000^","v":{"x.A":2000.0,"x.D":4000.0,"x.H":4000.0}},{"n":"Gabriel","e":"Cavalry final HP +200%, Cavalry final attack +50%, hero-led cavalry defense +30000%, casualties +25%","v":{"c.FH":200.0,"c.FA":50.0,"c.D":30000.0,"cas":25.0}},{"n":"Michael","e":"Archer attack +25000%, archer final attack +80%, hero-led archer attack +20000%, anti-casualties +20%","v":{"a.A":45000.0,"a.FA":80.0,"acas":20.0}},{"n":"Raphael","e":"Infantry final defense +250%, infantry final attack +50%, infantry defense +30000%, infantry HP +35000%","v":{"i.FD":250.0,"i.FA":50.0,"i.D":30000.0,"i.H":35000.0}},{"n":"Flawless","e":"All units attack +5000%, all units defense +18000%, all units HP +18000%","v":{"x.A":5000.0,"x.D":18000.0,"x.H":18000.0}},{"n":"All Perfect","e":"All units attack +25000%, all units defense +66666%, all units HP +66666%，anti-casualties +36%","v":{"x.A":25000.0,"x.D":66666.0,"x.H":66666.0,"acas":36.0}},{"n":"Original Sins","e":"March limit +80%, march limit +200k, casualties +30%, march speed +1000%","v":{"mp":80.0,"mf":200000.0,"cas":30.0,"ms":1000.0}},{"n":"Achilles I","e":"Infantry defense +44444%, Infantry HP +44444%, Infantry final defense +20%, Anti-casualties +20%","v":{"i.D":44444.0,"i.H":44444.0,"i.FD":20.0,"acas":20.0}},{"n":"Achilles II","e":"Cavalry defense +44444%, Cavalry HP +44444%, Cavalry final defense +20%, Anti-casualties +20%","v":{"c.D":44444.0,"c.H":44444.0,"c.FD":20.0,"acas":20.0}},{"n":"Achilles III","e":"Archer attack +44444%, archer final attack +20%, Anti-casualties +20%","v":{"a.A":44444.0,"a.FA":20.0,"acas":20.0}},{"n":"Jupiter","e":"Hero-led cavalry attack +24000%, defense +50000%; cavalry final attack +75%, casualties +20%","v":{"c.A":24000.0,"c.D":50000.0,"c.FA":75.0,"cas":20.0}},{"n":"Jupiter II","e":"Hero-led infantry defense +75000%; infantry final defense +75%, anti-casualties +20%","v":{"i.D":75000.0,"i.FD":75.0,"acas":20.0}},{"n":"Jupiter III","e":"Hero-led archer attack +33333%; archer final attack +125%, casualties +20%","v":{"a.A":33333.0,"a.FA":125.0,"cas":20.0}},{"n":"Amphitrite I","e":"Infantry defense +55555%, infantry final defense +80%, infantry attack +25000%, anti-casualties +50%","v":{"i.D":55555.0,"i.FD":80.0,"i.A":25000.0,"acas":50.0}},{"n":"Amphitrite II","e":"Hero-led cavalry defense +55555%, Hero-led cavalry attack +33333%, cavalry final defense +50%, march speed +200%","v":{"c.D":55555.0,"c.A":33333.0,"c.FD":50.0,"ms":200.0}},{"n":"Amphitrite III","e":"Archer attack +55555%, archer final attack +50%, anti-casualties +25%, max march +50%","v":{"a.A":55555.0,"a.FA":50.0,"acas":25.0,"mp":50.0}},{"n":"Khione I","e":"March limit +300k, Infantry attack +33333%, infantry defense against cavalry +60%, infantry defense +66666%","v":{"mf":300000.0,"i.A":33333.0,"i.VD":60.0,"i.D":66666.0}},{"n":"Khione II","e":"March limit +300k, cavalry defense in city +55555%,cavalry HP in city +55555%, casualties +18%","v":{"mf":300000.0,"c.CD":55555.0,"c.CH":55555.0,"cas":18.0}},{"n":"Khione III","e":"March limit +300k,archer final attack +318%, anti-casualties +48%","v":{"mf":300000.0,"a.FA":318.0,"acas":48.0}},{"n":"Thanatos I","e":"Infantry HP +77777%, Infantry final attack +40%, Infantry attack against cavalry +30%, casualties +10%","v":{"i.H":77777.0,"i.FA":40.0,"i.VA":30.0,"cas":10.0}},{"n":"Thanatos II","e":"Hero-led Cavalry attack +44444%, Cavalry final attack +50%, Cavalry defense against archer +40%, casualties +25%","v":{"c.A":44444.0,"c.FA":50.0,"c.VD":40.0,"cas":25.0}},{"n":"Thanatos III","e":"Archer attack +88888%, archer final attack +40%, archer attack against Infantry +50%","v":{"a.A":88888.0,"a.FA":40.0,"a.VA":50.0}},{"n":"Hades I","e":"Hero-led infantry defense +44444%, hero-led infantry HP +44444%, infantry final HP +44%, max march +44%","v":{"i.D":44444.0,"i.H":44444.0,"i.FH":44.0,"mp":44.0}},{"n":"Hades II","e":"Cavalry HP +44444%, cavalry final attack +44%, hero-led cavalry HP +44444%, casualties +44%","v":{"c.H":88888.0,"c.FA":44.0,"cas":44.0}},{"n":"Hades III","e":"Archer attack +44444%, archer final attack +444%, archer HP +44444%, anti-casualties +44%","v":{"a.A":44444.0,"a.FA":444.0,"a.H":44444.0,"acas":44.0}},{"n":"Demeter I","e":"Infantry HP +88888%, Infantry final attack +88%, march limit +88888","v":{"i.H":88888.0,"i.FA":88.0,"mf":88888.0}},{"n":"Demeter II","e":"Hero-led cavalry attack +88888%, cavalry final attack +88%, march limit +88%","v":{"c.A":88888.0,"c.FA":88.0,"mp":88.0}},{"n":"Demeter III","e":"Archer defense against infantry +88%, archer attack +88888%, anti-casualties +88%","v":{"a.VD":88.0,"a.A":88888.0,"acas":88.0}},{"n":"Titan II","e":"March speed +300%, Anti-Casualties +10%， all units attack +5000%","v":{"ms":300.0,"acas":10.0,"x.A":5000.0}},{"n":"God of Light II","e":"March speed +500%, Anti-Casualties +20%， all units attack +12500%","v":{"ms":500.0,"acas":20.0,"x.A":12500.0}},{"n":"Janus I","e":"Infantry final attack +33%, max march +333%, hero-led infantry attack +33333%, casualties +33%","v":{"i.FA":33.0,"mp":333.0,"i.A":33333.0,"cas":33.0}},{"n":"Janus II","e":"Cavalry attack in city +99999%, max march +333%, casualties +33%, cavalry HP +33333%","v":{"c.CA":99999.0,"mp":333.0,"cas":33.0,"c.H":33333.0}},{"n":"Janus III","e":"Archer attack in city +99999%, max march +333%, anti-casualties +66%, archer final attack +333%","v":{"a.CA":99999.0,"mp":333.0,"acas":66.0,"a.FA":333.0}},{"n":"Venus I","e":"Hero-led infantry attack +33333%, hero-led infantry defense +66666%, hero-led infantry HP +99999%, infantry attack against cavalry +30%","v":{"i.A":33333.0,"i.D":66666.0,"i.H":99999.0,"i.VA":30.0}},{"n":"Venus II","e":"Hero-led cavalry attack +66666%, hero-led cavalry defense +99999%, hero-led cavalry HP +33333%, casualties +50%","v":{"c.A":66666.0,"c.D":99999.0,"c.H":33333.0,"cas":50.0}},{"n":"Venus III","e":"Hero-led archer attack +99999%, hero-led archer defense +66666%, hero-led archer HP +33333%, anti-casualties +24%","v":{"a.A":99999.0,"a.D":66666.0,"a.H":33333.0,"acas":24.0}},{"n":"Flora I","e":"Infantry HP +66666%, Infantry final HP +88%, anti-casualties +66%, Hospital Capacity +333%","v":{"i.H":66666.0,"i.FH":88.0,"acas":66.0,"hosp":333.0}},{"n":"Flora II","e":"Cavalry HP +66666%, Cavalry final HP +88%, Hero-led Cavalry HP +33333%, Cavalry defense against Infantry +33%","v":{"c.H":99999.0,"c.FH":88.0,"c.VD":33.0}},{"n":"Flora III","e":"Archer HP +66666%, Archer final HP +222%, Hero-led Archer HP +33333%, Archer HP in city +66666%","v":{"a.H":99999.0,"a.FH":222.0,"a.CH":66666.0}},{"n":"Saint Raphael","e":"Infantry final defense +66%, infantry defense +66666%, infantry HP +66666%, infantry final attack +99%","v":{"i.FD":66.0,"i.D":66666.0,"i.H":66666.0,"i.FA":99.0}},{"n":"Saint Gabriel","e":"Cavalry final HP +99%, cavalry final attack +66%, hero-led cavalry defense +66666%, hero-led cavalry attack +66666%","v":{"c.FH":99.0,"c.FA":66.0,"c.D":66666.0,"c.A":66666.0}},{"n":"Saint Michael","e":"Archer attack +99999%, archer final attack +66%, archer final defense +66%, archer defense against infantry +66%","v":{"a.A":99999.0,"a.FA":66.0,"a.FD":66.0,"a.VD":66.0}},{"n":"Neptunus I","e":"Infantry defense +55555%, infantry HP +55555%, hero-led infantry defense +55555%, anti-casualties +25%","v":{"i.D":111110.0,"i.H":55555.0,"acas":25.0}},{"n":"Neptunus II","e":"Hero-led cavalry defense +55555%, hero-led cavalry attack +55555%, cavalry final defense +55%, march speed +200%","v":{"c.D":55555.0,"c.A":55555.0,"c.FD":55.0,"ms":200.0}},{"n":"Neptunus III","e":"Archer attack +55555%, archer final attack +55%, hero-led archer attack +55555%, march limit +50%","v":{"a.A":111110.0,"a.FA":55.0,"mp":50.0}},{"n":"Sol I","e":"Max march +300k, hero-led infantry attack +33333%, hero-led infantry defense +33333%, hero-led infantry HP +33333%","v":{"mf":300000.0,"i.A":33333.0,"i.D":33333.0,"i.H":33333.0}},{"n":"Sol II","e":"Max march +300k, hero-led Cavalry attack +33333%, hero-led Cavalry defense +33333%, cavalry attack against infantry +33%","v":{"mf":300000.0,"c.A":33333.0,"c.D":33333.0,"c.VA":33.0}},{"n":"Sol III","e":"Max march +300k, hero-led archer attack +33333%, archer final attack +66%, casualties +33%","v":{"mf":300000.0,"a.A":33333.0,"a.FA":66.0,"cas":33.0}},{"n":"α-Demeter I","e":"Infantry HP +88888%, infantry attack against infantry +88%, march limit +88888","v":{"i.H":88888.0,"i.VA":88.0,"mf":88888.0}},{"n":"α-Demeter II","e":"Hero-led cavalry attack +88888%, cavalry attack against archer +88%, march limit +88%","v":{"c.A":88888.0,"c.VA":88.0,"mp":88.0}},{"n":"α-Demeter III","e":"Archer attack against infantry +88%, archer attack +88888%, archer final attack +88%","v":{"a.VA":88.0,"a.A":88888.0,"a.FA":88.0}},{"n":"Boreas I","e":"March Speed +444%, casualties +44%, hero-led infantry defense +44444%, hero-led infantry HP +44444%","v":{"ms":444.0,"cas":44.0,"i.D":44444.0,"i.H":44444.0}},{"n":"Boreas II","e":"March Speed +444%, cavalry final attack +44%, hero-led cavalry attack +44444%, hero-led cavalry HP +44444%","v":{"ms":444.0,"c.FA":44.0,"c.A":44444.0,"c.H":44444.0}},{"n":"Boreas III","e":"March Speed +444%, archer attack against infantry +88%, archer final attack +444%","v":{"ms":444.0,"a.VA":88.0,"a.FA":444.0}},{"n":"Janus the Two-Faced I","e":"Infantry final attack +33%, Max March +99%, Hero-led Infantry HP +33333%, casualties +33%","v":{"i.FA":33.0,"mp":99.0,"i.H":33333.0,"cas":33.0}},{"n":"Janus the Two-Faced II","e":"Hero-led Cavalry HP +66666%, Max March +99%, casualties +33%, Cavalry HP +33333%","v":{"c.H":99999.0,"mp":99.0,"cas":33.0}},{"n":"Janus the Two-Faced III","e":"Hero-led Archer HP +66666%, Max March +99%, anti-casualties +66%, Archer final attack +333%","v":{"a.H":66666.0,"mp":99.0,"acas":66.0,"a.FA":333.0}},{"n":"Murtea I","e":"Hero-led Infantry attack +66666%, hero-led infantry defense +33333%, hero-led Infantry HP +99999%, infantry attack against archer +33%","v":{"i.A":66666.0,"i.D":33333.0,"i.H":99999.0,"i.VA":33.0}},{"n":"Murtea II","e":"Hero-led Cavalry attack +33333%, hero-led Cavalry defense +99999%, hero-led Cavalry HP +66666%, casualties +50%","v":{"c.A":33333.0,"c.D":99999.0,"c.H":66666.0,"cas":50.0}},{"n":"Murtea III","e":"Hero-led Archer attack +66666%, hero-led Archer defense +99999%, hero-led Archer HP +33333%, anti-casualties +33%","v":{"a.A":66666.0,"a.D":99999.0,"a.H":33333.0,"acas":33.0}},{"n":"Cupid's Arrow","e":"March Speed +500%, all units attack +25000%, casualties +33%, attack against monsters +33%","v":{"ms":500.0,"x.A":25000.0,"cas":33.0,"mon":33.0}},{"n":"β Flora I","e":"Infantry HP +66666%,Infantry attack +33333%, attack against monster +33%, casualties +33%","v":{"i.H":66666.0,"i.A":33333.0,"mon":33.0,"cas":33.0}},{"n":"β Flora II","e":"Cavalry HP +66666%,Cavalry final attack +33%, Hero-led Cavalry attack +33333%, Cavalry attack against Infantry +33%","v":{"c.H":66666.0,"c.FA":33.0,"c.A":33333.0,"c.VA":33.0}},{"n":"β Flora III","e":"Archer HP +66666%, Archer final HP +66%, Archer HP in city +99999%","v":{"a.H":66666.0,"a.FH":66.0,"a.CH":99999.0}},{"n":"β Saint Raphael","e":"Hero-led infantry attack +99999%, hero-led infantry defense +33333%, hero-led infantry HP +66666%, infantry final attack +33%","v":{"i.A":99999.0,"i.D":33333.0,"i.H":66666.0,"i.FA":33.0}},{"n":"β Saint Gabriel","e":"Cavalry final HP +99%, cavalry final attack +66%, cavalry final defense +33%, max march +66%","v":{"c.FH":99.0,"c.FA":66.0,"c.FD":33.0,"mp":66.0}},{"n":"β Saint Michael","e":"Hero-led Archer attack +99999%, archer final attack +66%, archer defense against cavalry +33%, archer attack against infantry +33%","v":{"a.A":99999.0,"a.FA":66.0,"a.VD":33.0,"a.VA":33.0}},{"n":"β Achilles I","e":"Hero-led Infantry defense +44444%, Hero-led Infantry HP +44444%, Anti-casualties +44%","v":{"i.D":44444.0,"i.H":44444.0,"acas":44.0}},{"n":"β Achilles II","e":"Hero-led Cavalry defense +44444%, Hero-led Cavalry HP +44444%, casualties +44%","v":{"c.D":44444.0,"c.H":44444.0,"cas":44.0}},{"n":"β Achilles III","e":"Archer attack +44444%,hero-led archer attack +44444%, archer final attack +44%","v":{"a.A":88888.0,"a.FA":44.0}},{"n":"Jupiter β I","e":"Hero-led infantry attack +24000%, hero-led infantry defense +50000%,infantry final attack +25%, casualties +20%","v":{"i.A":24000.0,"i.D":50000.0,"i.FA":25.0,"cas":20.0}},{"n":"Jupiter β II","e":"Hero-led cavalry attack +75000%, cavalry final attack +125%, anti-casualties +20%","v":{"c.A":75000.0,"c.FA":125.0,"acas":20.0}},{"n":"Jupiter β III","e":"Hero-led archer attack +66666%, archer final attack +125%, casualties +20%","v":{"a.A":66666.0,"a.FA":125.0,"cas":20.0}},{"n":"Neptunus β I","e":"Infantry defense +55555%, infantry HP +55555%, hero-led infantry defense +55555%, anti-casualties +25%","v":{"i.D":111110.0,"i.H":55555.0,"acas":25.0}},{"n":"Neptunus β II","e":"Hero-led cavalry defense +55555%, hero-led cavalry attack +55555%, cavalry final attack+55%, march speed +200%","v":{"c.D":55555.0,"c.A":55555.0,"c.FA":55.0,"ms":200.0}},{"n":"Neptunus β III","e":"Archer attack +55555%, archer final attack +55%, hero-led archer attack +55555%, march limit +50%","v":{"a.A":111110.0,"a.FA":55.0,"mp":50.0}},{"n":"Sol β I","e":"Max march +300k, hero-led infantry attack +33333%， infantry defense in city +33333%, infantry HP in city +33333%","v":{"mf":300000.0,"i.A":33333.0,"i.CD":33333.0,"i.CH":33333.0}},{"n":"Sol β II","e":"Max march +300k, hero-led Cavalry attack +33333%, hero-led Cavalry defense +33333%, hero-led Cavalry HP +33333%","v":{"mf":300000.0,"c.A":33333.0,"c.D":33333.0,"c.H":33333.0}},{"n":"Sol β III","e":"Max march +300k, hero-led archer attack +99999%, casualties +33%","v":{"mf":300000.0,"a.A":99999.0,"cas":33.0}}],"runes":[{"n":"Sloth","e":"Infantry final defense +20%, Cavalry final HP +20%, Archers final attack +10%","v":{"i.FD":20.0,"c.FH":20.0,"a.FA":10.0}},{"n":"Pride","e":"All troops attack +1500%，all troops defense +1000%，anti-casualties+1%","v":{"x.A":1500.0,"x.D":1000.0,"acas":1.0}},{"n":"Hyperion","e":"March speed +500%, Casualties +8%， march limit +500k","v":{"ms":500.0,"cas":8.0,"mf":500000.0}},{"n":"Heracles","e":"All units defense +2000%, All units attack +1000%, Hero-led units Attack +1000%","v":{"x.D":2000.0,"x.A":2000.0}},{"n":"Deadly Sins","e":"All units attack +2000%, all units defense +4000%, all units HP +4000%，anti-casualties +10%","v":{"x.A":2000.0,"x.D":4000.0,"x.H":4000.0,"acas":10.0}},{"n":"Ymir","e":"March Speed +1500%,Casualties +20%, March limit +150%","v":{"ms":1500.0,"cas":20.0,"mp":150.0}},{"n":"Ordo","e":"Hero-led units Attack +2000%；Hero-led units HP +2000%；Hero-led units Defense +2000%","v":{"x.A":2000.0,"x.H":2000.0,"x.D":2000.0}},{"n":"Apollo","e":"","v":{}},{"n":"Aurogon","e":"","v":{}},{"n":"Envy","e":"","v":{}},{"n":"Gluttony","e":"","v":{}},{"n":"Greed","e":"","v":{}},{"n":"Io","e":"","v":{}},{"n":"Iris","e":"","v":{}},{"n":"Leviathan","e":"","v":{}},{"n":"Lust","e":"","v":{}},{"n":"Neeids","e":"","v":{}},{"n":"Nidhogg","e":"","v":{}},{"n":"Titon","e":"","v":{}},{"n":"Wrath","e":"","v":{}},{"n":"Zeus","e":"","v":{}}],"sets":[{"n":"Absolute Defense","p":"Berserker Shoulder Padding","pi":0,"c":["Sloth","Sloth","Sloth"],"e":"Infantry final defense +300%, Cavalry final HP +200%, Archers final HP +150%, Hospital capacity +50%","v":{"i.FD":300.0,"c.FH":200.0,"a.FH":150.0,"hosp":50.0},"sp":0},{"n":"Undisputed Monarch","p":"Weapon","pi":0,"c":["Pride","Pride","Pride","Leviathan"],"e":"Infantry attack against Archer +50%, Archer final attack +100%, Cavalry attack +5000%, Casualties +5%","v":{"i.VA":50.0,"a.FA":100.0,"c.A":5000.0,"cas":5.0},"sp":0},{"n":"Sun Knight","p":"Turquoise Ring","pi":0,"c":["Pride","Pride","Nidhogg","Nidhogg"],"e":"March +100k, March +50%, when hero-led, all troops attack +1000%, defense +5000%","v":{"mf":100000.0,"mp":50.0,"x.A":1000.0,"x.D":5000.0},"sp":0},{"n":"The God of Light","p":"Blessing of Gods","pi":0,"c":["Hyperion","Pride","Pride","Greed"],"e":"All units attack +6000%,Cavalry final defense +100%, March Speed +800%, Casualties +15%","v":{"x.A":6000.0,"c.FD":100.0,"ms":800.0,"cas":15.0},"sp":0},{"n":"The Titans","p":"Blessing of Gods","pi":0,"c":["Hyperion","Iris","Apollo","Io"],"e":"March limit +500k, Hero-led units defense +4000%, archers final attack +80%, attack against monster +50%","v":{"mf":500000.0,"x.D":4000.0,"a.FA":80.0,"mon":50.0},"sp":0},{"n":"Deadly Game B-I","p":"Weapon","pi":0,"c":["Heracles","Heracles","Pride","Lust"],"e":"archer attack against cavalry +20%; archer attack +10000%; archer final attack +250%; for every 5% anti-casualties player has, archer final attack -15% (can be negative)","v":{"a.VA":20.0,"a.A":10000.0,"a.FA":250.0},"sp":0},{"n":"Transition C-I","p":"Breastplate","pi":0,"c":["Heracles","Heracles","Sloth","Wrath"],"e":"infantry defense +20000%; infantry final defense +120%; infantry attack against cavalry +20%; for every 2000% infantry defense bonus player has, infantry attack +300% (max +5000%)","v":{"i.D":20000.0,"i.FD":120.0,"i.VA":20.0},"sp":0},{"n":"Immortal A-I","p":"Helmet","pi":0,"c":["Heracles","Heracles","Pride","Gluttony"],"e":"hero-led cavalry attack +10000%; cavalry final defense +150%; casualties +10%; for every 1% casualties player has, cavalry attack +100% (max 5000%)","v":{"c.A":10000.0,"c.FD":150.0,"cas":10.0},"sp":0},{"n":"Transition D-I","p":"Blessing of Gods","pi":0,"c":["Heracles","Heracles","Envy","Wrath"],"e":"infantry defense +20000%; infantry final attack +60%; infantry attack against cavalry +20%; for every 2000% infantry defense bonus player has, infantry attack +300% (max +5000%)","v":{"i.D":20000.0,"i.FA":60.0,"i.VA":20.0},"sp":0},{"n":"Immortal B-I","p":"Weapon","pi":0,"c":["Heracles","Heracles","Gluttony","Gluttony"],"e":"hero-led cavalry attack +10000%; cavalry final attack +60%; casualties +10%; for every 1% casualties player has, cavalry attack +100% (max 5000%)","v":{"c.A":10000.0,"c.FA":60.0,"cas":10.0},"sp":0},{"n":"Deadly Game A-II","p":"Helmet","pi":0,"c":["Heracles","Heracles","Heracles","Pride"],"e":"archer attack against cavalry +20%; archer attack +15000%; archer final attack +400%; for every 5% anti-casualties player has, archer final attack -10% (final attack can be negative)","v":{"a.VA":20.0,"a.A":15000.0,"a.FA":400.0},"sp":0},{"n":"Immortal G-II","p":"Royal Cloak","pi":0,"c":["Heracles","Heracles","Heracles","Pride"],"e":"hero-led cavalry attack +15000%; cavalry final HP +150%; for every 1% casualties player has, cavalry attack +200% (max 15000%); for every 1% casualties player has, cavalry HP +400% (max 30000%)","v":{"c.A":15000.0,"c.FH":150.0},"sp":0},{"n":"Transition H-II","p":"Berserker Shoulder Padding","pi":0,"c":["Heracles","Heracles","Heracles","Pride"],"e":"infantry defense +30000%; infantry attack against cavalry +20%; infantry final HP +150%; for every 2000% infantry defense bonus player has, infantry attack +1000% (max +30000%)","v":{"i.D":30000.0,"i.VA":20.0,"i.FH":150.0},"sp":0},{"n":"Hyperion Guardian","p":"Berserker Shoulder Padding","pi":0,"c":["Heracles","Heracles","Hyperion","Hyperion"],"e":"anti-casualties +100%, hospital capacity +100%, treasury capacity +100%, troops attack in city +50000%","v":{"acas":100.0,"hosp":100.0,"x.CA":50000.0},"sp":0},{"n":"Titan Rage","p":"Berserker Shoulder Padding","pi":0,"c":["Hyperion","Hyperion","Titon","Neeids"],"e":"archer final attack +200%, infantry final defense +100%, cavalry final attack +100%, anti-casualties +18%","v":{"a.FA":200.0,"i.FD":100.0,"c.FA":100.0,"acas":18.0},"sp":0},{"n":"Sin Knights","p":"Turquoise Ring","pi":0,"c":["Deadly Sins","Heracles","Pride","Pride"],"e":"Cavalry final attack +200%,cavalry attack against archer +150%, cavalry final defense +800%, casualties +30%","v":{"c.FA":200.0,"c.VA":150.0,"c.FD":800.0,"cas":30.0},"sp":0},{"n":"Sin Marksman","p":"Turquoise Ring","pi":0,"c":["Deadly Sins","Heracles","Lust","Lust"],"e":"Archer final attack +200%,archer attack against infantry +110%, archer attack against cavalry +100%, archer attack against archer +100%","v":{"a.FA":200.0,"a.VA":310.0},"sp":0},{"n":"Sin Warrior","p":"Turquoise Ring","pi":0,"c":["Deadly Sins","Heracles","Lust","Lust"],"e":"Infantry final attack +200%,infantry defense +1500%, infantry attack against cavalry +150%, anti-casualties +30%","v":{"i.FA":200.0,"i.D":1500.0,"i.VA":150.0,"acas":30.0},"sp":0},{"n":"Fatal Frost B-I","p":"Weapon","pi":0,"c":["Heracles","Heracles","Gluttony","Gluttony"],"e":"archer attack against infantry +444%, archer attack against cavalry +444%; archer attack +44444%; archer final attack +2000%;for every 5% anti-casualties player has, archer final attack -10% (final attack can be negative)","v":{"a.VA":888.0,"a.A":44444.0,"a.FA":2000.0},"sp":0},{"n":"Frost Guardian C-I","p":"Breastplate","pi":0,"c":["Heracles","Heracles","Ymir","Deadly Sins"],"e":"infantry defense +44444%; infantry final defense +44%; infantry HP +44444%;infantry final HP +44%; for every 2000% infantry defense bonus player has, infantry attack +300% (max +50000%)","v":{"i.D":44444.0,"i.FD":44.0,"i.H":44444.0,"i.FH":44.0},"sp":0},{"n":"Immortal Frost A-I","p":"Helmet","pi":0,"c":["Heracles","Heracles","Ymir","Deadly Sins"],"e":"cavalry final attack +444%; cavalry attack against archer +444%; hero-led cavalry attack +44444%; for every 1% casualties player has, cavalry attack +400% (max 80000%);for every 1% casualties player has, cavalry HP +400% (max 80000%)","v":{"c.FA":444.0,"c.VA":444.0,"c.A":44444.0},"sp":0},{"n":"The Holy Order","p":"Royal Cloak","pi":0,"c":["Ordo","Hyperion","Hyperion","Hyperion"],"e":"When attacking, Reduce Defense Bonus of Infantry in the enemy city by 199999%; Reduce HP Bonus of Cavalry in the enemy city by 199999%, Reduce Attack Bonus of Archer in the enemy city by 99999% (no effect if the enemy has no bonus),hero-led units attack +55555%","v":{"x.A":55555.0},"sp":1},{"n":"The Holy Justice","p":"Royal Cloak","pi":0,"c":["Ordo","Zeus","Aurogon","Aurogon"],"e":"Hospital capacity +200%, treasury +200%, units in city attack +50000%, units in city HP +50000%","v":{"hosp":200.0,"x.CA":50000.0,"x.CH":50000.0},"sp":0},{"n":"Fatal Frost E-I","p":"Turquoise Ring","pi":1,"c":["Heracles","Heracles","Gluttony","Gluttony"],"e":"archer attack against infantry +888%; archer attack +88888%; archer final attack +2000%;for every 5% anti-casualties player has, archer final attack -10% (final attack can be negative)","v":{"a.VA":888.0,"a.A":88888.0,"a.FA":2000.0},"sp":0},{"n":"Guardian H-I","p":"Berserker Shoulder Padding","pi":1,"c":["Heracles","Heracles","Ymir","Deadly Sins"],"e":"infantry defense +44444%; infantry final defense +44%; hero-led infantry defense +88888%; for every 2000% infantry defense bonus player has, infantry attack +300% (max +50000%)","v":{"i.D":133332.0,"i.FD":44.0},"sp":0},{"n":"Immortal Frost D-I","p":"Blessing of Gods","pi":0,"c":["Heracles","Heracles","Ymir","Deadly Sins"],"e":"cavalry final attack +888%; cavalry attack +44444%; hero-led cavalry attack +44444%; for every 1% casualties player has, cavalry attack +400% (max 80000%);for every 1% casualties player has, cavalry HP +400% (max 80000%)","v":{"c.FA":888.0,"c.A":88888.0},"sp":0},{"n":"Justice's Bane","p":"Shoulder Padding","pi":0,"c":["Ordo","Ordo","Greed","Lust"],"e":"all units HP +99999%, all units defense +99999%, all units attack +99999%, casualties +50%","v":{"x.H":99999.0,"x.D":99999.0,"x.A":99999.0,"cas":50.0},"sp":0}],"pieces":["Helmet","Weapon","Breastplate","Blessing of Gods","Turquoise Ring","Shoulder Padding","Royal Cloak","Berserker Shoulder Padding"]};
+const GT={
+es:{btn:"Gemas y runas",title:"Calculadora de gemas y runas",sub:"Pon lo que tienes y te digo la mejor combinación",
+ intro:"1) Marca tu tipo de tropa y tu enfoque. 2) Anota cuántas gemas y runas tienes (pestañas «Mis gemas» y «Mis runas»). 3) Mira la pestaña «Resultado». Se guarda en tu navegador.",
+ tabG:"Mis gemas",tabR:"Mis runas",tabX:"Resultado",troop:"Tipo de tropa",inf:"Infantería",cav:"Caballería",arc:"Arqueros",all:"Las 3 tropas",
+ focus:"Enfoque",fAtk:"Ataque",fDef:"Defensa y vida",fBal:"Equilibrado",adv:"Ajustes avanzados",
+ advNote:"El juego no publica una fórmula de «mejor». Aquí se puntúa cada efecto con estos pesos; cámbialos si prefieres otro criterio.",
+ wFin:"1% de «final» equivale a (% base)",wVs:"Factor de «contra otra tropa»",wCity:"Factor de «en ciudad»",wCas:"Peso de Casualties",wAcas:"Peso de Anti-casualties",wMarch:"Peso de marcha (por % / por 1000)",wMs:"Peso de velocidad de marcha",
+ maxc:"Máx. copias iguales de una gema",resp:"Respetar la pieza de cada set de runas",
+ search:"Buscar…",fAll:"Todas",fOwn:"Las que tengo",zero:"Poner todo a 0",one:"1 de cada",owned:"Total:",
+ resG:"Gemas a equipar",resR:"Runas a equipar",resT:"Suma de efectos",slots:"huecos usados",
+ noG:"Anota primero tus gemas en «Mis gemas».",noR:"Anota tus runas en «Mis runas».",setsB:"Sets de runas a montar (coloca las runas en este orden)",loose:"Runas sueltas (cuentan en individual)",
+ pieceInf:"pieza deducida",special:"Incluye un efecto especial que no se puntúa",moreStats:"Otros efectos",score:"puntos",none:"—",slotsG:"Huecos de gemas",
+ runesNote:"Los sets cuentan una sola vez cada uno. Las runas fuera de set suman su efecto individual.",piece:"Pieza",
+ tabS:"Compartir",pname:"Nombre del jugador",pnamePh:"Tu nombre en el juego",shareT:"Exportar mis datos",shareN:"Envía el código, el enlace o el archivo a quien lo pida (líder de alianza, etc.). Quien abra el enlace verá tus gemas y runas sin poder cambiar las tuyas.",cCode:"Copiar código",cLink:"Copiar enlace",cText:"Copiar lista en texto",dl:"Descargar archivo",impT:"Importar datos",impPh:"Pega aquí un código o un enlace…",impBtn:"Importar",impFile:"O elige un archivo .json",copied:"Copiado",bad:"Código no válido",done:"Datos importados",viewing:"Estás viendo el inventario de",viewN:"Solo lectura: no se guarda en tu calculadora.",saveMine:"Importar a mi calculadora",exitV:"Volver al mío",player:"Jugador",sendT:"Enviar a la alianza",sendN:"Envía tu inventario al líder de la alianza. Si ya lo enviaste antes, se actualiza tu fila.",akey:"Clave de la alianza",sendBtn:"Enviar",sending:"Enviando…",sentOk:"✓ Enviado correctamente",badKey:"Clave incorrecta",sendErr:"No se pudo enviar. Revisa tu conexión e inténtalo de nuevo",needName:"Escribe tu nombre del juego",unk:"Sin efecto publicado",close:"Cerrar"},
+en:{btn:"Gems & runes",title:"Gem & rune calculator",sub:"Enter what you own and get the best setup",
+ intro:"1) Pick your troop type and focus. 2) Enter how many gems and runes you have («My gems» and «My runes» tabs). 3) Check the «Result» tab. Saved in your browser.",
+ tabG:"My gems",tabR:"My runes",tabX:"Result",troop:"Troop type",inf:"Infantry",cav:"Cavalry",arc:"Archers",all:"All 3 troops",
+ focus:"Focus",fAtk:"Attack",fDef:"Defense & HP",fBal:"Balanced",adv:"Advanced settings",
+ advNote:"The game does not publish a «best» formula. Each effect is scored with these weights; change them if you prefer another criterion.",
+ wFin:"1% of «final» equals (base %)",wVs:"«Against another troop» factor",wCity:"«In city» factor",wCas:"Casualties weight",wAcas:"Anti-casualties weight",wMarch:"March weight (per % / per 1000)",wMs:"March speed weight",
+ maxc:"Max copies of the same gem",resp:"Respect each rune set's piece",
+ search:"Search…",fAll:"All",fOwn:"Owned",zero:"Set all to 0",one:"1 of each",owned:"Total:",
+ resG:"Gems to equip",resR:"Runes to equip",resT:"Total effects",slots:"slots used",
+ noG:"Enter your gems first in «My gems».",noR:"Enter your runes in «My runes».",setsB:"Rune sets to build (place the runes in this order)",loose:"Loose runes (count individually)",
+ pieceInf:"piece inferred",special:"Includes a special effect that is not scored",moreStats:"Other effects",score:"points",none:"—",slotsG:"Gem slots",
+ runesNote:"Each set counts only once. Runes outside a set add their individual effect.",piece:"Piece",
+ tabS:"Share",pname:"Player name",pnamePh:"Your in-game name",shareT:"Export my data",shareN:"Send the code, the link or the file to whoever asks for it (alliance leader, etc.). Whoever opens the link will see your gems and runes without changing theirs.",cCode:"Copy code",cLink:"Copy link",cText:"Copy list as text",dl:"Download file",impT:"Import data",impPh:"Paste a code or a link here…",impBtn:"Import",impFile:"Or choose a .json file",copied:"Copied",bad:"Invalid code",done:"Data imported",viewing:"You are viewing the inventory of",viewN:"Read-only: it is not saved to your calculator.",saveMine:"Import into my calculator",exitV:"Back to mine",player:"Player",sendT:"Send to the alliance",sendN:"Send your inventory to the alliance leader. If you sent it before, your row is updated.",akey:"Alliance key",sendBtn:"Send",sending:"Sending…",sentOk:"✓ Sent successfully",badKey:"Wrong key",sendErr:"Could not send. Check your connection and try again",needName:"Enter your in-game name",unk:"No published effect",close:"Close"},
+ru:{btn:"Самоцветы и руны",title:"Калькулятор самоцветов и рун",sub:"Укажите, что у вас есть, и получите лучший набор",
+ intro:"1) Выберите тип войск и фокус. 2) Укажите количество самоцветов и рун (вкладки «Мои самоцветы» и «Мои руны»). 3) Откройте вкладку «Результат». Данные хранятся в браузере.",
+ tabG:"Мои самоцветы",tabR:"Мои руны",tabX:"Результат",troop:"Тип войск",inf:"Пехота",cav:"Кавалерия",arc:"Лучники",all:"Все 3 типа",
+ focus:"Фокус",fAtk:"Атака",fDef:"Защита и здоровье",fBal:"Сбалансированно",adv:"Расширенные настройки",
+ advNote:"Игра не публикует формулу «лучшего». Каждый эффект оценивается этими весами; измените их при другом критерии.",
+ wFin:"1% «итогового» равен (% базы)",wVs:"Коэффициент «против другого типа»",wCity:"Коэффициент «в городе»",wCas:"Вес Casualties",wAcas:"Вес Anti-casualties",wMarch:"Вес отряда (за % / за 1000)",wMs:"Вес скорости отряда",
+ maxc:"Макс. одинаковых самоцветов",resp:"Учитывать слот каждого набора рун",
+ search:"Поиск…",fAll:"Все",fOwn:"Есть у меня",zero:"Обнулить всё",one:"По одному",owned:"Всего:",
+ resG:"Самоцветы для установки",resR:"Руны для установки",resT:"Сумма эффектов",slots:"слотов занято",
+ noG:"Сначала укажите самоцветы во вкладке «Мои самоцветы».",noR:"Укажите руны во вкладке «Мои руны».",setsB:"Наборы рун (ставьте руны в таком порядке)",loose:"Отдельные руны (действуют по одной)",
+ pieceInf:"слот предположительно",special:"Есть особый эффект, он не оценивается",moreStats:"Другие эффекты",score:"очков",none:"—",slotsG:"Слоты самоцветов",
+ runesNote:"Каждый набор учитывается один раз. Руны вне набора дают свой эффект.",piece:"Слот",
+ tabS:"Поделиться",pname:"Имя игрока",pnamePh:"Ваше имя в игре",shareT:"Экспорт моих данных",shareN:"Отправьте код, ссылку или файл тому, кто просит (лидер альянса и т. д.). Открывший ссылку увидит ваши самоцветы и руны, не меняя свои.",cCode:"Копировать код",cLink:"Копировать ссылку",cText:"Копировать список текстом",dl:"Скачать файл",impT:"Импорт данных",impPh:"Вставьте код или ссылку…",impBtn:"Импортировать",impFile:"Или выберите файл .json",copied:"Скопировано",bad:"Неверный код",done:"Данные импортированы",viewing:"Вы просматриваете инвентарь игрока",viewN:"Только чтение: в ваш калькулятор не сохраняется.",saveMine:"Импортировать в мой калькулятор",exitV:"Вернуться к моему",player:"Игрок",sendT:"Отправить альянсу",sendN:"Отправьте инвентарь лидеру альянса. Если вы уже отправляли, ваша строка обновится.",akey:"Ключ альянса",sendBtn:"Отправить",sending:"Отправка…",sentOk:"✓ Отправлено",badKey:"Неверный ключ",sendErr:"Не удалось отправить. Проверьте соединение и повторите",needName:"Введите имя в игре",unk:"Эффект не опубликован",close:"Закрыть"},
+ar:{btn:"الجواهر والرونات",title:"حاسبة الجواهر والرونات",sub:"أدخل ما تملكه واحصل على أفضل تركيبة",
+ intro:"1) اختر نوع القوات والتركيز. 2) أدخل عدد الجواهر والرونات التي تملكها (تبويبا «جواهري» و«روناتي»). 3) افتح تبويب «النتيجة». يُحفظ في متصفحك.",
+ tabG:"جواهري",tabR:"روناتي",tabX:"النتيجة",troop:"نوع القوات",inf:"المشاة",cav:"الفرسان",arc:"الرماة",all:"القوات الثلاث",
+ focus:"التركيز",fAtk:"الهجوم",fDef:"الدفاع والصحة",fBal:"متوازن",adv:"إعدادات متقدمة",
+ advNote:"اللعبة لا تنشر صيغة «الأفضل». يُقيَّم كل تأثير بهذه الأوزان؛ غيّرها إذا فضّلت معيارًا آخر.",
+ wFin:"1% من «النهائي» يساوي (% أساسي)",wVs:"معامل «ضد قوة أخرى»",wCity:"معامل «في المدينة»",wCas:"وزن Casualties",wAcas:"وزن Anti-casualties",wMarch:"وزن المسيرة (لكل % / لكل 1000)",wMs:"وزن سرعة المسيرة",
+ maxc:"الحد الأقصى لنسخ الجوهرة نفسها",resp:"احترام قطعة كل طقم رونات",
+ search:"بحث…",fAll:"الكل",fOwn:"ما أملكه",zero:"تصفير الكل",one:"واحدة من كل نوع",owned:"المجموع:",
+ resG:"الجواهر المطلوب تركيبها",resR:"الرونات المطلوب تركيبها",resT:"مجموع التأثيرات",slots:"خانات مستخدمة",
+ noG:"أدخل جواهرك أولًا في «جواهري».",noR:"أدخل رونك في «روناتي».",setsB:"أطقم الرونات (ضع الرونات بهذا الترتيب)",loose:"رونات منفردة (تعمل بشكل فردي)",
+ pieceInf:"القطعة مستنتجة",special:"يتضمن تأثيرًا خاصًا لا يُحتسب",moreStats:"تأثيرات أخرى",score:"نقاط",none:"—",slotsG:"خانات الجواهر",
+ runesNote:"يُحتسب كل طقم مرة واحدة. الرونات خارج الطقم تضيف تأثيرها الفردي.",piece:"القطعة",
+ tabS:"مشاركة",pname:"اسم اللاعب",pnamePh:"اسمك في اللعبة",shareT:"تصدير بياناتي",shareN:"أرسل الرمز أو الرابط أو الملف لمن يطلبه (قائد التحالف وغيره). من يفتح الرابط سيرى جواهرك ورونك دون تغيير بياناته.",cCode:"نسخ الرمز",cLink:"نسخ الرابط",cText:"نسخ القائمة كنص",dl:"تنزيل الملف",impT:"استيراد البيانات",impPh:"الصق رمزًا أو رابطًا هنا…",impBtn:"استيراد",impFile:"أو اختر ملف .json",copied:"تم النسخ",bad:"رمز غير صالح",done:"تم استيراد البيانات",viewing:"أنت تشاهد مخزون اللاعب",viewN:"للقراءة فقط: لا يُحفظ في حاسبتك.",saveMine:"استيراد إلى حاسبتي",exitV:"العودة إلى بياناتي",player:"اللاعب",sendT:"إرسال إلى التحالف",sendN:"أرسل مخزونك إلى قائد التحالف. إذا أرسلته سابقًا فسيتم تحديث صفك.",akey:"مفتاح التحالف",sendBtn:"إرسال",sending:"جارٍ الإرسال…",sentOk:"✓ تم الإرسال بنجاح",badKey:"المفتاح غير صحيح",sendErr:"تعذّر الإرسال. تحقق من اتصالك وأعد المحاولة",needName:"اكتب اسمك في اللعبة",unk:"لا يوجد تأثير منشور",close:"إغلاق"},
+fil:{btn:"Gems at runes",title:"Calculator ng gems at runes",sub:"Ilagay ang meron ka at ibibigay ang pinakamahusay na combo",
+ intro:"1) Piliin ang troop type at focus. 2) Ilagay kung ilan ang gems at runes mo (tabs na «Aking gems» at «Aking runes»). 3) Tingnan ang tab na «Resulta». Naka-save sa browser mo.",
+ tabG:"Aking gems",tabR:"Aking runes",tabX:"Resulta",troop:"Troop type",inf:"Infantry",cav:"Cavalry",arc:"Archers",all:"Lahat ng 3",
+ focus:"Focus",fAtk:"Attack",fDef:"Depensa at HP",fBal:"Balanced",adv:"Advanced settings",
+ advNote:"Walang inilalabas na formula ang laro para sa «pinakamahusay». Ina-score ang bawat effect gamit ang mga timbang na ito; baguhin kung iba ang gusto mo.",
+ wFin:"1% ng «final» ay katumbas ng (base %)",wVs:"Factor ng «laban sa ibang troop»",wCity:"Factor ng «sa city»",wCas:"Timbang ng Casualties",wAcas:"Timbang ng Anti-casualties",wMarch:"Timbang ng march (bawat % / bawat 1000)",wMs:"Timbang ng march speed",
+ maxc:"Max na kopya ng parehong gem",resp:"Sundin ang piece ng bawat rune set",
+ search:"Maghanap…",fAll:"Lahat",fOwn:"Meron ako",zero:"I-zero lahat",one:"1 bawat isa",owned:"Kabuuan:",
+ resG:"Gems na ilalagay",resR:"Runes na ilalagay",resT:"Kabuuan ng effects",slots:"slots na gamit",
+ noG:"Ilagay muna ang gems mo sa «Aking gems».",noR:"Ilagay ang runes mo sa «Aking runes».",setsB:"Rune sets na bubuuin (ilagay ang runes sa ganitong ayos)",loose:"Mga loose rune (individual ang bisa)",
+ pieceInf:"hinuhang piece",special:"May special effect na hindi na-score",moreStats:"Ibang effects",score:"puntos",none:"—",slotsG:"Gem slots",
+ runesNote:"Isang beses lang binibilang ang bawat set. Ang runes na wala sa set ay nagdaragdag ng individual effect.",piece:"Piece",
+ tabS:"Ibahagi",pname:"Pangalan ng player",pnamePh:"Pangalan mo sa laro",shareT:"I-export ang data ko",shareN:"Ipadala ang code, link o file sa humihingi (alliance leader, atbp.). Ang magbubukas ng link ay makikita ang gems at runes mo nang hindi binabago ang sa kanya.",cCode:"Kopyahin ang code",cLink:"Kopyahin ang link",cText:"Kopyahin ang listahan bilang text",dl:"I-download ang file",impT:"Mag-import ng data",impPh:"I-paste dito ang code o link…",impBtn:"I-import",impFile:"O pumili ng .json file",copied:"Nakopya",bad:"Di-wastong code",done:"Na-import ang data",viewing:"Tinitingnan mo ang inventory ni",viewN:"Read-only: hindi sine-save sa calculator mo.",saveMine:"I-import sa calculator ko",exitV:"Bumalik sa akin",player:"Player",sendT:"Ipadala sa alliance",sendN:"Ipadala ang inventory mo sa alliance leader. Kung naipadala mo na dati, mag-a-update ang row mo.",akey:"Alliance key",sendBtn:"Ipadala",sending:"Ipinapadala…",sentOk:"✓ Matagumpay na naipadala",badKey:"Maling key",sendErr:"Hindi maipadala. Suriin ang koneksyon at subukan ulit",needName:"Ilagay ang pangalan mo sa laro",unk:"Walang nakalathalang effect",close:"Isara"}
+};
+const GTRN={
+es:{i:"Infantería",c:"Caballería",a:"Arqueros",x:"Todas las unidades"},en:{i:"Infantry",c:"Cavalry",a:"Archers",x:"All units"},
+ru:{i:"Пехота",c:"Кавалерия",a:"Лучники",x:"Все войска"},ar:{i:"المشاة",c:"الفرسان",a:"الرماة",x:"جميع الوحدات"},fil:{i:"Infantry",c:"Cavalry",a:"Archers",x:"Lahat ng unit"}};
+const GSTN={
+es:{A:"ataque",D:"defensa",H:"vida",FA:"ataque final",FD:"defensa final",FH:"vida final",VA:"ataque contra otra tropa",VD:"defensa contra otra tropa",VH:"vida contra otra tropa",CA:"ataque en ciudad",CD:"defensa en ciudad",CH:"vida en ciudad"},
+en:{A:"attack",D:"defense",H:"HP",FA:"final attack",FD:"final defense",FH:"final HP",VA:"attack against another troop",VD:"defense against another troop",VH:"HP against another troop",CA:"attack in city",CD:"defense in city",CH:"HP in city"},
+ru:{A:"атака",D:"защита",H:"здоровье",FA:"итоговая атака",FD:"итоговая защита",FH:"итоговое здоровье",VA:"атака против другого типа",VD:"защита против другого типа",VH:"здоровье против другого типа",CA:"атака в городе",CD:"защита в городе",CH:"здоровье в городе"},
+ar:{A:"الهجوم",D:"الدفاع",H:"الصحة",FA:"الهجوم النهائي",FD:"الدفاع النهائي",FH:"الصحة النهائية",VA:"الهجوم ضد قوة أخرى",VD:"الدفاع ضد قوة أخرى",VH:"الصحة ضد قوة أخرى",CA:"الهجوم في المدينة",CD:"الدفاع في المدينة",CH:"الصحة في المدينة"},
+fil:{A:"attack",D:"depensa",H:"HP",FA:"final attack",FD:"final depensa",FH:"final HP",VA:"attack laban sa ibang troop",VD:"depensa laban sa ibang troop",VH:"HP laban sa ibang troop",CA:"attack sa city",CD:"depensa sa city",CH:"HP sa city"}};
+const GMISC={
+es:{cas:"Casualties",acas:"Anti-casualties",mp:"Límite de marcha (%)",mf:"Límite de marcha (fijo)",ms:"Velocidad de marcha",hosp:"Capacidad del hospital",silver:"Producción de plata",mon:"Ataque contra monstruos"},
+en:{cas:"Casualties",acas:"Anti-casualties",mp:"March limit (%)",mf:"March limit (flat)",ms:"March speed",hosp:"Hospital capacity",silver:"Silver production",mon:"Attack against monsters"},
+ru:{cas:"Casualties",acas:"Anti-casualties",mp:"Лимит отряда (%)",mf:"Лимит отряда (фикс.)",ms:"Скорость отряда",hosp:"Вместимость госпиталя",silver:"Добыча серебра",mon:"Атака против монстров"},
+ar:{cas:"Casualties",acas:"Anti-casualties",mp:"حد المسيرة (%)",mf:"حد المسيرة (ثابت)",ms:"سرعة المسيرة",hosp:"سعة المستشفى",silver:"إنتاج الفضة",mon:"الهجوم ضد الوحوش"},
+fil:{cas:"Casualties",acas:"Anti-casualties",mp:"March limit (%)",mf:"March limit (flat)",ms:"March speed",hosp:"Kapasidad ng hospital",silver:"Silver production",mon:"Attack laban sa monsters"}};
+const GKEY="err_calc",GURL="https://script.google.com/macros/s/AKfycbxVR-eidL_O8wBWJ6HkVf-FjgqCjY4sFGRMHHNJ_xJr_0e8zkR-ajCchdtshA5eURYriA/exec",GKK="err_key";
+let gcfg={troop:"i",focus:"attack",fin:1000,vs:0.5,city:0.5,cas:1000,acas:1000,march:0,ms:0,maxc:16,resp:true};
+let ginv={g:{},r:{},name:""}, gOpen=false, gTab="g", gFilter="all", gQuery="";
+try{const s=JSON.parse(localStorage.getItem(GKEY)||"null");if(s){Object.assign(gcfg,s.c||{});ginv.g=s.g||{};ginv.r=s.r||{};ginv.name=s.n||""}}catch(e){}
+let gView=null,gStash=null;
+function gSave(){if(gView)return;try{localStorage.setItem(GKEY,JSON.stringify({c:gcfg,g:ginv.g,r:ginv.r,n:ginv.name}))}catch(e){}}
+const gesc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function gWeights(){
+  const tr=gcfg.troop==="all"?["i","c","a"]:[gcfg.troop];
+  const F={attack:{A:1,D:.25,H:.25,cas:1,acas:.25},defense:{A:.25,D:1,H:1,cas:.25,acas:1},bal:{A:1,D:1,H:1,cas:1,acas:1}}[gcfg.focus==="def"?"defense":gcfg.focus==="bal"?"bal":"attack"];
+  return key=>{
+    if(key.indexOf(".")>0){
+      const p=key.split("."),tp=p[0],st=p[1];
+      const mult=tp==="x"?tr.length:(tr.indexOf(tp)>=0?1:0);
+      if(!mult)return 0;
+      const base=st.replace(/^[FVC]/,"");let w=F[base];
+      if(st[0]==="F")w*=gcfg.fin;else if(st[0]==="V")w*=gcfg.fin*gcfg.vs;else if(st[0]==="C")w*=gcfg.city;
+      return w*mult;
+    }
+    switch(key){case "cas":return F.cas*gcfg.cas;case "acas":return F.acas*gcfg.acas;case "mp":return gcfg.march;case "mf":return gcfg.march/1000;case "ms":return gcfg.ms;default:return 0}
+  };
+}
+const gScore=(v,w)=>{let s=0;for(const k in v)s+=w(k)*v[k];return s};
+function gAdd(tot,v,n){for(const k in v)tot[k]=(tot[k]||0)+v[k]*(n||1)}
+function gKeyLabel(k,lang){
+  if(k.indexOf(".")>0){const p=k.split(".");return GTRN[lang][p[0]]+" "+GSTN[lang][p[1]]}
+  return GMISC[lang][k]||k;
+}
+function gNum(x){const r=Math.round(x*100)/100;return (r>0?"+":"")+r.toLocaleString("en-US")}
+function gFmtVal(k,x){return k==="mf"?gNum(x)+" ("+(Math.round(x/1000*10)/10)+"k)":gNum(x)+"%"}
+function gOptRunes(w,respect){
+  const inv={};GD.runes.forEach(r=>{inv[r.n]=+ginv.r[r.n]||0});
+  const rs={};GD.runes.forEach(r=>rs[r.n]=gScore(r.v,w));
+  const sets=GD.sets.map(s=>({s:s,sc:gScore(s.v,w)})).filter(o=>o.sc>0&&o.s.c.every(n=>inv[n]>0));
+  sets.sort((a,b)=>b.sc-a.sc);
+  const names=Object.keys(inv).sort((a,b)=>rs[b]-rs[a]);
+  let best={score:-1,pick:[],loose:[]},nodes=0;
+  function evalPick(pick){
+    const cur=Object.assign({},inv);let sc=0,used=0;
+    pick.forEach(o=>{sc+=o.sc;o.s.c.forEach(n=>{cur[n]--;sc+=rs[n];used++})});
+    let free=32-pick.length*0-used;const loose=[];
+    // las runas fuera de set: se colocan en los huecos libres (32 en total)
+    for(const n of names){if(rs[n]<=0)continue;let c=cur[n];while(c>0&&free>0){loose.push(n);free--;c--;sc+=rs[n]}}
+    if(sc>best.score)best={score:sc,pick:pick.slice(),loose:loose,used:32-free};
+  }
+  if(respect){
+    const groups=GD.pieces.map(p=>sets.filter(o=>o.s.p===p));
+    const cur=Object.assign({},inv);
+    (function dfs(gi,pick){
+      if(++nodes>400000)return;
+      if(gi===groups.length){evalPick(pick);return}
+      dfs(gi+1,pick);
+      for(const o of groups[gi]){
+        if(pick.some(x=>x.s===o.s))continue;
+        const need={};o.s.c.forEach(n=>need[n]=(need[n]||0)+1);
+        if(!Object.keys(need).every(n=>cur[n]>=need[n]))continue;
+        for(const n in need)cur[n]-=need[n];
+        pick.push(o);dfs(gi+1,pick);pick.pop();
+        for(const n in need)cur[n]+=need[n];
+      }
+    })(0,[]);
+  }else{
+    const cur=Object.assign({},inv);
+    (function dfs(i,pick){
+      if(++nodes>400000)return;
+      if(i===sets.length||pick.length===8){evalPick(pick);return}
+      const o=sets[i],need={};o.s.c.forEach(n=>need[n]=(need[n]||0)+1);
+      if(Object.keys(need).every(n=>cur[n]>=need[n])){
+        for(const n in need)cur[n]-=need[n];pick.push(o);dfs(i+1,pick);pick.pop();for(const n in need)cur[n]+=need[n];
+      }
+      dfs(i+1,pick);
+    })(0,[]);
+  }
+  if(best.score<0)evalPick([]);
+  return best;
+}
+function gCompute(){
+  const w=gWeights(),res={gems:[],tot:{},runes:null};
+  const pool=[];
+  GD.gems.forEach(g=>{const q=Math.min(+ginv.g[g.n]||0,gcfg.maxc);const sc=gScore(g.v,w);if(q>0&&sc>0)pool.push({g:g,q:q,sc:sc})});
+  pool.sort((a,b)=>b.sc-a.sc);
+  let slots=16;
+  for(const o of pool){if(slots<=0)break;const n=Math.min(o.q,slots);res.gems.push({g:o.g,n:n,sc:o.sc});slots-=n;gAdd(res.tot,o.g.v,n)}
+  res.gemSlots=16-slots;
+  res.runes=gOptRunes(w,gcfg.resp);
+  res.runes.pick.forEach(o=>{gAdd(res.tot,o.s.v,1);o.s.c.forEach(n=>{const r=GD.runes.find(x=>x.n===n);gAdd(res.tot,r.v,1)})});
+  const cnt={};res.runes.loose.forEach(n=>cnt[n]=(cnt[n]||0)+1);
+  res.looseCnt=cnt;Object.keys(cnt).forEach(n=>{const r=GD.runes.find(x=>x.n===n);gAdd(res.tot,r.v,cnt[n])});
+  res.w=w;return res;
+}
+function gResultHtml(lang){
+  const t=GT[lang],r=gCompute();
+  const anyG=GD.gems.some(g=>+ginv.g[g.n]>0),anyR=GD.runes.some(x=>+ginv.r[x.n]>0);
+  let h=`<h3 class="hsec">${t.resG} <small>(${r.gemSlots}/16 ${t.slots})</small></h3>`;
+  if(!anyG||!r.gems.length)h+=`<p class="desc">${t.noG}</p>`;
+  else h+=`<ol class="gres">${r.gems.map(o=>`<li><b><bdi dir="ltr">${gesc(o.g.n)}</bdi>${o.n>1?` ×${o.n}`:""}</b><span class="geff"><bdi dir="ltr">${gesc(o.g.e)}</bdi></span></li>`).join("")}</ol>`;
+  h+=`<h3 class="hsec">${t.resR} <small>(${r.runes.used||0}/32 ${t.slots})</small></h3>`;
+  if(!anyR)h+=`<p class="desc">${t.noR}</p>`;
+  else{
+    if(r.runes.pick.length){
+      h+=`<div class="hlab">${t.setsB}</div><div class="hgrid">`+r.runes.pick.map(o=>`<div class="hcard"><h4><bdi dir="ltr">${gesc(o.s.n)}</bdi></h4>
+        <div class="desc"><bdi dir="ltr">${o.s.c.map(gesc).join(" → ")}</bdi></div>
+        <span class="tag note">${t.piece}: <bdi dir="ltr">${gesc(o.s.p||"?")}</bdi>${o.s.pi?` (${t.pieceInf})`:""}</span>
+        <span class="geff"><bdi dir="ltr">${gesc(o.s.e)}</bdi></span>${o.s.sp?`<span class="tag warn">${t.special}</span>`:""}</div>`).join("")+`</div>`;
+    }
+    const ln=Object.keys(r.looseCnt);
+    if(ln.length)h+=`<div class="hlab">${t.loose}</div><p class="desc"><bdi dir="ltr">${ln.map(n=>gesc(n)+" ×"+r.looseCnt[n]).join(", ")}</bdi></p>`;
+    h+=`<p class="desc gsmall">${t.runesNote}</p>`;
+  }
+  // totales
+  const keys=Object.keys(r.tot).filter(k=>r.tot[k]!==0);
+  const main=keys.filter(k=>r.w(k)!==0).sort((a,b)=>Math.abs(r.w(b)*r.tot[b])-Math.abs(r.w(a)*r.tot[a]));
+  const rest=keys.filter(k=>r.w(k)===0);
+  h+=`<h3 class="hsec">${t.resT}</h3><ul class="hstats">${main.map(k=>`<li><span>${gKeyLabel(k,lang)}</span><bdi dir="ltr" class="sv">${gFmtVal(k,r.tot[k])}</bdi></li>`).join("")}</ul>`;
+  if(rest.length)h+=`<details class="gadv"><summary>${t.moreStats}</summary><ul class="hstats">${rest.map(k=>`<li><span>${gKeyLabel(k,lang)}</span><bdi dir="ltr" class="sv">${gFmtVal(k,r.tot[k])}</bdi></li>`).join("")}</ul></details>`;
+  return h;
+}
+
+function gPack(){
+  const g={},r={};
+  GD.gems.forEach((x,i)=>{const q=+ginv.g[x.n]||0;if(q)g[i]=q});
+  GD.runes.forEach((x,i)=>{const q=+ginv.r[x.n]||0;if(q)r[i]=q});
+  const o={v:1,n:ginv.name||"",g:g,r:r,t:gcfg.troop,f:gcfg.focus};
+  const j=unescape(encodeURIComponent(JSON.stringify(o)));
+  return "ERR1:"+btoa(j).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+function gUnpack(code){
+  try{
+    code=String(code).trim();const m=code.match(/ERR1:[A-Za-z0-9_\-]+/);if(!m)return null;
+    let b=m[0].slice(5).replace(/-/g,"+").replace(/_/g,"/");while(b.length%4)b+="=";
+    const o=JSON.parse(decodeURIComponent(escape(atob(b))));
+    if(!o||o.v!==1)return null;
+    const inv={g:{},r:{},name:String(o.n||"").slice(0,40)};
+    for(const i in o.g){const x=GD.gems[+i];if(x)inv.g[x.n]=Math.min(99,+o.g[i]||0)}
+    for(const i in o.r){const x=GD.runes[+i];if(x)inv.r[x.n]=Math.min(99,+o.r[i]||0)}
+    return {inv:inv,t:o.t,f:o.f};
+  }catch(e){return null}
+}
+
+async function gSend(){
+  const t=GT[curLang],msg=document.getElementById("gxSendMsg"),btn=document.getElementById("gxSend");
+  const name=(ginv.name||"").trim(),key=(document.getElementById("gkey").value||"").trim();
+  if(!name){msg.textContent=t.needName;return}
+  const gl=[],rl=[];let ng=0,nr=0;
+  GD.gems.forEach(x=>{const q=+ginv.g[x.n]||0;if(q){gl.push(x.n+" x"+q);ng+=q}});
+  GD.runes.forEach(x=>{const q=+ginv.r[x.n]||0;if(q){rl.push(x.n+" x"+q);nr+=q}});
+  msg.textContent=t.sending;btn.disabled=true;
+  try{
+    const r=await fetch(GURL,{method:"POST",body:JSON.stringify({clave:key,nombre:name,numGemas:ng,numRunas:nr,gemas:gl.join(", "),runas:rl.join(", "),codigo:gPack()})});
+    const txt=(await r.text()).trim();
+    msg.textContent=txt==="ok"?t.sentOk:txt==="clave incorrecta"?t.badKey:t.sendErr;
+  }catch(e){msg.textContent=t.sendErr}
+  btn.disabled=false;
+}
+function gLink(){return location.origin+location.pathname+"#inv="+gPack()}
+function gText(){
+  const L=[];L.push("Player: "+(ginv.name||"?"));
+  L.push("[Gems]");GD.gems.forEach(x=>{const q=+ginv.g[x.n]||0;if(q)L.push(x.n+" x"+q)});
+  L.push("[Runes]");GD.runes.forEach(x=>{const q=+ginv.r[x.n]||0;if(q)L.push(x.n+" x"+q)});
+  return L.join("\n");
+}
+function gCopy(txt,btn){
+  const done=()=>{if(btn){const o=btn.textContent;btn.textContent="✓ "+GT[curLang].copied;setTimeout(()=>{btn.textContent=o},1500)}};
+  const fb=()=>{const ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch(e){}ta.remove()};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(done,fb);else fb();
+}
+function gApplyImport(r,persist){
+  if(persist){gView=null;gStash=null}
+  ginv=r.inv;if(r.t)gcfg.troop=r.t;if(r.f)gcfg.focus=r.f;
+  if(persist)gSave();
+}
+function gEnterView(r){
+  if(!gView){gStash={inv:ginv,c:Object.assign({},gcfg)}}
+  gView={name:r.inv.name||"?"};ginv=r.inv;if(r.t)gcfg.troop=r.t;if(r.f)gcfg.focus=r.f;gTab="x";
+}
+function gExitView(){if(gStash){ginv=gStash.inv;Object.assign(gcfg,gStash.c)}gView=null;gStash=null;gTab="g"}
+function gShareHtml(lang){
+  const t=GT[lang];
+  let key="";try{key=localStorage.getItem(GKK)||""}catch(e){}
+  return `<div class="gshare"><h3 class="hsec">${t.sendT}</h3><p class="desc gsmall">${t.sendN}</p>
+  <div class="gnums"><label class="gnum"><span>${t.pname}</span><input type="text" id="gname2" maxlength="40" placeholder="${t.pnamePh}" value="${gesc(ginv.name||"")}"></label>
+  <label class="gnum"><span>${t.akey}</span><input type="password" id="gkey" autocomplete="off" value="${gesc(key)}"></label></div>
+  <div class="gchips"><button type="button" class="gchip on" id="gxSend">${t.sendBtn}</button><span class="gown" id="gxSendMsg"></span></div>
+  <h3 class="hsec">${t.shareT}</h3><p class="desc gsmall">${t.shareN}</p>
+  <label class="gnum"><span>${t.pname}</span><input type="text" id="gname" maxlength="40" placeholder="${t.pnamePh}" value="${gesc(ginv.name||"")}"></label>
+  <div class="gchips"><button type="button" class="gchip" id="gxCode">${t.cCode}</button><button type="button" class="gchip" id="gxLink">${t.cLink}</button><button type="button" class="gchip" id="gxText">${t.cText}</button><button type="button" class="gchip" id="gxFile">${t.dl}</button></div>
+  <textarea id="gxOut" class="gta" readonly rows="3"></textarea>
+  <h3 class="hsec">${t.impT}</h3><textarea id="gxIn" class="gta" rows="3" placeholder="${t.impPh}"></textarea>
+  <div class="gchips"><button type="button" class="gchip on" id="gxImp">${t.impBtn}</button><label class="gchip gfile">${t.impFile}<input type="file" id="gxF" accept=".json,.txt" hidden></label><span class="gown" id="gxMsg"></span></div></div>`;
+}
+function gRows(list,inv,lang){
+  const t=GT[lang];
+  return list.map(g=>`<div class="grow" data-n="${gesc(g.n)}"><div class="gname"><b><bdi dir="ltr">${gesc(g.n)}</bdi></b><span class="geff"><bdi dir="ltr">${g.e?gesc(g.e):t.unk}</bdi></span></div>
+    <div class="gstep"><button type="button" data-d="-1" aria-label="-">−</button><input type="number" min="0" max="99" inputmode="numeric" value="${+inv[g.n]||0}"><button type="button" data-d="1" aria-label="+">+</button></div></div>`).join("");
+}
+function gFilterRows(){
+  const q=gQuery.toLowerCase(),box=document.getElementById("gemList");if(!box)return;
+  const inv=gTab==="g"?ginv.g:ginv.r;
+  box.querySelectorAll(".grow").forEach(el=>{
+    const n=el.dataset.n,hit=!q||n.toLowerCase().indexOf(q)>=0||el.textContent.toLowerCase().indexOf(q)>=0;
+    const own=gFilter==="all"||(+inv[n]||0)>0;
+    el.style.display=hit&&own?"":"none";
+  });
+}
+function gTotals(){
+  const t=GT[curLang],el=document.getElementById("gemOwned");if(!el)return;
+  const inv=gTab==="g"?ginv.g:ginv.r;let s=0;for(const k in inv)s+=+inv[k]||0;el.textContent=t.owned+" "+s;
+}
+function gHtml(lang){
+  const t=GT[lang],c=gcfg;
+  const chip=(grp,val,label,cur)=>`<button type="button" class="gchip${cur===val?" on":""}" data-grp="${grp}" data-val="${val}">${label}</button>`;
+  const num=(id,label,v,step)=>`<label class="gnum"><span>${label}</span><input type="number" id="${id}" value="${v}" step="${step||"any"}" min="0"></label>`;
+  let h=(gView?`<div class="gview"><span>${t.viewing} <b><bdi dir="ltr">${gesc(gView.name)}</bdi></b>. ${t.viewN}</span><button type="button" class="gchip on" id="gvSave">${t.saveMine}</button><button type="button" class="gchip" id="gvExit">${t.exitV}</button></div>`:"")+`<div class="halhero ghero"><div class="halhero-in"><span class="hsub">${t.sub}</span><h2>💎 ${t.title}</h2><div class="hdate">${t.intro}</div></div></div>
+  <div class="gctl"><div class="hlab">${t.troop}</div><div class="gchips">${chip("troop","i",t.inf,c.troop)}${chip("troop","c",t.cav,c.troop)}${chip("troop","a",t.arc,c.troop)}${chip("troop","all",t.all,c.troop)}</div>
+  <div class="hlab">${t.focus}</div><div class="gchips">${chip("focus","attack",t.fAtk,c.focus)}${chip("focus","def",t.fDef,c.focus)}${chip("focus","bal",t.fBal,c.focus)}</div>
+  <details class="gadv"><summary>${t.adv}</summary><p class="desc gsmall">${t.advNote}</p><div class="gnums">
+   ${num("gc_fin",t.wFin,c.fin)}${num("gc_vs",t.wVs,c.vs)}${num("gc_city",t.wCity,c.city)}${num("gc_cas",t.wCas,c.cas)}${num("gc_acas",t.wAcas,c.acas)}${num("gc_march",t.wMarch,c.march)}${num("gc_ms",t.wMs,c.ms)}${num("gc_maxc",t.maxc,c.maxc,1)}
+   <label class="gnum gchk"><input type="checkbox" id="gc_resp" ${c.resp?"checked":""}><span>${t.resp}</span></label></div></details></div>
+  <div class="gtabs"><button type="button" class="gtab${gTab==="g"?" on":""}" data-tab="g">${t.tabG}</button><button type="button" class="gtab${gTab==="r"?" on":""}" data-tab="r">${t.tabR}</button><button type="button" class="gtab${gTab==="x"?" on":""}" data-tab="x">${t.tabX}</button><button type="button" class="gtab${gTab==="s"?" on":""}" data-tab="s">${t.tabS}</button></div>`;
+  if(gTab==="x")h+=`<div id="gemRes">${gResultHtml(lang)}</div>`;
+  else if(gTab==="s")h+=gShareHtml(lang);
+  else{
+    const list=gTab==="g"?GD.gems:GD.runes,inv=gTab==="g"?ginv.g:ginv.r;
+    h+=`<div class="gtools"><input type="search" id="gemQ" placeholder="${t.search}" value="${gesc(gQuery)}"><button type="button" class="gchip${gFilter==="all"?" on":""}" data-flt="all">${t.fAll}</button><button type="button" class="gchip${gFilter==="own"?" on":""}" data-flt="own">${t.fOwn}</button><button type="button" class="gchip" id="gemOne">${t.one}</button><button type="button" class="gchip" id="gemZero">${t.zero}</button><span class="gown" id="gemOwned"></span></div>
+    <div id="gemList">${gRows(list,inv,lang)}</div>`;
+  }
+  return h;
+}
+function gRender(){
+  const m=document.getElementById("gemModal"),sc=m.scrollTop;
+  document.getElementById("gemBody").innerHTML=gHtml(curLang);
+  document.getElementById("gemClose").setAttribute("aria-label",GT[curLang].close);
+  gFilterRows();gTotals();m.scrollTop=sc;
+}
+function gShow(on){
+  const m=document.getElementById("gemModal");gOpen=on;m.hidden=!on;
+  document.body.style.overflow=on?"hidden":"";
+  if(on){gRender();m.scrollTop=0;document.getElementById("gemClose").focus()}else document.getElementById("gemBtn").focus();
+}
+function gLabel(){document.getElementById("gemBtnTxt").textContent=GT[curLang].btn}
+function gInit(){
+  document.getElementById("gemBtn").addEventListener("click",()=>gShow(true));
+  document.getElementById("gemClose").addEventListener("click",()=>gShow(false));
+  const m=document.getElementById("gemModal");
+  m.addEventListener("click",e=>{
+    if(e.target.id==="gemModal"){gShow(false);return}
+    const b=e.target.closest("button");if(!b)return;
+    if(b.id==="gvSave"){gApplyImport({inv:ginv},true);gTab="g";gRender();return}
+    if(b.id==="gvExit"){gExitView();gRender();return}
+    if(b.id==="gxSend"){gSend();return}
+    if(b.id==="gxCode"||b.id==="gxLink"||b.id==="gxText"){const txt=b.id==="gxCode"?gPack():b.id==="gxLink"?gLink():gText();const o=document.getElementById("gxOut");o.value=txt;gCopy(txt,b);return}
+    if(b.id==="gxFile"){const code=gPack(),blob=new Blob([JSON.stringify({game:"ERR",player:ginv.name||"",code:code,text:gText()},null,1)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="ERR_"+((ginv.name||"jugador").replace(/[^\w\-]+/g,"_"))+".json";document.body.appendChild(a);a.click();a.remove();return}
+    if(b.id==="gxImp"){const r=gUnpack(document.getElementById("gxIn").value),msg=document.getElementById("gxMsg");if(!r){msg.textContent=GT[curLang].bad;return}gApplyImport(r,true);gRender();document.getElementById("gxMsg").textContent="✓ "+GT[curLang].done;return}
+    if(b.dataset.grp){gcfg[b.dataset.grp]=b.dataset.val;gSave();gRender();return}
+    if(b.dataset.tab){gTab=b.dataset.tab;gFilter="all";gQuery="";gRender();m.scrollTop=0;return}
+    if(b.dataset.flt){gFilter=b.dataset.flt;gRender();return}
+    if(b.id==="gemZero"){const inv=gTab==="g"?ginv.g:ginv.r;Object.keys(inv).forEach(k=>delete inv[k]);gSave();gRender();return}
+    if(b.id==="gemOne"){const inv=gTab==="g"?ginv.g:ginv.r,list=gTab==="g"?GD.gems:GD.runes;list.forEach(x=>{inv[x.n]=1});gSave();gRender();return}
+    if(b.dataset.d){
+      const row=b.closest(".grow"),inp=row.querySelector("input"),inv=gTab==="g"?ginv.g:ginv.r;
+      const v=Math.max(0,Math.min(99,(+inp.value||0)+(+b.dataset.d)));inp.value=v;
+      if(v)inv[row.dataset.n]=v;else delete inv[row.dataset.n];gSave();gTotals();
+    }
+  });
+  m.addEventListener("input",e=>{
+    const el=e.target;
+    if(el.id==="gname"||el.id==="gname2"){ginv.name=el.value.slice(0,40);gSave();return}
+    if(el.id==="gkey"){try{localStorage.setItem(GKK,el.value)}catch(e){}return}
+    if(el.id==="gemQ"){gQuery=el.value;gFilterRows();return}
+    if(el.closest(".grow")&&el.type==="number"){
+      const row=el.closest(".grow"),inv=gTab==="g"?ginv.g:ginv.r,v=Math.max(0,Math.min(99,Math.floor(+el.value||0)));
+      if(v)inv[row.dataset.n]=v;else delete inv[row.dataset.n];gSave();gTotals();return}
+    const map={gc_fin:"fin",gc_vs:"vs",gc_city:"city",gc_cas:"cas",gc_acas:"acas",gc_march:"march",gc_ms:"ms",gc_maxc:"maxc"};
+    if(map[el.id]){const v=parseFloat(el.value);if(!isNaN(v)&&v>=0){gcfg[map[el.id]]=v;gSave()}}
+    if(el.id==="gc_resp"){gcfg.resp=el.checked;gSave()}
+  });
+  m.addEventListener("change",e=>{
+    if(e.target.id==="gxF"&&e.target.files[0]){const f=e.target.files[0],rd=new FileReader();rd.onload=()=>{document.getElementById("gxIn").value=String(rd.result);document.getElementById("gxImp").click()};rd.readAsText(f)}
+  });
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&gOpen)gShow(false)});
+  const h=location.hash.match(/inv=(ERR1:[A-Za-z0-9_\-]+)/);
+  if(h){const r=gUnpack(h[1]);if(r){gEnterView(r);gShow(true)}}
+}
+
 
 function liveRow(ev,lang,state,secs,custom,dayIdx,slots){
   const l=L[lang], u=UI[lang];
@@ -643,6 +1051,7 @@ function renderAll(lang){
   b.classList.toggle("on",liveOn);b.setAttribute("aria-pressed",liveOn);
   renderLive();
   halLabel();if(halOpen)halRender();
+  gLabel();if(gOpen)gRender();
 }
 
 const B={
@@ -755,6 +1164,7 @@ document.getElementById("liveBtn").addEventListener("click",()=>{
 });
 renderAll(start);
 liveTimer=setInterval(renderLive,1000);
+gInit();
 document.getElementById("halBtn").addEventListener("click",()=>halShow(true));
 document.getElementById("halClose").addEventListener("click",()=>halShow(false));
 document.getElementById("halModal").addEventListener("click",e=>{if(e.target.id==="halModal")halShow(false)});
