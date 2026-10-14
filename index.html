@@ -771,6 +771,10 @@ function gWeights(){
 const gScore=(v,w)=>{let s=0;for(const k in v)s+=w(k)*v[k];return s};
 function gAdd(tot,v,n){for(const k in v)tot[k]=(tot[k]||0)+v[k]*(n||1)}
 function gKeyLabel(k,lang){
+  if(lang==="ar"){const a=gKeyLabel0(k,"ar"),f=gKeyLabel0(k,"fr");return a===f?a:a+" "+GFR(f)}
+  return gKeyLabel0(k,lang);
+}
+function gKeyLabel0(k,lang){
   if(k.indexOf(".")>0){const p=k.split(".");return GTRN[lang][p[0]]+" "+GSTN[lang][p[1]]}
   return GMISC[lang][k]||k;
 }
@@ -958,6 +962,19 @@ fil:{st:{attack:"Atake",defense:"Depensa",hp:"HP",fattack:"Final na atake",fdefe
  max:"max",neg:"maaaring negatibo",isw:"gumagana lang sa ISW",nobonus:"walang epekto kung walang bonus ang kalaban",marching:"may animasyon ng martsa",herow:"kapag Hero-led",atk:"Kapag umaatake:",
  red:(b,u,v)=>"Binabawasan ang bonus sa "+b+" ng "+u+" sa lungsod ng kalaban ng "+v,rb:{defense:"depensa",hp:"HP",attack:"atake"},ru:{i:"infantry",c:"cavalry",a:"archer"}}
 };
+GTRX.fr={st:{attack:"Attaque",defense:"Défense",hp:"PV",fattack:"Attaque finale",fdefense:"Défense finale",fhp:"PV finaux"},
+ un:{i:"de l'infanterie",c:"de la cavalerie",a:"des archers",x:"de toutes les unités"},tg:{i:"contre l'infanterie",c:"contre la cavalerie",a:"contre les archers",m:"contre les monstres"},
+ hero:"(dirigé par un héros)", city:"en ville",
+ o:{"troop number of a single attack":"Nombre de troupes par attaque","capture rate":"Taux de capture","treasure protection":"Protection du trésor","hall of war capacity":"Capacité de la salle de guerre","troops load":"Capacité de charge des troupes","collection speed":"Vitesse de collecte des troupes","march limit":"Limite de marche","max march":"Marche max.","march speed":"Vitesse de marche","march":"Marche","hospital capacity":"Capacité de l'hôpital","silver production":"Production d'argent","treasury":"Trésor","expedition troop number":"Nombre de troupes de l'expédition","casualties":"Pertes","improve soldiers treatment rate":"Amélioration du taux de soins des soldats","training speed":"Vitesse d'entraînement","building upgrade speed":"Vitesse d'amélioration des bâtiments","research speed":"Vitesse de recherche","anti-casualties":"Anti-pertes"},
+ chance:p=>p+" de chances : ",every:(v,x)=>"Pour chaque "+v+" "+x+" du joueur : ",
+ ev:{"infantry defense bonus":"de bonus de défense de l'infanterie","casualties":"de pertes","anti-casualties":"d'anti-pertes"},
+ max:"max.",neg:"peut être négatif",isw:"fonctionne uniquement en ISW",nobonus:"sans effet si l'ennemi n'a pas de bonus",marching:"avec animation de marche",herow:"quand dirigé par un héros",atk:"À l'attaque :",
+ red:(b,u,v)=>"Réduit le bonus "+b+" "+u+" dans la ville ennemie de "+v,rb:{defense:"de défense",hp:"de PV",attack:"d'attaque"},ru:{i:"de l'infanterie",c:"de la cavalerie",a:"des archers"}};
+GTRN.fr={i:"Infanterie",c:"Cavalerie",a:"Archers",x:"Toutes les unités"};
+GSTN.fr={A:"attaque",D:"défense",H:"PV",FA:"attaque finale",FD:"défense finale",FH:"PV finaux",VA:"attaque contre une autre troupe",VD:"défense contre une autre troupe",VH:"PV contre une autre troupe",CA:"attaque en ville",CD:"défense en ville",CH:"PV en ville",VAi:"attaque contre l'infanterie",VAc:"attaque contre la cavalerie",VAa:"attaque contre les archers",VDi:"défense contre l'infanterie",VDc:"défense contre la cavalerie",VDa:"défense contre les archers",VHi:"PV contre l'infanterie",VHc:"PV contre la cavalerie",VHa:"PV contre les archers"};
+GMISC.fr={cas:"Pertes",acas:"Anti-pertes",mp:"Limite de marche (%)",mf:"Limite de marche (fixe)",ms:"Vitesse de marche",hosp:"Capacité de l'hôpital",silver:"Production d'argent",mon:"Attaque contre les monstres",hall:"Capacité de la salle de guerre",tp:"Protection du trésor",cap:"Taux de capture",tre:"Capacité du trésor"};
+// En árabe se añade entre paréntesis el término en francés (el juego solo está en francés para ellos) para poder compararlo
+const GFR=x=>"\u2066("+x+")\u2069";
 function gtrNote(n,D){
   const m=n.match(/max\s*([+\-]?\s*[\d.,]+\s*[%kK]?)/i);if(m)return "("+D.max+" "+m[1].replace(/\s+/g,"")+")";
   if(/negative/i.test(n))return "("+D.neg+")";
@@ -997,6 +1014,10 @@ function gtrClause(c,D){
   return r+" "+v+note;
 }
 function gtr(e,lang){
+  if(lang==="ar"){const a=gtr0(e,"ar");if(!e)return a;const f=gtr0(e,"fr");return a===f?a:a+" "+GFR(f)}
+  return gtr0(e,lang);
+}
+function gtr0(e,lang){
   const D=GTRX[lang];if(!D||!e)return e||"";
   const parts=e.split(/\s*[;；，]\s*|,\s*|\s+\/\s+/).filter(x=>x.trim());
   const out=[];
