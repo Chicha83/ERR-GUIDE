@@ -1137,8 +1137,6 @@ function gHtml(lang){
   <div class="hlab">${t.focus}</div><div class="gchips">${chip("focus","attack",t.fAtk,c.focus)}${chip("focus","def",t.fDef,c.focus)}${chip("focus","bal",t.fBal,c.focus)}</div>
   <div class="hlab">${t.hero}</div><div class="gchips">${chip("hero","n",t.heroN,c.hero)}${chip("hero","y",t.heroY,c.hero)}</div>
   <p class="desc gsmall">${t.heroNote}</p>
-  <div class="hlab">${t.baseT}</div><div class="gbase">${num("gc_bcas",t.baseCas,c.bcas,1)}${num("gc_bacas",t.baseAcas,c.bacas,1)}${num("gc_bidef",t.baseIdef,c.bidef,100)}</div>
-  <p class="desc gsmall">${t.baseNote}</p>
   </div>
   <div class="gtabs"><button type="button" class="gtab${gTab==="g"?" on":""}" data-tab="g">${t.tabG}</button><button type="button" class="gtab${gTab==="r"?" on":""}" data-tab="r">${t.tabR}</button><button type="button" class="gtab${gTab==="x"?" on":""}" data-tab="x">${t.tabX}</button><button type="button" class="gtab${gTab==="s"?" on":""}" data-tab="s">${t.tabS}</button></div>`;
   if(gTab==="x")h+=`<div id="gemRes">${gResultHtml(lang)}</div>`;
