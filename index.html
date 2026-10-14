@@ -765,7 +765,7 @@ function gWeights(){
       }else if(st[0]==="C")w*=gcfg.city;
       return w*mult;
     }
-    switch(key){case "cas":return F.cas*gcfg.cas;case "acas":return F.acas*gcfg.acas;case "mp":return gcfg.march>0?gcfg.march:5;case "mf":return (gcfg.march>0?gcfg.march:5)/1000;case "ms":return gcfg.ms>0?gcfg.ms:5;case "hosp":return 30;case "silver":return 8;case "hall":return 30;case "tp":return 10;case "tre":return 10;case "cap":return 5;default:return 0}
+    switch(key){case "cas":return F.cas*gcfg.cas;case "acas":return F.acas*gcfg.acas;case "mp":return gcfg.march>0?gcfg.march:300;case "mf":return (gcfg.march>0?gcfg.march:300)/1000;case "ms":return gcfg.ms>0?gcfg.ms:100;case "hosp":return 200;case "silver":return 100;case "hall":return 200;case "tp":return 100;case "tre":return 100;case "cap":return 100;default:return 0}
   };
 }
 const gScore=(v,w)=>{let s=0;for(const k in v)s+=w(k)*v[k];return s};
