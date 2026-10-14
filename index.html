@@ -188,6 +188,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
 .gfile{cursor:pointer;display:inline-block}
 .gshare .gchips{margin:10px 0}
 .gtutl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:18px}.gtutl li p{margin:0 0 8px;font-weight:600}.gtutl img{display:block;max-width:100%;width:340px;height:auto;border-radius:10px;border:1px solid rgba(255,255,255,.12)}
+#gemRes .gg{margin-top:14px;font-size:.95em;letter-spacing:.03em}#gemRes .gh{margin-top:20px;padding:6px 10px;border-left:3px solid var(--gold,#f0b84a);background:rgba(240,184,74,.08);font-weight:700}#gemRes .hstats li.sec{opacity:.82}#gemRes .hstats li.sec.first{border-top:1px dashed rgba(255,255,255,.18);margin-top:6px;padding-top:6px}
 </style>
 </head>
 <body>
@@ -617,7 +618,7 @@ const GT={
 es:{btn:"Gemas y runas",title:"Calculadora de gemas y runas",sub:"Pon lo que tienes y te digo la mejor combinación",
  intro:"1) Marca tu tipo de tropa y tu enfoque. 2) Anota cuántas gemas y runas tienes (pestañas «Mis gemas» y «Mis runas»). 3) Mira la pestaña «Resultado». Se guarda en tu navegador.",
  tabG:"Mis gemas",tabR:"Mis runas",tabX:"Resultado",troop:"Tipo de tropa",inf:"Infantería",cav:"Caballería",arc:"Arqueros",all:"Las 3 tropas",
- hero:"Marcha",heroN:"Sin héroe",heroY:"Con héroe",heroNote:"Los efectos «Hero-led» (liderados por héroe) solo se aplican si el héroe lidera la marcha. Con «Sin héroe» no se cuentan.",sumN:"Estadísticas sin héroe",sumY:"Estadísticas con héroe (se suman a las anteriores)",tutT:"¿Cómo sé el nombre de mis gemas?",tutN:"Para apuntar tus gemas necesitas saber cómo se llama cada una. Se ve en el juego, en unos pocos pasos:",tut1:"1) Ve a tu ciudad y abre la Blacksmith's Shop (la herrería, el edificio con el martillo y el yunque).",tut2:"2) Dentro de la herrería, entra en «Gems».",tut3:"3) Pulsa «Remove all» (arriba a la derecha) para quitar todas las gemas que llevas puestas. Así todas pasan a la lista de abajo.",tut4:"4) Ve a la pestaña «Merge» y toca una gema de la lista de abajo: su nombre aparece justo debajo, en el recuadro de la izquierda.",focus:"Enfoque",fAtk:"Ataque",fDef:"Defensa y vida",fBal:"Equilibrado",adv:"Ajustes avanzados",
+ hero:"Marcha",heroN:"Sin héroe",heroY:"Con héroe",heroNote:"Los efectos «Hero-led» (liderados por héroe) solo se aplican si el héroe lidera la marcha. Con «Sin héroe» no se cuentan.",sumN:"Estadísticas sin héroe",sumY:"Estadísticas con héroe (se suman a las anteriores)",tutT:"¿Cómo sé el nombre de mis gemas?",tutN:"Para apuntar tus gemas necesitas saber cómo se llama cada una. Se ve en el juego, en unos pocos pasos:",tut1:"1) Ve a tu ciudad y abre la Blacksmith's Shop (la herrería, el edificio con el martillo y el yunque).",tut2:"2) Dentro de la herrería, entra en «Gems».",tut3:"3) Pulsa «Remove all» (arriba a la derecha) para quitar todas las gemas que llevas puestas. Así todas pasan a la lista de abajo.",tut4:"4) Ve a la pestaña «Merge» y toca una gema de la lista de abajo: su nombre aparece justo debajo, en el recuadro de la izquierda.",gAtk:"⚔ Ataque",gDef:"🛡 Defensa",gHp:"❤ Vida",gMisc:"Casualties, marcha y otros",focus:"Enfoque",fAtk:"Ataque",fDef:"Defensa y vida",fBal:"Equilibrado",adv:"Ajustes avanzados",
  advNote:"El juego no publica una fórmula de «mejor». Aquí se puntúa cada efecto con estos pesos; cámbialos si prefieres otro criterio.",
  wFin:"1% de «final» equivale a (% base)",wVs:"Factor de «contra otra tropa»",wCity:"Factor de «en ciudad»",wCas:"Peso de Casualties",wAcas:"Peso de Anti-casualties",wMarch:"Peso de marcha (por % / por 1000)",wMs:"Peso de velocidad de marcha",
  maxc:"Máx. copias iguales de una gema",resp:"Respetar la pieza de cada set de runas",
@@ -630,7 +631,7 @@ es:{btn:"Gemas y runas",title:"Calculadora de gemas y runas",sub:"Pon lo que tie
 en:{btn:"Gems & runes",title:"Gem & rune calculator",sub:"Enter what you own and get the best setup",
  intro:"1) Pick your troop type and focus. 2) Enter how many gems and runes you have («My gems» and «My runes» tabs). 3) Check the «Result» tab. Saved in your browser.",
  tabG:"My gems",tabR:"My runes",tabX:"Result",troop:"Troop type",inf:"Infantry",cav:"Cavalry",arc:"Archers",all:"All 3 troops",
- hero:"March",heroN:"Without hero",heroY:"With hero",heroNote:"«Hero-led» effects only apply when a hero leads the march. With «Without hero» they are not counted.",sumN:"Stats without hero",sumY:"Stats with hero (added on top of the above)",tutT:"How do I find out the name of my gems?",tutN:"To enter your gems you need to know each one's name. You can see it in the game in a few steps:",tut1:"1) Go to your city and open the Blacksmith's Shop (the building with the hammer and anvil).",tut2:"2) Inside the Blacksmith's Shop, tap «Gems».",tut3:"3) Tap «Remove all» (top right) to take off every gem you have equipped. They all go back to the list at the bottom.",tut4:"4) Go to the «Merge» tab and tap a gem in the list at the bottom: its name appears right below, in the box on the left.",focus:"Focus",fAtk:"Attack",fDef:"Defense & HP",fBal:"Balanced",adv:"Advanced settings",
+ hero:"March",heroN:"Without hero",heroY:"With hero",heroNote:"«Hero-led» effects only apply when a hero leads the march. With «Without hero» they are not counted.",sumN:"Stats without hero",sumY:"Stats with hero (added on top of the above)",tutT:"How do I find out the name of my gems?",tutN:"To enter your gems you need to know each one's name. You can see it in the game in a few steps:",tut1:"1) Go to your city and open the Blacksmith's Shop (the building with the hammer and anvil).",tut2:"2) Inside the Blacksmith's Shop, tap «Gems».",tut3:"3) Tap «Remove all» (top right) to take off every gem you have equipped. They all go back to the list at the bottom.",tut4:"4) Go to the «Merge» tab and tap a gem in the list at the bottom: its name appears right below, in the box on the left.",gAtk:"⚔ Attack",gDef:"🛡 Defense",gHp:"❤ HP",gMisc:"Casualties, march and others",focus:"Focus",fAtk:"Attack",fDef:"Defense & HP",fBal:"Balanced",adv:"Advanced settings",
  advNote:"The game does not publish a «best» formula. Each effect is scored with these weights; change them if you prefer another criterion.",
  wFin:"1% of «final» equals (base %)",wVs:"«Against another troop» factor",wCity:"«In city» factor",wCas:"Casualties weight",wAcas:"Anti-casualties weight",wMarch:"March weight (per % / per 1000)",wMs:"March speed weight",
  maxc:"Max copies of the same gem",resp:"Respect each rune set's piece",
@@ -643,7 +644,7 @@ en:{btn:"Gems & runes",title:"Gem & rune calculator",sub:"Enter what you own and
 ru:{btn:"Самоцветы и руны",title:"Калькулятор самоцветов и рун",sub:"Укажите, что у вас есть, и получите лучший набор",
  intro:"1) Выберите тип войск и фокус. 2) Укажите количество самоцветов и рун (вкладки «Мои самоцветы» и «Мои руны»). 3) Откройте вкладку «Результат». Данные хранятся в браузере.",
  tabG:"Мои самоцветы",tabR:"Мои руны",tabX:"Результат",troop:"Тип войск",inf:"Пехота",cav:"Кавалерия",arc:"Лучники",all:"Все 3 типа",
- hero:"Марш",heroN:"Без героя",heroY:"С героем",heroNote:"Эффекты «Hero-led» действуют только если марш ведёт герой. При «Без героя» они не учитываются.",sumN:"Характеристики без героя",sumY:"Характеристики с героем (добавляются к предыдущим)",tutT:"Как узнать названия моих камней?",tutN:"Чтобы внести камни, нужно знать их названия. Их видно в игре за несколько шагов:",tut1:"1) Зайдите в свой город и откройте Blacksmith's Shop (кузница, здание с молотом и наковальней).",tut2:"2) В кузнице нажмите «Gems».",tut3:"3) Нажмите «Remove all» (справа вверху), чтобы снять все вставленные камни. Они вернутся в список внизу.",tut4:"4) Перейдите на вкладку «Merge» и нажмите на камень в списке внизу: его название появится чуть ниже, в левом окошке.",focus:"Фокус",fAtk:"Атака",fDef:"Защита и здоровье",fBal:"Сбалансированно",adv:"Расширенные настройки",
+ hero:"Марш",heroN:"Без героя",heroY:"С героем",heroNote:"Эффекты «Hero-led» действуют только если марш ведёт герой. При «Без героя» они не учитываются.",sumN:"Характеристики без героя",sumY:"Характеристики с героем (добавляются к предыдущим)",tutT:"Как узнать названия моих камней?",tutN:"Чтобы внести камни, нужно знать их названия. Их видно в игре за несколько шагов:",tut1:"1) Зайдите в свой город и откройте Blacksmith's Shop (кузница, здание с молотом и наковальней).",tut2:"2) В кузнице нажмите «Gems».",tut3:"3) Нажмите «Remove all» (справа вверху), чтобы снять все вставленные камни. Они вернутся в список внизу.",tut4:"4) Перейдите на вкладку «Merge» и нажмите на камень в списке внизу: его название появится чуть ниже, в левом окошке.",gAtk:"⚔ Атака",gDef:"🛡 Защита",gHp:"❤ Здоровье",gMisc:"Casualties, марш и прочее",focus:"Фокус",fAtk:"Атака",fDef:"Защита и здоровье",fBal:"Сбалансированно",adv:"Расширенные настройки",
  advNote:"Игра не публикует формулу «лучшего». Каждый эффект оценивается этими весами; измените их при другом критерии.",
  wFin:"1% «итогового» равен (% базы)",wVs:"Коэффициент «против другого типа»",wCity:"Коэффициент «в городе»",wCas:"Вес Casualties",wAcas:"Вес Anti-casualties",wMarch:"Вес отряда (за % / за 1000)",wMs:"Вес скорости отряда",
  maxc:"Макс. одинаковых самоцветов",resp:"Учитывать слот каждого набора рун",
@@ -656,7 +657,7 @@ ru:{btn:"Самоцветы и руны",title:"Калькулятор само�
 ar:{btn:"الجواهر والرونات",title:"حاسبة الجواهر والرونات",sub:"أدخل ما تملكه واحصل على أفضل تركيبة",
  intro:"1) اختر نوع القوات والتركيز. 2) أدخل عدد الجواهر والرونات التي تملكها (تبويبا «جواهري» و«روناتي»). 3) افتح تبويب «النتيجة». يُحفظ في متصفحك.",
  tabG:"جواهري",tabR:"روناتي",tabX:"النتيجة",troop:"نوع القوات",inf:"المشاة",cav:"الفرسان",arc:"الرماة",all:"القوات الثلاث",
- hero:"المسيرة",heroN:"بدون بطل",heroY:"مع بطل",heroNote:"تأثيرات «Hero-led» تعمل فقط عندما يقود البطل المسيرة. مع «بدون بطل» لا تُحتسب.",sumN:"الإحصائيات بدون بطل",sumY:"الإحصائيات مع بطل (تُضاف إلى السابقة)",tutT:"كيف أعرف أسماء جواهري؟",tutN:"لإدخال جواهرك تحتاج إلى معرفة اسم كل واحدة. تظهر الأسماء في اللعبة بخطوات قليلة:",tut1:"1) اذهب إلى مدينتك وافتح Blacksmith's Shop (الحدّاد، المبنى الذي عليه المطرقة والسندان).",tut2:"2) داخل الحدّاد، اضغط على «Gems».",tut3:"3) اضغط على «Remove all» (أعلى اليمين) لإزالة كل الجواهر المركّبة. ستعود كلها إلى القائمة في الأسفل.",tut4:"4) انتقل إلى تبويب «Merge» واضغط على جوهرة في القائمة السفلية: سيظهر اسمها مباشرةً تحتها، في المربع الأيسر.",focus:"التركيز",fAtk:"الهجوم",fDef:"الدفاع والصحة",fBal:"متوازن",adv:"إعدادات متقدمة",
+ hero:"المسيرة",heroN:"بدون بطل",heroY:"مع بطل",heroNote:"تأثيرات «Hero-led» تعمل فقط عندما يقود البطل المسيرة. مع «بدون بطل» لا تُحتسب.",sumN:"الإحصائيات بدون بطل",sumY:"الإحصائيات مع بطل (تُضاف إلى السابقة)",tutT:"كيف أعرف أسماء جواهري؟",tutN:"لإدخال جواهرك تحتاج إلى معرفة اسم كل واحدة. تظهر الأسماء في اللعبة بخطوات قليلة:",tut1:"1) اذهب إلى مدينتك وافتح Blacksmith's Shop (الحدّاد، المبنى الذي عليه المطرقة والسندان).",tut2:"2) داخل الحدّاد، اضغط على «Gems».",tut3:"3) اضغط على «Remove all» (أعلى اليمين) لإزالة كل الجواهر المركّبة. ستعود كلها إلى القائمة في الأسفل.",tut4:"4) انتقل إلى تبويب «Merge» واضغط على جوهرة في القائمة السفلية: سيظهر اسمها مباشرةً تحتها، في المربع الأيسر.",gAtk:"⚔ الهجوم",gDef:"🛡 الدفاع",gHp:"❤ الصحة",gMisc:"Casualties والمسيرة وغيرها",focus:"التركيز",fAtk:"الهجوم",fDef:"الدفاع والصحة",fBal:"متوازن",adv:"إعدادات متقدمة",
  advNote:"اللعبة لا تنشر صيغة «الأفضل». يُقيَّم كل تأثير بهذه الأوزان؛ غيّرها إذا فضّلت معيارًا آخر.",
  wFin:"1% من «النهائي» يساوي (% أساسي)",wVs:"معامل «ضد قوة أخرى»",wCity:"معامل «في المدينة»",wCas:"وزن Casualties",wAcas:"وزن Anti-casualties",wMarch:"وزن المسيرة (لكل % / لكل 1000)",wMs:"وزن سرعة المسيرة",
  maxc:"الحد الأقصى لنسخ الجوهرة نفسها",resp:"احترام قطعة كل طقم رونات",
@@ -669,7 +670,7 @@ ar:{btn:"الجواهر والرونات",title:"حاسبة الجواهر وا�
 fil:{btn:"Gems at runes",title:"Calculator ng gems at runes",sub:"Ilagay ang meron ka at ibibigay ang pinakamahusay na combo",
  intro:"1) Piliin ang troop type at focus. 2) Ilagay kung ilan ang gems at runes mo (tabs na «Aking gems» at «Aking runes»). 3) Tingnan ang tab na «Resulta». Naka-save sa browser mo.",
  tabG:"Aking gems",tabR:"Aking runes",tabX:"Resulta",troop:"Troop type",inf:"Infantry",cav:"Cavalry",arc:"Archers",all:"Lahat ng 3",
- hero:"Martsa",heroN:"Walang bayani",heroY:"May bayani",heroNote:"Ang mga epektong «Hero-led» ay gumagana lang kapag pinamumunuan ng bayani ang martsa. Sa «Walang bayani» hindi ito binibilang.",sumN:"Stats na walang bayani",sumY:"Stats na may bayani (idinadagdag sa nauna)",tutT:"Paano ko malalaman ang pangalan ng mga gem ko?",tutN:"Para ilagay ang mga gem mo, kailangan mong malaman ang pangalan ng bawat isa. Makikita ito sa laro sa ilang hakbang:",tut1:"1) Pumunta sa iyong lungsod at buksan ang Blacksmith's Shop (ang gusaling may martilyo at pandayan).",tut2:"2) Sa loob ng Blacksmith's Shop, pindutin ang «Gems».",tut3:"3) Pindutin ang «Remove all» (kanang itaas) para tanggalin ang lahat ng gem na suot mo. Babalik silang lahat sa listahan sa ibaba.",tut4:"4) Pumunta sa tab na «Merge» at pindutin ang isang gem sa listahan sa ibaba: lalabas ang pangalan nito sa ibaba mismo, sa kahong nasa kaliwa.",focus:"Focus",fAtk:"Attack",fDef:"Depensa at HP",fBal:"Balanced",adv:"Advanced settings",
+ hero:"Martsa",heroN:"Walang bayani",heroY:"May bayani",heroNote:"Ang mga epektong «Hero-led» ay gumagana lang kapag pinamumunuan ng bayani ang martsa. Sa «Walang bayani» hindi ito binibilang.",sumN:"Stats na walang bayani",sumY:"Stats na may bayani (idinadagdag sa nauna)",tutT:"Paano ko malalaman ang pangalan ng mga gem ko?",tutN:"Para ilagay ang mga gem mo, kailangan mong malaman ang pangalan ng bawat isa. Makikita ito sa laro sa ilang hakbang:",tut1:"1) Pumunta sa iyong lungsod at buksan ang Blacksmith's Shop (ang gusaling may martilyo at pandayan).",tut2:"2) Sa loob ng Blacksmith's Shop, pindutin ang «Gems».",tut3:"3) Pindutin ang «Remove all» (kanang itaas) para tanggalin ang lahat ng gem na suot mo. Babalik silang lahat sa listahan sa ibaba.",tut4:"4) Pumunta sa tab na «Merge» at pindutin ang isang gem sa listahan sa ibaba: lalabas ang pangalan nito sa ibaba mismo, sa kahong nasa kaliwa.",gAtk:"⚔ Atake",gDef:"🛡 Depensa",gHp:"❤ HP",gMisc:"Casualties, martsa at iba pa",focus:"Focus",fAtk:"Attack",fDef:"Depensa at HP",fBal:"Balanced",adv:"Advanced settings",
  advNote:"Walang inilalabas na formula ang laro para sa «pinakamahusay». Ina-score ang bawat effect gamit ang mga timbang na ito; baguhin kung iba ang gusto mo.",
  wFin:"1% ng «final» ay katumbas ng (base %)",wVs:"Factor ng «laban sa ibang troop»",wCity:"Factor ng «sa city»",wCas:"Timbang ng Casualties",wAcas:"Timbang ng Anti-casualties",wMarch:"Timbang ng march (bawat % / bawat 1000)",wMs:"Timbang ng march speed",
  maxc:"Max na kopya ng parehong gem",resp:"Sundin ang piece ng bawat rune set",
@@ -904,16 +905,31 @@ function gResultHtml(lang){
     h+=`<p class="desc gsmall">${t.runesNote}</p>`;
   }
   // totales
-  const lst=(tot,det)=>{const keys=Object.keys(tot).filter(k=>tot[k]!==0);
-    const main=keys.filter(k=>r.w(k)!==0).sort((a,b)=>Math.abs(r.w(b)*tot[b])-Math.abs(r.w(a)*tot[a]));
-    const rest=keys.filter(k=>r.w(k)===0);
-    let o=`<ul class="hstats">${main.map(k=>`<li><span>${gKeyLabel(k,lang)}</span><bdi dir="ltr" class="sv">${gFmtVal(k,tot[k])}</bdi></li>`).join("")}</ul>`;
-    if(rest.length)o+=`<details class="gadv"><summary>${t.moreStats}</summary><ul class="hstats">${rest.map(k=>`<li><span>${gKeyLabel(k,lang)}</span><bdi dir="ltr" class="sv">${gFmtVal(k,tot[k])}</bdi></li>`).join("")}</ul></details>`;
-    return o};
+  const trs=gcfg.troop==="all"?["i","c","a"]:[gcfg.troop];
+  const sub=st=>{const f=st.charAt(0);return f==="F"?1:f==="V"?2+"ica".indexOf(st.charAt(2)||"i")/10:f==="C"?3:0};
+  const grp=st=>st.replace(/^[FVC]/,"").charAt(0);
+  const li=(k,v,cls)=>`<li${cls?` class="${cls}"`:""}><span>${gKeyLabel(k,lang)}</span><bdi dir="ltr" class="sv">${gFmtVal(k,v)}</bdi></li>`;
+  const lst=tot=>{
+    const keys=Object.keys(tot).filter(k=>tot[k]!==0);
+    const troopKeys=keys.filter(k=>k.indexOf(".")>0);
+    let o="";
+    [["A",t.gAtk],["D",t.gDef],["H",t.gHp]].forEach(([g,title])=>{
+      const items=[];
+      trs.forEach(u=>troopKeys.filter(k=>k.split(".")[0]===u&&grp(k.split(".")[1])===g).sort((x,y)=>sub(x.split(".")[1])-sub(y.split(".")[1])).forEach(k=>items.push(li(k,tot[k]))));
+      let first=true;
+      troopKeys.filter(k=>k.split(".")[0]==="x"&&grp(k.split(".")[1])===g).sort((x,y)=>sub(x.split(".")[1])-sub(y.split(".")[1])).forEach(k=>{items.push(li(k,tot[k],first?"sec first":"sec"));first=false});
+      if(items.length)o+=`<div class="hlab gg">${title}</div><ul class="hstats">${items.join("")}</ul>`;
+    });
+    const misc=keys.filter(k=>k.indexOf(".")<0).sort((x,y)=>Math.abs(r.w(y)*tot[y])-Math.abs(r.w(x)*tot[x]));
+    if(misc.length)o+=`<div class="hlab gg">${t.gMisc}</div><ul class="hstats">${misc.map(k=>li(k,tot[k])).join("")}</ul>`;
+    const others=troopKeys.filter(k=>{const u=k.split(".")[0];return u!=="x"&&trs.indexOf(u)<0});
+    if(others.length)o+=`<details class="gadv"><summary>${t.moreStats}</summary><ul class="hstats">${others.sort().map(k=>li(k,tot[k])).join("")}</ul></details>`;
+    return o;
+  };
   h+=`<h3 class="hsec">${t.resT}</h3>`;
   if(gcfg.hero==="y"){
-    h+=`<div class="hlab">${t.sumN}</div>${lst(r.tot)}`;
-    if(Object.keys(r.toth).some(k=>r.toth[k]!==0))h+=`<div class="hlab">${t.sumY}</div>${lst(r.toth)}`;
+    h+=`<div class="hlab gh">${t.sumN}</div>${lst(r.tot)}`;
+    if(Object.keys(r.toth).some(k=>r.toth[k]!==0))h+=`<div class="hlab gh">${t.sumY}</div>${lst(r.toth)}`;
   }else h+=lst(r.tot);
   return h;
 }
