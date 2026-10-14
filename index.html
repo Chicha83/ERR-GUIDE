@@ -189,6 +189,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
 .gshare .gchips{margin:10px 0}
 .gtutl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:18px}.gtutl li p{margin:0 0 8px;font-weight:600}.gtutl img{display:block;max-width:100%;width:340px;height:auto;border-radius:10px;border:1px solid rgba(255,255,255,.12)}
 #gemRes .gg{margin-top:14px;font-size:.95em;letter-spacing:.03em}#gemRes .gh{margin-top:20px;padding:6px 10px;border-left:3px solid var(--gold,#f0b84a);background:rgba(240,184,74,.08);font-weight:700}#gemRes .hstats li.sec{opacity:.82}#gemRes .hstats li.sec.first{border-top:1px dashed rgba(255,255,255,.18);margin-top:6px;padding-top:6px}
+#gemRes .htag{font-style:normal;font-size:.78em;font-weight:700;padding:1px 6px;border-radius:8px;background:rgba(240,184,74,.18);color:#f0b84a;margin-inline-start:4px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -799,35 +800,35 @@ function gCompute(){
 const GTRX={
 es:{st:{attack:"Ataque",defense:"Defensa",hp:"Vida",fattack:"Ataque final",fdefense:"Defensa final",fhp:"Vida final"},
  un:{i:"de infantería",c:"de caballería",a:"de arqueros",x:"de todas las unidades"},tg:{i:"contra infantería",c:"contra caballería",a:"contra arqueros",m:"contra monstruos"},
- hero:"al mando del héroe", city:"en la ciudad",
+ hero:"Hero-led", city:"en la ciudad",
  o:{"march limit":"Límite de marcha","max march":"Marcha máx.","march speed":"Velocidad de marcha","march":"Marcha","hospital capacity":"Capacidad del hospital","silver production":"Producción de plata","treasury":"Tesoro","expedition troop number":"Nº de tropas de la expedición","casualties":"Casualties","improve soldiers treatment rate":"Mejora de la tasa de tratamiento de soldados","training speed":"Velocidad de entrenamiento","building upgrade speed":"Velocidad de mejora de edificios","research speed":"Velocidad de investigación","anti-casualties":"Anti-casualties"},
  chance:p=>p+" de probabilidad: ",every:(v,x)=>"Por cada "+v+" de "+x+" del jugador: ",
  ev:{"infantry defense bonus":"bonus de defensa de infantería","casualties":"Casualties","anti-casualties":"Anti-casualties"},
- max:"máx.",neg:"puede ser negativo",isw:"solo funciona en ISW",nobonus:"sin efecto si el enemigo no tiene bonus",marching:"con animación de marcha",herow:"cuando va al mando del héroe",atk:"Al atacar:",
+ max:"máx.",neg:"puede ser negativo",isw:"solo funciona en ISW",nobonus:"sin efecto si el enemigo no tiene bonus",marching:"con animación de marcha",herow:"cuando es Hero-led",atk:"Al atacar:",
  red:(b,u,v)=>"Reduce el bonus de "+b+" de "+u+" en la ciudad enemiga en "+v,rb:{defense:"defensa",hp:"vida",attack:"ataque"},ru:{i:"infantería",c:"caballería",a:"arqueros"}},
 ru:{st:{attack:"Атака",defense:"Защита",hp:"Здоровье",fattack:"Итоговая атака",fdefense:"Итоговая защита",fhp:"Итоговое здоровье"},
  un:{i:"пехоты",c:"кавалерии",a:"лучников",x:"всех войск"},tg:{i:"против пехоты",c:"против кавалерии",a:"против лучников",m:"против монстров"},
- hero:"под командованием героя", city:"в городе",
+ hero:"Hero-led", city:"в городе",
  o:{"march limit":"Лимит марша","max march":"Макс. марш","march speed":"Скорость марша","march":"Марш","hospital capacity":"Вместимость госпиталя","silver production":"Добыча серебра","treasury":"Казна","expedition troop number":"Число войск в походе","casualties":"Casualties","improve soldiers treatment rate":"Улучшение скорости лечения солдат","training speed":"Скорость обучения","building upgrade speed":"Скорость улучшения зданий","research speed":"Скорость исследований","anti-casualties":"Anti-casualties"},
  chance:p=>"Шанс "+p+": ",every:(v,x)=>"За каждые "+v+" "+x+" игрока: ",
  ev:{"infantry defense bonus":"бонуса защиты пехоты","casualties":"Casualties","anti-casualties":"Anti-casualties"},
- max:"макс.",neg:"может быть отрицательным",isw:"работает только в ISW",nobonus:"не действует, если у врага нет бонуса",marching:"с анимацией марша",herow:"когда ведёт герой",atk:"При атаке:",
+ max:"макс.",neg:"может быть отрицательным",isw:"работает только в ISW",nobonus:"не действует, если у врага нет бонуса",marching:"с анимацией марша",herow:"когда Hero-led",atk:"При атаке:",
  red:(b,u,v)=>"Снижает бонус "+b+" "+u+" в городе врага на "+v,rb:{defense:"защиты",hp:"здоровья",attack:"атаки"},ru:{i:"пехоты",c:"кавалерии",a:"лучников"}},
 ar:{st:{attack:"هجوم",defense:"دفاع",hp:"صحة",fattack:"هجوم نهائي",fdefense:"دفاع نهائي",fhp:"صحة نهائية"},
  un:{i:"للمشاة",c:"للفرسان",a:"للرماة",x:"لجميع الوحدات"},tg:{i:"ضد المشاة",c:"ضد الفرسان",a:"ضد الرماة",m:"ضد الوحوش"},
- hero:"بقيادة البطل", city:"في المدينة",
+ hero:"Hero-led", city:"في المدينة",
  o:{"march limit":"حد المسيرة","max march":"أقصى مسيرة","march speed":"سرعة المسيرة","march":"المسيرة","hospital capacity":"سعة المستشفى","silver production":"إنتاج الفضة","treasury":"الخزينة","expedition troop number":"عدد قوات الحملة","casualties":"Casualties","improve soldiers treatment rate":"تحسين معدل علاج الجنود","training speed":"سرعة التدريب","building upgrade speed":"سرعة ترقية المباني","research speed":"سرعة البحث","anti-casualties":"Anti-casualties"},
  chance:p=>"احتمال "+p+": ",every:(v,x)=>"لكل "+v+" من "+x+" لدى اللاعب: ",
  ev:{"infantry defense bonus":"مكافأة دفاع المشاة","casualties":"Casualties","anti-casualties":"Anti-casualties"},
- max:"الحد الأقصى",neg:"قد يكون سلبيًا",isw:"يعمل فقط في ISW",nobonus:"بلا تأثير إذا لم يكن للعدو مكافأة",marching:"مع حركة المسيرة",herow:"عند القيادة بالبطل",atk:"عند الهجوم:",
+ max:"الحد الأقصى",neg:"قد يكون سلبيًا",isw:"يعمل فقط في ISW",nobonus:"بلا تأثير إذا لم يكن للعدو مكافأة",marching:"مع حركة المسيرة",herow:"عندما Hero-led",atk:"عند الهجوم:",
  red:(b,u,v)=>"يخفض مكافأة "+b+" "+u+" في مدينة العدو بمقدار "+v,rb:{defense:"الدفاع",hp:"الصحة",attack:"الهجوم"},ru:{i:"للمشاة",c:"للفرسان",a:"للرماة"}},
 fil:{st:{attack:"Atake",defense:"Depensa",hp:"HP",fattack:"Final na atake",fdefense:"Final na depensa",fhp:"Final na HP"},
  un:{i:"ng infantry",c:"ng cavalry",a:"ng archer",x:"ng lahat ng yunit"},tg:{i:"laban sa infantry",c:"laban sa cavalry",a:"laban sa archer",m:"laban sa halimaw"},
- hero:"na pinamumunuan ng bayani", city:"sa lungsod",
+ hero:"Hero-led", city:"sa lungsod",
  o:{"march limit":"Limitasyon ng martsa","max march":"Max na martsa","march speed":"Bilis ng martsa","march":"Martsa","hospital capacity":"Kapasidad ng ospital","silver production":"Produksyon ng pilak","treasury":"Kaban","expedition troop number":"Bilang ng tropa sa ekspedisyon","casualties":"Casualties","improve soldiers treatment rate":"Pagpapabuti ng bilis ng panggagamot sa sundalo","training speed":"Bilis ng pagsasanay","building upgrade speed":"Bilis ng pag-upgrade ng gusali","research speed":"Bilis ng pananaliksik","anti-casualties":"Anti-casualties"},
  chance:p=>p+" tsansa: ",every:(v,x)=>"Sa bawat "+v+" ng "+x+" ng manlalaro: ",
  ev:{"infantry defense bonus":"bonus sa depensa ng infantry","casualties":"Casualties","anti-casualties":"Anti-casualties"},
- max:"max",neg:"maaaring negatibo",isw:"gumagana lang sa ISW",nobonus:"walang epekto kung walang bonus ang kalaban",marching:"may animasyon ng martsa",herow:"kapag pinamumunuan ng bayani",atk:"Kapag umaatake:",
+ max:"max",neg:"maaaring negatibo",isw:"gumagana lang sa ISW",nobonus:"walang epekto kung walang bonus ang kalaban",marching:"may animasyon ng martsa",herow:"kapag Hero-led",atk:"Kapag umaatake:",
  red:(b,u,v)=>"Binabawasan ang bonus sa "+b+" ng "+u+" sa lungsod ng kalaban ng "+v,rb:{defense:"depensa",hp:"HP",attack:"atake"},ru:{i:"infantry",c:"cavalry",a:"archer"}}
 };
 function gtrNote(n,D){
@@ -908,29 +909,28 @@ function gResultHtml(lang){
   const trs=gcfg.troop==="all"?["i","c","a"]:[gcfg.troop];
   const sub=st=>{const f=st.charAt(0);return f==="F"?1:f==="V"?2+"ica".indexOf(st.charAt(2)||"i")/10:f==="C"?3:0};
   const grp=st=>st.replace(/^[FVC]/,"").charAt(0);
-  const li=(k,v,cls)=>`<li${cls?` class="${cls}"`:""}><span>${gKeyLabel(k,lang)}</span><bdi dir="ltr" class="sv">${gFmtVal(k,v)}</bdi></li>`;
-  const lst=tot=>{
-    const keys=Object.keys(tot).filter(k=>tot[k]!==0);
-    const troopKeys=keys.filter(k=>k.indexOf(".")>0);
-    let o="";
-    [["A",t.gAtk],["D",t.gDef],["H",t.gHp]].forEach(([g,title])=>{
-      const items=[];
-      trs.forEach(u=>troopKeys.filter(k=>k.split(".")[0]===u&&grp(k.split(".")[1])===g).sort((x,y)=>sub(x.split(".")[1])-sub(y.split(".")[1])).forEach(k=>items.push(li(k,tot[k]))));
-      let first=true;
-      troopKeys.filter(k=>k.split(".")[0]==="x"&&grp(k.split(".")[1])===g).sort((x,y)=>sub(x.split(".")[1])-sub(y.split(".")[1])).forEach(k=>{items.push(li(k,tot[k],first?"sec first":"sec"));first=false});
-      if(items.length)o+=`<div class="hlab gg">${title}</div><ul class="hstats">${items.join("")}</ul>`;
-    });
-    const misc=keys.filter(k=>k.indexOf(".")<0).sort((x,y)=>Math.abs(r.w(y)*tot[y])-Math.abs(r.w(x)*tot[x]));
-    if(misc.length)o+=`<div class="hlab gg">${t.gMisc}</div><ul class="hstats">${misc.map(k=>li(k,tot[k])).join("")}</ul>`;
-    const others=troopKeys.filter(k=>{const u=k.split(".")[0];return u!=="x"&&trs.indexOf(u)<0});
-    if(others.length)o+=`<details class="gadv"><summary>${t.moreStats}</summary><ul class="hstats">${others.sort().map(k=>li(k,tot[k])).join("")}</ul></details>`;
-    return o;
-  };
+  const hy=gcfg.hero==="y";
+  const nz=(o,k)=>o&&o[k]&&o[k]!==0;
+  const li=(k,cls)=>{let o="";
+    if(nz(r.tot,k))o+=`<li${cls?` class="${cls}"`:""}><span>${gKeyLabel(k,lang)}</span><bdi dir="ltr" class="sv">${gFmtVal(k,r.tot[k])}</bdi></li>`;
+    if(hy&&nz(r.toth,k))o+=`<li class="hl${cls?" "+cls:""}"><span>${gKeyLabel(k,lang)} <em class="htag">Hero-led</em></span><bdi dir="ltr" class="sv">${gFmtVal(k,r.toth[k])}</bdi></li>`;
+    return o};
+  const all=new Set([...Object.keys(r.tot),...(hy?Object.keys(r.toth):[])]);
+  const keys=[...all].filter(k=>nz(r.tot,k)||(hy&&nz(r.toth,k)));
+  const troopKeys=keys.filter(k=>k.indexOf(".")>0);
+  const ord=(x,y)=>sub(x.split(".")[1])-sub(y.split(".")[1]);
   h+=`<h3 class="hsec">${t.resT}</h3>`;
-  if(gcfg.hero==="y"){
-    h+=`<div class="hlab gh">${t.sumN}</div>${lst(r.tot)}`;
-    if(Object.keys(r.toth).some(k=>r.toth[k]!==0))h+=`<div class="hlab gh">${t.sumY}</div>${lst(r.toth)}`;
-  }else h+=lst(r.tot);
+  [["A",t.gAtk],["D",t.gDef],["H",t.gHp]].forEach(([g,title])=>{
+    let items="";
+    trs.forEach(u=>troopKeys.filter(k=>k.split(".")[0]===u&&grp(k.split(".")[1])===g).sort(ord).forEach(k=>{items+=li(k)}));
+    let first=true;
+    troopKeys.filter(k=>k.split(".")[0]==="x"&&grp(k.split(".")[1])===g).sort(ord).forEach(k=>{items+=li(k,first?"sec first":"sec");first=false});
+    if(items)h+=`<div class="hlab gg">${title}</div><ul class="hstats">${items}</ul>`;
+  });
+  const misc=keys.filter(k=>k.indexOf(".")<0).sort((x,y)=>Math.abs(r.w(y)*((r.tot[y]||0)+(r.toth[y]||0)))-Math.abs(r.w(x)*((r.tot[x]||0)+(r.toth[x]||0))));
+  if(misc.length)h+=`<div class="hlab gg">${t.gMisc}</div><ul class="hstats">${misc.map(k=>li(k)).join("")}</ul>`;
+  const others=troopKeys.filter(k=>{const u=k.split(".")[0];return u!=="x"&&trs.indexOf(u)<0});
+  if(others.length)h+=`<details class="gadv"><summary>${t.moreStats}</summary><ul class="hstats">${others.sort().map(k=>li(k)).join("")}</ul></details>`;
   return h;
 }
 
