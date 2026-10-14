@@ -760,8 +760,8 @@ function gWeights(){
       else if(st[0]==="V"){
         const en=gcfg.enemy||"any",sf=st.charAt(2);
         if(en==="any")w*=gcfg.fin*gcfg.vs;
-        else if(sf)w*=sf===en?gcfg.fin*GVP:0;  // «contra infantería/caballería/arqueros»: solo cuenta el rival elegido y tiene prioridad máxima
-        else w*=tp===en?0:gcfg.fin*GVP;         // «contra otra tropa»: vale si el rival es de otro tipo
+        else if(sf)w*=sf===en?gcfg.fin*GVP:gcfg.fin*.3;  // «contra infantería/caballería/arqueros»: solo cuenta el rival elegido y tiene prioridad máxima
+        else w*=tp===en?gcfg.fin*.3:gcfg.fin*GVP;         // «contra otra tropa»: vale si el rival es de otro tipo
       }else if(st[0]==="C")w*=gcfg.city;
       return w*mult;
     }
