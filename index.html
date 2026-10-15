@@ -799,7 +799,14 @@ const gesc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"
 // Los bonus «finales», «contra tropa» y «en ciudad» se multiplican entre sí: cada punto extra vale menos cuanto más tienes ya de ese mismo tipo.
 // gTotN guarda los totales de la mejor combinación hallada hasta ahora y el peso de cada tipo se ajusta a 1/(100+total).
 let gTotN=null;const GREF=5000,GVP=1e4;
-function gMarg(tp,st,snap){if(!snap)return 1;const T=Math.max(0,(snap[tp+"."+st]||0)+(snap["x."+st]||0));return (GREF+100)/(100+T)}
+// El ataque/defensa/vida «final» multiplica el valor base de esa tropa: un punto final vale (100+base total)/(100+final total) puntos base.
+function gMarg(tp,st,snap){
+  if(!snap)return 1;
+  const T=Math.max(0,(snap[tp+"."+st]||0)+(snap["x."+st]||0));
+  let B=GREF;
+  if(st[0]==="F"){const g=st.slice(1,2);B=Math.max(0,(snap[tp+"."+g]||0)+(snap["x."+g]||0))}
+  return (B+100)/(100+T);
+}
 function gWeights(){
   const snap=gTotN;
   const tr=gcfg.troop==="all"?["i","c","a"]:[gcfg.troop];
@@ -814,7 +821,7 @@ function gWeights(){
       if(st[0]==="F")w*=gcfg.fin;
       else if(st[0]==="V"){
         const en=gcfg.enemy||"any",sf=st.charAt(2);
-        if(en==="any")w*=gcfg.fin*gcfg.vs;
+        if(en==="any"||gcfg.focus==="def")w*=gcfg.fin*gcfg.vs;  // en defensa manda multiplicar la defensa base (final); el «contra tropa» solo es un extra
         else if(sf)w*=sf===en?gcfg.fin*GVP:gcfg.fin*.3;  // «contra infantería/caballería/arqueros»: solo cuenta el rival elegido y tiene prioridad máxima
         else w*=tp===en?gcfg.fin*.3:gcfg.fin*GVP;         // «contra otra tropa»: vale si el rival es de otro tipo
       }else if(st[0]==="C")w*=gcfg.city;
