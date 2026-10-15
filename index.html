@@ -810,18 +810,21 @@ function gMarg(tp,st,snap){
 function gWeights(){
   const snap=gTotN;
   const tr=gcfg.troop==="all"?["i","c","a"]:[gcfg.troop];
-  const F={attack:{A:1,D:.25,H:.25,cas:1,acas:.25},defense:{A:.25,D:1,H:1,cas:.25,acas:1},bal:{A:1,D:1,H:1,cas:1,acas:1}}[gcfg.focus==="def"?"defense":gcfg.focus==="bal"?"bal":"attack"];
+  const TB={attack:{A:1,D:.25,H:.25,cas:1,acas:.25},defense:{A:.25,D:1,H:1,cas:.25,acas:1},bal:{A:1,D:1,H:1,cas:1,acas:1}};
+  // Por tropa: arqueros (matan antes de morir) y caballería (equilibrada) no bajan el ataque en defensa; la infantería sí prioriza defensa y vida.
+  const tb=u=>u==="c"?TB.bal:gcfg.focus==="def"?(u==="a"?TB.bal:TB.defense):gcfg.focus==="bal"?TB.bal:TB.attack;
+  const F=tr.length===1?tb(tr[0]):TB[gcfg.focus==="def"?"defense":gcfg.focus==="bal"?"bal":"attack"];
   return key=>{
     if(key.indexOf(".")>0){
       const p=key.split("."),tp=p[0],st=p[1];
       const mult=tp==="x"?tr.length:(tr.indexOf(tp)>=0?1:0);
       if(!mult)return 0;
-      const base=st.replace(/^[FVC]/,"").charAt(0);let w=F[base];
+      const base=st.replace(/^[FVC]/,"").charAt(0);const ts0=tp==="x"?tr:[tp];let w=ts0.reduce((a,u)=>a+tb(u)[base],0)/ts0.length;
       if(st[0]==="F"||st[0]==="V"||st[0]==="C")w*=gMarg(tp==="x"?tr[0]:tp,st,snap);
       if(st[0]==="F"){const ts=tp==="x"?tr:[tp];w*=ts.reduce((a,u)=>a+GTS[u][base],0)/ts.length}
       else if(st[0]==="V"){
         const en=gcfg.enemy||"any",sf=st.charAt(2);
-        if(en==="any"||gcfg.focus==="def")w*=gcfg.vs;  // en defensa manda multiplicar la defensa base (final); el «contra tropa» solo es un extra
+        if(en==="any"||(gcfg.focus==="def"&&(tp==="x"?tr.every(u=>u==="i"):tp==="i")))w*=gcfg.vs;  // en defensa manda multiplicar la defensa base (final); el «contra tropa» solo es un extra
         else if(sf)w*=sf===en?GVP:.3;  // «contra infantería/caballería/arqueros»: solo cuenta el rival elegido y tiene prioridad máxima
         else w*=tp===en?.3:GVP;         // «contra otra tropa»: vale si el rival es de otro tipo
       }else if(st[0]==="C")w*=gcfg.city;
