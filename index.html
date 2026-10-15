@@ -804,7 +804,7 @@ function gMarg(tp,st,snap){
   if(!snap)return 1;
   const T=Math.max(0,(snap[tp+"."+st]||0)+(snap["x."+st]||0));
   let B=GREF;
-  if(st[0]==="F"){const g=st.slice(1,2);B=Math.max(0,(snap[tp+"."+g]||0)+(snap["x."+g]||0))}
+  if(st[0]==="F"||st[0]==="V"){const g=st.slice(1,2);B=Math.max(0,(snap[tp+"."+g]||0)+(snap["x."+g]||0))}
   return (B+100)/(100+T);
 }
 function gWeights(){
@@ -818,12 +818,12 @@ function gWeights(){
       if(!mult)return 0;
       const base=st.replace(/^[FVC]/,"").charAt(0);let w=F[base];
       if(st[0]==="F"||st[0]==="V"||st[0]==="C")w*=gMarg(tp==="x"?tr[0]:tp,st,snap);
-      if(st[0]==="F"){w*=gcfg.fin;const ts=tp==="x"?tr:[tp];w*=ts.reduce((a,u)=>a+GTS[u][base],0)/ts.length}
+      if(st[0]==="F"){const ts=tp==="x"?tr:[tp];w*=ts.reduce((a,u)=>a+GTS[u][base],0)/ts.length}
       else if(st[0]==="V"){
         const en=gcfg.enemy||"any",sf=st.charAt(2);
-        if(en==="any"||gcfg.focus==="def")w*=gcfg.fin*gcfg.vs;  // en defensa manda multiplicar la defensa base (final); el «contra tropa» solo es un extra
-        else if(sf)w*=sf===en?gcfg.fin*GVP:gcfg.fin*.3;  // «contra infantería/caballería/arqueros»: solo cuenta el rival elegido y tiene prioridad máxima
-        else w*=tp===en?gcfg.fin*.3:gcfg.fin*GVP;         // «contra otra tropa»: vale si el rival es de otro tipo
+        if(en==="any"||gcfg.focus==="def")w*=gcfg.vs;  // en defensa manda multiplicar la defensa base (final); el «contra tropa» solo es un extra
+        else if(sf)w*=sf===en?GVP:.3;  // «contra infantería/caballería/arqueros»: solo cuenta el rival elegido y tiene prioridad máxima
+        else w*=tp===en?.3:GVP;         // «contra otra tropa»: vale si el rival es de otro tipo
       }else if(st[0]==="C")w*=gcfg.city;
       return w*mult;
     }
