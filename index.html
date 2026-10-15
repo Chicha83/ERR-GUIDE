@@ -821,10 +821,11 @@ function gWeights(){
       if(!mult)return 0;
       const base=st.replace(/^[FVC]/,"").charAt(0);const ts0=tp==="x"?tr:[tp];let w=ts0.reduce((a,u)=>a+tb(u)[base],0)/ts0.length;
       if(st[0]==="F"||st[0]==="V"||st[0]==="C")w*=gMarg(tp==="x"?tr[0]:tp,st,snap);
+      if(st==="FD"&&gcfg.focus==="def")w*=GVP;
       if(st[0]==="F"){const ts=tp==="x"?tr:[tp];w*=ts.reduce((a,u)=>a+GTS[u][base],0)/ts.length}
       else if(st[0]==="V"){
         const en=gcfg.enemy||"any",sf=st.charAt(2);
-        if(en==="any"||(gcfg.focus==="def"&&(tp==="x"?tr.every(u=>u==="i"):tp==="i")))w*=gcfg.vs;  // en defensa manda multiplicar la defensa base (final); el «contra tropa» solo es un extra
+        if(en==="any"||(gcfg.focus==="def"&&(tp==="x"?tr.every(u=>u!=="c"):tp!=="c")))w*=gcfg.vs;  // en defensa manda multiplicar la defensa base (final); el «contra tropa» solo es un extra
         else if(sf)w*=sf===en?GVP:.3;  // «contra infantería/caballería/arqueros»: solo cuenta el rival elegido y tiene prioridad máxima
         else w*=tp===en?.3:GVP;         // «contra otra tropa»: vale si el rival es de otro tipo
       }else if(st[0]==="C")w*=gcfg.city;
@@ -974,7 +975,7 @@ function gCompute1(){
   const capA=+gcfg.ecas>0?+gcfg.ecas:Infinity,capC=+gcfg.eacas>0?+gcfg.eacas+100:Infinity;
   const wn=k=>(k==="cas"||k==="acas")?0:w(k);
   const pool=[];
-  GD.gems.forEach(g=>{const q=Math.min(+ginv.g[g.n]||0,gcfg.maxc);if(q>0){const v=gvec(g);pool.push({g:g,q:q,n:0,v:v,b:gScore(v,wn)})}});
+  GD.gems.forEach(g=>{const q=Math.min(+ginv.g[g.n]||0,gcfg.maxc);if(q>0){const v=gvec(g);if(!Object.keys(v).some(k=>k.indexOf(".")>0&&w(k)*v[k]>0))return;pool.push({g:g,q:q,n:0,v:v,b:gScore(v,wn)})}});
   let c=(res.tot.cas||0)+(res.toth.cas||0),a=(res.tot.acas||0)+(res.toth.acas||0);
   const hy0=gcfg.hero==="y",gx=k=>(res.tot[k]||0)+(hy0?(res.toth[k]||0):0);
   let d=gx("i.D")+gx("x.D");const bC=+gcfg.bcas||0,bA=+gcfg.bacas||0,bD=+gcfg.bidef||0;
