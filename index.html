@@ -818,7 +818,7 @@ function gWeights(){
       if(!mult)return 0;
       const base=st.replace(/^[FVC]/,"").charAt(0);let w=F[base];
       if(st[0]==="F"||st[0]==="V"||st[0]==="C")w*=gMarg(tp==="x"?tr[0]:tp,st,snap);
-      if(st[0]==="F")w*=gcfg.fin;
+      if(st[0]==="F"){w*=gcfg.fin;const ts=tp==="x"?tr:[tp];w*=ts.reduce((a,u)=>a+GTS[u][base],0)/ts.length}
       else if(st[0]==="V"){
         const en=gcfg.enemy||"any",sf=st.charAt(2);
         if(en==="any"||gcfg.focus==="def")w*=gcfg.fin*gcfg.vs;  // en defensa manda multiplicar la defensa base (final); el «contra tropa» solo es un extra
@@ -845,6 +845,8 @@ function gFmtVal(k,x){return k==="mf"?gNum(x)+" ("+(Math.round(x/1000*10)/10)+"k
 function gCv(v){return [v.cas||0,v.acas||0,(v["i.D"]||0)+(v["x.D"]||0)]}
 function gCondVal(r,X){const n=Math.floor(X/r.s+1e-9);if(n<=0)return 0;let v=n*r.v;if(r.m!=null)v=r.v>0?Math.min(v,r.m):Math.max(v,r.m);return v}
 function gCondX(r,C,A,D){return r.t==="cas"?C:r.t==="acas"?A:D}
+// Fortaleza de cada tropa (estimación por experiencia de juego): arqueros fuertes en ataque y débiles en defensa, infantería al revés, caballería equilibrada.
+const GTS={i:{A:.5,D:2,H:1},c:{A:1,D:1,H:1},a:{A:2,D:.5,H:1}};
 let gBase={c:0,a:0,d:0};
 function gOptRunes(w,respect){
   const inv={};GD.runes.forEach(r=>{inv[r.n]=+ginv.r[r.n]||0});
