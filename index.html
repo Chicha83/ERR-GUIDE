@@ -211,7 +211,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
 .hsec small{color:var(--muted);font-weight:400;font-size:.8rem}
 .gview{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#0f2a3a;border:1px solid #3aa7e0;border-radius:10px;padding:10px 12px;margin:10px 0;color:#cfe9f7;font-size:.9rem}
 .gview>span{flex:1 1 220px}
-.gta{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px;font-family:monospace;font-size:.8rem;resize:vertical}
+.gta{direction:ltr!important;text-align:left!important;unicode-bidi:isolate;word-break:break-all;white-space:pre-wrap;width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px;font-family:monospace;font-size:.8rem;resize:vertical}
 .gnum input[type=text]{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-family:inherit;width:100%;max-width:320px}
 .gfile{cursor:pointer;display:inline-block}
 .gshare .gchips{margin:10px 0}
@@ -1160,12 +1160,24 @@ function gPack(){
   const j=unescape(encodeURIComponent(JSON.stringify(o)));
   return "ERR1:"+btoa(j).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 }
+function gClean(s){
+  s=String(s).replace(/[\u0660-\u0669]/g,c=>String(c.charCodeAt(0)-0x660)).replace(/[\u06F0-\u06F9]/g,c=>String(c.charCodeAt(0)-0x6F0));
+  s=s.replace(/[\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF\u00AD\u061C\u180E]/g,"").replace(/[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D\u0640]/g,"-").replace(/\uFF3F/g,"_").replace(/\uFF1A/g,":");
+  return s;
+}
+function gDecode(b){
+  b=b.replace(/-/g,"+").replace(/_/g,"/");while(b.length%4)b+="=";
+  const o=JSON.parse(decodeURIComponent(escape(atob(b))));
+  return o&&o.v===1?o:null;
+}
 function gUnpack(code){
   try{
-    code=String(code).trim();const m=code.match(/ERR1:[A-Za-z0-9_\-]+/);if(!m)return null;
-    let b=m[0].slice(5).replace(/-/g,"+").replace(/_/g,"/");while(b.length%4)b+="=";
-    const o=JSON.parse(decodeURIComponent(escape(atob(b))));
-    if(!o||o.v!==1)return null;
+    code=gClean(code);const k=code.search(/ERR1:/i);if(k<0)return null;
+    const toks=code.slice(k+5).replace(/^[\s:]+/,"").split(/\s+/),part=[];
+    for(const t of toks){if(/^[A-Za-z0-9_\-]+$/.test(t))part.push(t);else{const mm=t.match(/^[A-Za-z0-9_\-]+/);if(mm)part.push(mm[0]);break}}
+    let o=null;
+    for(let n=part.length;n>0&&!o;n--){try{o=gDecode(part.slice(0,n).join(""))}catch(e){}}
+    if(!o)return null;
     const inv={g:{},r:{},name:String(o.n||"").slice(0,40)};
     for(const i in o.g){const x=GD.gems[+i];if(x)inv.g[x.n]=Math.min(99,+o.g[i]||0)}
     for(const i in o.r){const x=GD.runes[+i];if(x)inv.r[x.n]=Math.min(99,+o.r[i]||0)}
@@ -1261,10 +1273,10 @@ function gShareHtml(lang){
   <h3 class="hsec">${t.shareT}</h3><p class="desc gsmall">${t.shareN}</p><p class="desc gsmall"><b>${t.copyH}</b></p>
   <label class="gnum"><span>${t.pname}</span><input type="text" id="gname" maxlength="40" placeholder="${t.pnamePh}" value="${gesc(ginv.name||"")}"></label>
   <div class="gchips"><button type="button" class="gchip" id="gxCode">${t.cCode}</button><button type="button" class="gchip" id="gxLink">${t.cLink}</button><button type="button" class="gchip" id="gxText">${t.cText}</button><button type="button" class="gchip" id="gxFile">${t.dl}</button></div>
-  <textarea id="gxOut" class="gta" readonly rows="3"></textarea>
-  <h3 class="hsec">${t.impT}</h3><textarea id="gxIn" class="gta" rows="3" placeholder="${t.impPh}"></textarea>
+  <textarea id="gxOut" class="gta" dir="ltr" spellcheck="false" autocomplete="off" autocapitalize="off" readonly rows="3"></textarea>
+  <h3 class="hsec">${t.impT}</h3><textarea id="gxIn" class="gta" dir="ltr" spellcheck="false" autocomplete="off" autocapitalize="off" rows="3" placeholder="${t.impPh}"></textarea>
   <div class="gchips"><button type="button" class="gchip on" id="gxImp">${t.impBtn}</button><label class="gchip gfile">${t.impFile}<input type="file" id="gxF" accept=".json,.txt" hidden></label><span class="gown" id="gxMsg"></span></div>
-  <h3 class="hsec">${t.cmpT}</h3><p class="desc gsmall">${t.cmpN}</p><textarea id="gcIn" class="gta" rows="3" placeholder="${t.cmpPh}"></textarea>
+  <h3 class="hsec">${t.cmpT}</h3><p class="desc gsmall">${t.cmpN}</p><textarea id="gcIn" class="gta" dir="ltr" spellcheck="false" autocomplete="off" autocapitalize="off" rows="3" placeholder="${t.cmpPh}"></textarea>
   <div class="gchips"><button type="button" class="gchip on" id="gcBtn">${t.cmpBtn}</button><span class="gown" id="gcMsg"></span></div>${gCmpHtml(lang)}</div>`;
 }
 function gRows(list,inv,lang){
@@ -1417,7 +1429,7 @@ function gInit(){
     if(e.target.id==="gxF"&&e.target.files[0]){const f=e.target.files[0],rd=new FileReader();rd.onload=()=>{document.getElementById("gxIn").value=String(rd.result);document.getElementById("gxImp").click()};rd.readAsText(f)}
   });
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&gOpen)gShow(false)});
-  const h=location.hash.match(/inv=(ERR1:[A-Za-z0-9_\-]+)/);
+  const h=gClean((()=>{const x=location.hash.replace(/^#/,"");try{return decodeURIComponent(x)}catch(e){return x}})()).match(/inv=(ERR1:[A-Za-z0-9_\-]+)/);
   if(h){const r=gUnpack(h[1]);if(r){gEnterView(r);gShow(true)}}
 }
 
