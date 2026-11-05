@@ -372,15 +372,15 @@ function renderDay(i,lang){
    - Los eventos de 4h empiezan a las 02:00, 10:00 y 14:00 (hora de Canarias) y duran 4h.
    - CYCLE_START = fecha (en Canarias) en que empieza el Día 1 del ciclo de 14 días. */
 const CYCLE_START="2026-10-12";
-const TZ="Atlantic/Canary";
+const TZ="Etc/GMT-1"; // hora del juego = UTC+1 fija (no cambia con el horario de verano de Canarias)
 const H4=[2,10,17], DUR4=4;
 
 const L={
- es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora de Canarias",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy",prep:"Prepárate para mañana",at:"Empiezan a las",tmr:"MAÑANA",lasts:"Dura",days:"Días",dsuf:"d",cont:"Continúa mañana",fin:"Finalizado",sat:"Empieza a las"},
- en:{btn:"Live",title:"Live now",clock:"Canary Islands time",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events",prep:"Get ready for tomorrow",at:"Starts at",tmr:"TOMORROW",lasts:"Lasts",days:"Days",dsuf:"d",cont:"Continues tomorrow",fin:"Finished",sat:"Starts at"},
- ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Время Канарских островов",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня",prep:"Готовьтесь к завтрашнему дню",at:"Начало в",tmr:"ЗАВТРА",lasts:"Длится",days:"Дни",dsuf:"д",cont:"Продолжается завтра",fin:"Завершено",sat:"Начало в"},
- ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت جزر الكناري",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم",prep:"استعد لغد",at:"يبدأ في الساعة",tmr:"غدًا",lasts:"تستمر",days:"الأيام",dsuf:"ي",cont:"يستمر غدًا",fin:"انتهى",sat:"يبدأ في الساعة"},
- fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng Canary Islands",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon",prep:"Maghanda para bukas",at:"Magsisimula nang",tmr:"BUKAS",lasts:"Tumatagal ng",days:"Araw",dsuf:"d",cont:"Magpapatuloy bukas",fin:"Tapos na",sat:"Magsisimula nang"}
+ es:{btn:"En vivo",title:"Ahora en vivo",clock:"Hora del juego (UTC+1)",ends:"Termina en",starts:"Empieza en",done:"Finalizado por hoy",today:"HOY",s24:"Eventos de 24H",s4:"Eventos de 4H de hoy",prep:"Prepárate para mañana",at:"Empiezan a las",tmr:"MAÑANA",lasts:"Dura",days:"Días",dsuf:"d",cont:"Continúa mañana",fin:"Finalizado",sat:"Empieza a las"},
+ en:{btn:"Live",title:"Live now",clock:"Game time (UTC+1)",ends:"Ends in",starts:"Starts in",done:"Finished for today",today:"TODAY",s24:"24H events",s4:"Today's 4H events",prep:"Get ready for tomorrow",at:"Starts at",tmr:"TOMORROW",lasts:"Lasts",days:"Days",dsuf:"d",cont:"Continues tomorrow",fin:"Finished",sat:"Starts at"},
+ ru:{btn:"Сейчас",title:"Сейчас идёт",clock:"Игровое время (UTC+1)",ends:"Закончится через",starts:"Начнётся через",done:"На сегодня завершено",today:"СЕГОДНЯ",s24:"События 24Ч",s4:"События 4Ч сегодня",prep:"Готовьтесь к завтрашнему дню",at:"Начало в",tmr:"ЗАВТРА",lasts:"Длится",days:"Дни",dsuf:"д",cont:"Продолжается завтра",fin:"Завершено",sat:"Начало в"},
+ ar:{btn:"مباشر",title:"مباشر الآن",clock:"توقيت اللعبة (UTC+1)",ends:"ينتهي بعد",starts:"يبدأ بعد",done:"انتهى لهذا اليوم",today:"اليوم",s24:"أحداث 24 ساعة",s4:"أحداث 4 ساعات اليوم",prep:"استعد لغد",at:"يبدأ في الساعة",tmr:"غدًا",lasts:"تستمر",days:"الأيام",dsuf:"ي",cont:"يستمر غدًا",fin:"انتهى",sat:"يبدأ في الساعة"},
+ fil:{btn:"Live",title:"Live ngayon",clock:"Oras ng laro (UTC+1)",ends:"Matatapos sa",starts:"Magsisimula sa",done:"Tapos na para ngayon",today:"NGAYON",s24:"Mga event na 24H",s4:"Mga event na 4H ngayon",prep:"Maghanda para bukas",at:"Magsisimula nang",tmr:"BUKAS",lasts:"Tumatagal ng",days:"Araw",dsuf:"d",cont:"Magpapatuloy bukas",fin:"Tapos na",sat:"Magsisimula nang"}
 };
 let curLang="es", liveOn=true;
 
@@ -462,7 +462,7 @@ const HCITY=[
 const HLIVING=[["ifa","44"],["cfa","44"],["afa","44"],["hua","144444"]];
 
 const HT={
-es:{btn:"Halloween",title:"Evento de Halloween 2026",sub:"Resumen de la actualización",when:"Fechas (hora de Canarias)",from:"Del 15/10/2026 07:00 al 03/11/2026 06:00",
+es:{btn:"Halloween",title:"Evento de Halloween 2026",sub:"Resumen de la actualización",when:"Fechas (hora del juego, UTC+1)",from:"Del 15/10/2026 07:00 al 03/11/2026 06:00",
  startsIn:"Empieza en",endsIn:"Termina en",over:"Evento finalizado",close:"Cerrar",
  secEv:"Eventos",obj:"Objetivos",tips:"Consejos",
  e1:"Evento de Halloween",e1o:["Derrota al [[Pumpkin ghoul]] o recoge caramelos.","Recoge [[Surprise Candy]], [[Ghost Candy]] y [[Rainbow Candy]].","Usa [[Rainbow Candy]] para conseguir puntos de evento."],
@@ -484,7 +484,7 @@ es:{btn:"Halloween",title:"Evento de Halloween 2026",sub:"Resumen de la actualiz
  rank:"Recompensas por ranking",
  rune1:"Alta probabilidad de [[Rune Nidhogg]], pequeña de [[Rune Leviathan]] y muy baja de [[Rune Greed]] o [[Envy]].",
  rune2:"Probabilidad media de [[Rune Nidhogg]], pequeña de [[Rune Greed]] o [[Envy]] y baja de [[Rune Leviathan]]."},
-en:{btn:"Halloween",title:"Halloween 2026 Event",sub:"Update summary",when:"Dates (Canary Islands time)",from:"From 15/10/2026 07:00 to 03/11/2026 06:00",
+en:{btn:"Halloween",title:"Halloween 2026 Event",sub:"Update summary",when:"Dates (game time, UTC+1)",from:"From 15/10/2026 07:00 to 03/11/2026 06:00",
  startsIn:"Starts in",endsIn:"Ends in",over:"Event finished",close:"Close",
  secEv:"Events",obj:"Targets",tips:"Tips",
  e1:"Halloween Event",e1o:["Defeat [[Pumpkin ghoul]] or collect candies.","Collect [[Surprise Candy]], [[Ghost Candy]] and [[Rainbow Candy]].","Use [[Rainbow Candy]] to get event points."],
@@ -506,7 +506,7 @@ en:{btn:"Halloween",title:"Halloween 2026 Event",sub:"Update summary",when:"Date
  rank:"Rank rewards",
  rune1:"Big chance to get [[Rune Nidhogg]], small chance to get [[Rune Leviathan]], very low chance to get [[Rune Greed]] or [[Envy]].",
  rune2:"Medium chance to get [[Rune Nidhogg]], small chance to get [[Rune Greed]] or [[Envy]], low chance to get [[Rune Leviathan]]."},
-ru:{btn:"Хэллоуин",title:"Событие Хэллоуин 2026",sub:"Краткое описание обновления",when:"Даты (время Канарских островов)",from:"С 15.10.2026 07:00 по 03.11.2026 06:00",
+ru:{btn:"Хэллоуин",title:"Событие Хэллоуин 2026",sub:"Краткое описание обновления",when:"Даты (игровое время, UTC+1)",from:"С 15.10.2026 07:00 по 03.11.2026 06:00",
  startsIn:"Начнётся через",endsIn:"Закончится через",over:"Событие завершено",close:"Закрыть",
  secEv:"События",obj:"Цели",tips:"Советы",
  e1:"Событие Хэллоуина",e1o:["Победите [[Pumpkin ghoul]] или собирайте конфеты.","Собирайте [[Surprise Candy]], [[Ghost Candy]] и [[Rainbow Candy]].","Используйте [[Rainbow Candy]], чтобы получать очки события."],
@@ -528,7 +528,7 @@ ru:{btn:"Хэллоуин",title:"Событие Хэллоуин 2026",sub:"К�
  rank:"Награды за рейтинг",
  rune1:"Большой шанс получить [[Rune Nidhogg]], малый шанс получить [[Rune Leviathan]], очень низкий шанс получить [[Rune Greed]] или [[Envy]].",
  rune2:"Средний шанс получить [[Rune Nidhogg]], малый шанс получить [[Rune Greed]] или [[Envy]], низкий шанс получить [[Rune Leviathan]]."},
-ar:{btn:"هالوين",title:"حدث هالوين 2026",sub:"ملخص التحديث",when:"التواريخ (توقيت جزر الكناري)",from:"من 15/10/2026 07:00 إلى 03/11/2026 06:00",
+ar:{btn:"هالوين",title:"حدث هالوين 2026",sub:"ملخص التحديث",when:"التواريخ (توقيت اللعبة، UTC+1)",from:"من 15/10/2026 07:00 إلى 03/11/2026 06:00",
  startsIn:"يبدأ بعد",endsIn:"ينتهي بعد",over:"انتهى الحدث",close:"إغلاق",
  secEv:"الأحداث",obj:"الأهداف",tips:"نصائح",
  e1:"حدث هالوين",e1o:["اهزم [[Pumpkin ghoul]] أو اجمع الحلوى.","اجمع [[Surprise Candy]] و[[Ghost Candy]] و[[Rainbow Candy]].","استخدم [[Rainbow Candy]] للحصول على نقاط الحدث."],
@@ -550,7 +550,7 @@ ar:{btn:"هالوين",title:"حدث هالوين 2026",sub:"ملخص التحد
  rank:"مكافآت الترتيب",
  rune1:"فرصة كبيرة للحصول على [[Rune Nidhogg]]، وفرصة صغيرة للحصول على [[Rune Leviathan]]، وفرصة منخفضة جدًا للحصول على [[Rune Greed]] أو [[Envy]].",
  rune2:"فرصة متوسطة للحصول على [[Rune Nidhogg]]، وفرصة صغيرة للحصول على [[Rune Greed]] أو [[Envy]]، وفرصة منخفضة للحصول على [[Rune Leviathan]]."},
-fil:{btn:"Halloween",title:"Halloween 2026 Event",sub:"Buod ng update",when:"Mga petsa (oras ng Canary Islands)",from:"Mula 15/10/2026 07:00 hanggang 03/11/2026 06:00",
+fil:{btn:"Halloween",title:"Halloween 2026 Event",sub:"Buod ng update",when:"Mga petsa (oras ng laro, UTC+1)",from:"Mula 15/10/2026 07:00 hanggang 03/11/2026 06:00",
  startsIn:"Magsisimula sa",endsIn:"Matatapos sa",over:"Tapos na ang event",close:"Isara",
  secEv:"Mga event",obj:"Mga target",tips:"Mga tip",
  e1:"Halloween Event",e1o:["Talunin ang [[Pumpkin ghoul]] o mangolekta ng candy.","Kolektahin ang [[Surprise Candy]], [[Ghost Candy]] at [[Rainbow Candy]].","Gamitin ang [[Rainbow Candy]] para makakuha ng event points."],
@@ -810,10 +810,12 @@ function gMarg(tp,st,snap){
 function gWeights(){
   const snap=gTotN;
   const tr=gcfg.troop==="all"?["i","c","a"]:[gcfg.troop];
-  const TB={attack:{A:1,D:.25,H:.25,cas:1,acas:.25},defense:{A:.25,D:1,H:1,cas:.25,acas:1},bal:{A:1,D:1,H:1,cas:1,acas:1}};
+  const TB={attack:{A:1,D:.25,H:.25,cas:.25,acas:.25},defense:{A:.25,D:1,H:1,cas:.25,acas:1},bal:{A:1,D:1,H:1,cas:1,acas:1}};
   // Por tropa: arqueros (matan antes de morir) y caballería (equilibrada) no bajan el ataque en defensa; la infantería sí prioriza defensa y vida.
   const tb=u=>u==="c"?TB.bal:gcfg.focus==="def"?(u==="a"?TB.bal:TB.defense):gcfg.focus==="bal"?TB.bal:TB.attack;
   const F=tr.length===1?tb(tr[0]):TB[gcfg.focus==="def"?"defense":gcfg.focus==="bal"?"bal":"attack"];
+  // Casualties / anti-casualties van por objetivo, igual para todas las tropas: en defensa importan las anti-casualties (los muertos del defensor van al hospital si no superan las casualties del atacante); en ataque importan las casualties (muertes definitivas del rival).
+  const FC=TB[gcfg.focus==="def"?"defense":gcfg.focus==="bal"?"bal":"attack"];
   return key=>{
     if(key.indexOf(".")>0){
       const p=key.split("."),tp=p[0],st=p[1];
@@ -831,7 +833,7 @@ function gWeights(){
       }else if(st[0]==="C")w*=gcfg.city;
       return w*mult;
     }
-    switch(key){case "cas":return F.cas*gcfg.cas;case "acas":return F.acas*gcfg.acas;case "mp":return gcfg.march>0?gcfg.march:300;case "mf":return (gcfg.march>0?gcfg.march:300)/1000;case "ms":return gcfg.ms>0?gcfg.ms:100;case "hosp":return 200;case "silver":return 100;case "hall":return 200;case "tp":return 100;case "tre":return 100;case "cap":return 100;default:return 0}
+    switch(key){case "cas":return FC.cas*gcfg.cas;case "acas":return FC.acas*gcfg.acas;case "mp":return gcfg.march>0?gcfg.march:300;case "mf":return (gcfg.march>0?gcfg.march:300)/1000;case "ms":return gcfg.ms>0?gcfg.ms:100;case "hosp":return 200;case "silver":return 100;case "hall":return 200;case "tp":return 100;case "tre":return 100;case "cap":return 100;default:return 0}
   };
 }
 const gScore=(v,w)=>{let s=0;for(const k in v)s+=w(k)*v[k];return s};
